@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Norscope/Scenes/Bootstrap.unity
+    guid: 75d92f24bcf9c1f4bbd664be2f5f375c
+  m_configObjects:
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: b8c2f03681a014e4bab0d41b376be22c, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 266e4427ba60b2b459026d491296f799, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 7a0a47e2f8201634e861ecbb446b7ea1, type: 2}
+  m_UseUCBPForAssetBundles: 0
