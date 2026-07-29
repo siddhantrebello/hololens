@@ -24,7 +24,7 @@ namespace Norscope.UI
 
         [SerializeField] private string text = "Ready";
         [SerializeField] private Vector2 size = new Vector2(88f, 24f);
-        [SerializeField] private RectOffset padding = new RectOffset(10, 10, 4, 4);
+        [SerializeField] private RectOffset padding;
 
         public string Text
         {
@@ -41,6 +41,11 @@ namespace Norscope.UI
 
         public void Apply()
         {
+            if (padding == null)
+            {
+                padding = new RectOffset(10, 10, 4, 4);
+            }
+
             if (root == null)
             {
                 root = transform as RectTransform;

@@ -17,7 +17,7 @@ namespace Norscope.UI
         [SerializeField] private string text = "Tab";
         [SerializeField] private bool selected;
         [SerializeField] private Vector2 size = new Vector2(96f, 32f);
-        [SerializeField] private RectOffset padding = new RectOffset(12, 12, 6, 6);
+        [SerializeField] private RectOffset padding;
 
         public string Text
         {
@@ -44,6 +44,11 @@ namespace Norscope.UI
 
         public void Apply()
         {
+            if (padding == null)
+            {
+                padding = new RectOffset(12, 12, 6, 6);
+            }
+
             if (root == null)
             {
                 root = transform as RectTransform;

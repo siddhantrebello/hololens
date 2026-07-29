@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d07b83e804c49e45a30e30e622123ef, type: 3}
+  m_Name: UIAudioTheme
+  m_EditorClassIdentifier: 
+  buttonClick: {fileID: 0}
+  panelOpen: {fileID: 0}
+  panelClose: {fileID: 0}
+  panelMoveStart: {fileID: 0}
+  panelMoveEnd: {fileID: 0}
+  panelResizeStart: {fileID: 0}
+  panelResizeEnd: {fileID: 0}
+  windowSnap: {fileID: 0}
+  searchFocused: {fileID: 0}
+  searchCleared: {fileID: 0}
+  searchResult: {fileID: 0}
+  taskSelected: {fileID: 0}
+  taskOpened: {fileID: 0}
+  toggleChanged: {fileID: 0}
+  sliderChanged: {fileID: 0}
+  dropdownOpened: {fileID: 0}
+  dropdownSelected: {fileID: 0}
+  notification: {fileID: 0}
+  success: {fileID: 0}
+  warning: {fileID: 0}
+  error: {fileID: 0}
+  loadingStart: {fileID: 0}
+  loadingComplete: {fileID: 0}
+  aiThinking: {fileID: 0}
+  aiResponse: {fileID: 0}
+  voiceStartListening: {fileID: 0}
+  voiceStopListening: {fileID: 0}
+  voiceRecognized: {fileID: 0}
+  reportGenerated: {fileID: 0}
+  fileDownloaded: {fileID: 0}
+  fileUploaded: {fileID: 0}
+  storageOperation: {fileID: 0}

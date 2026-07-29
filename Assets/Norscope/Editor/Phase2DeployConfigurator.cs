@@ -78,14 +78,15 @@ namespace Norscope.Editor
                     new EditorBuildSettingsScene(BootstrapScenePath, true)
                 };
 
-                NamedBuildTarget wsa = NamedBuildTarget.FromBuildTargetGroup(BuildTargetGroup.WSA);
-                EditorUserBuildSettings.SwitchActiveBuildTarget(wsa, BuildTarget.WSAPlayer);
+                EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.WSA, BuildTarget.WSAPlayer);
                 EditorUserBuildSettings.wsaUWPBuildType = WSAUWPBuildType.D3D;
                 EditorUserBuildSettings.wsaArchitecture = "ARM64";
                 TrySetWsaBuildTypeMaster();
 
-                PlayerSettings.SetScriptingBackend(wsa, ScriptingImplementation.IL2CPP);
-                PlayerSettings.SetArchitecture(wsa, 2);
+#pragma warning disable CS0618
+                PlayerSettings.SetScriptingBackend(BuildTargetGroup.WSA, ScriptingImplementation.IL2CPP);
+                PlayerSettings.SetArchitecture(BuildTargetGroup.WSA, 2);
+#pragma warning restore CS0618
                 PlayerSettings.WSA.SetTargetDeviceFamily(PlayerSettings.WSATargetFamily.Holographic, true);
                 PlayerSettings.WSA.SetTargetDeviceFamily(PlayerSettings.WSATargetFamily.Desktop, false);
                 PlayerSettings.WSA.SetTargetDeviceFamily(PlayerSettings.WSATargetFamily.Mobile, false);

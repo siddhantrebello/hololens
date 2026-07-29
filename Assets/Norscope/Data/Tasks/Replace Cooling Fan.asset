@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a75e3b2a68aa1c24e9d7d15fde9e9bea, type: 3}
+  m_Name: Replace Cooling Fan
+  m_EditorClassIdentifier: 
+  taskId: replace-cooling-fan
+  displayName: Replace Cooling Fan
+  description: Remove the worn fan and install a replacement.
+  icon: {fileID: 21300000, guid: 2deb64c5dd04087499331b4f3a029c93, type: 3}
+  estimatedDuration: 45 min
+  difficulty: 1
+  isEnabled: 1
+  steps:
+  - stepTitle: Power Down and Discharge
+    instruction: Shut down, unplug, and remove the battery if possible. Hold the
+      power button for 10 seconds to discharge residual power.
+    image: {fileID: 0}
+    warning: "Static discharge can damage internal components \u2014 use an anti-static
+      wrist strap if available."
+    verification: 
+  - stepTitle: Access the Fan Assembly
+    instruction: Remove the back panel and any brackets covering the fan and heatsink.
+    image: {fileID: 0}
+    warning: 
+    verification: 
+  - stepTitle: Disconnect the Fan Cable
+    instruction: Gently unplug the fan's connector from the motherboard.
+    image: {fileID: 0}
+    warning: Pull the connector housing, not the wires, to avoid damaging the cable.
+    verification: 
+  - stepTitle: Remove and Replace the Fan
+    instruction: Unscrew the old fan and lift it out. Install the replacement fan
+      in the same orientation and secure the screws.
+    image: {fileID: 0}
+    warning: 
+    verification: 
+  - stepTitle: Reconnect and Reassemble
+    instruction: Plug the new fan's cable back in, replace covers, and power on.
+    image: {fileID: 0}
+    warning: 
+    verification: Fan should spin immediately at startup with no rattling or grinding
+      noise.

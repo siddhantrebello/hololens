@@ -1,22 +1,38 @@
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.Hands;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
+using UnityEngine.XR.Interaction.Toolkit.Interactors.Casters;
+using UnityEngine.XR.Interaction.Toolkit.Interactors.Visuals;
 
 namespace Norscope
 {
     /// <summary>
-    /// Temporary Phase 3 diagnostics for hand interaction readiness.
+    /// Temporary Phase 3 hand diagnostics. Logs state changes only; HUD updates while enabled.
     /// </summary>
     public sealed class HandInteractionDiagnostics : MonoBehaviour
     {
-        [SerializeField]
-        public bool showDiagnostics = true;
+        [Tooltip("Show Hand Diagnostics (Phase 3).")]
+        [SerializeField] public bool showHandDiagnostics = true;
 
-        [SerializeField]
-        public Text statusText;
+        [SerializeField] public Text statusText;
 
         private XRHandSubsystem _handSubsystem;
+        private readonly StringBuilder _sb = new StringBuilder(640);
+
+        private bool _leftTracked;
+        private bool _rightTracked;
+        private bool _leftAimValid;
+        private bool _rightAimValid;
+        private bool _leftNear;
+        private bool _rightNear;
+        private bool _leftFar;
+        private bool _rightFar;
+        private bool _leftSelect;
+        private bool _rightSelect;
+        private string _leftTarget = "-";
+        private string _rightTarget = "-";
 
         private void OnEnable()
         {
@@ -25,14 +41,9 @@ namespace Norscope
 
         private void Update()
         {
-            if (statusText == null)
+            if (!showHandDiagnostics)
             {
-                return;
-            }
-
-            if (!showDiagnostics)
-            {
-                if (statusText.gameObject.activeSelf)
+                if (statusText != null && statusText.gameObject.activeSelf)
                 {
                     statusText.gameObject.SetActive(false);
                 }
@@ -40,7 +51,7 @@ namespace Norscope
                 return;
             }
 
-            if (!statusText.gameObject.activeSelf)
+            if (statusText != null && !statusText.gameObject.activeSelf)
             {
                 statusText.gameObject.SetActive(true);
             }
@@ -52,17 +63,132 @@ namespace Norscope
 
             bool leftTracked = _handSubsystem != null && _handSubsystem.leftHand.isTracked;
             bool rightTracked = _handSubsystem != null && _handSubsystem.rightHand.isTracked;
+            LogChange(ref _leftTracked, leftTracked, "Left hand tracked");
+            LogChange(ref _rightTracked, rightTracked, "Right hand tracked");
 
-            bool farReady = HasEnabledInteractorOfType<NearFarInteractor>() || HasEnabledInteractorOfType<XRRayInteractor>();
-            bool nearReady = HasEnabledInteractorOfType<NearFarInteractor>() || HasEnabledInteractorOfType<XRPokeInteractor>();
-            bool pinchDetected = IsPinchLikely(leftTracked, rightTracked);
+            HandSnapshot left = CaptureHand("Left Hand", leftTracked);
+            HandSnapshot right = CaptureHand("Right Hand", rightTracked);
 
-            statusText.text =
-                "Left Hand\n" + (leftTracked ? "Tracked" : "Not Tracked") + "\n\n" +
-                "Right Hand\n" + (rightTracked ? "Tracked" : "Not Tracked") + "\n\n" +
-                "Far Interaction\n" + (farReady ? "Ready" : "Not Ready") + "\n\n" +
-                "Near Interaction\n" + (nearReady ? "Ready" : "Not Ready") + "\n\n" +
-                "Pinch\n" + (pinchDetected ? "Detected" : "Not Detected");
+            LogChange(ref _leftAimValid, left.aimValid, "Left aim pose valid");
+            LogChange(ref _rightAimValid, right.aimValid, "Right aim pose valid");
+            LogChange(ref _leftNear, left.nearActive, "Left near active");
+            LogChange(ref _rightNear, right.nearActive, "Right near active");
+            LogChange(ref _leftFar, left.farActive, "Left far active");
+            LogChange(ref _rightFar, right.farActive, "Right far active");
+            LogChange(ref _leftSelect, left.selectActive, "Left select/pinch");
+            LogChange(ref _rightSelect, right.selectActive, "Right select/pinch");
+
+            if (left.targetName != _leftTarget)
+            {
+                Debug.Log("[Norscope HandDiag] Left target => " + left.targetName);
+                _leftTarget = left.targetName;
+            }
+
+            if (right.targetName != _rightTarget)
+            {
+                Debug.Log("[Norscope HandDiag] Right target => " + right.targetName);
+                _rightTarget = right.targetName;
+            }
+
+            if (statusText == null)
+            {
+                return;
+            }
+
+            _sb.Clear();
+            AppendHand(_sb, "LEFT", left);
+            _sb.AppendLine();
+            AppendHand(_sb, "RIGHT", right);
+            statusText.text = _sb.ToString();
+        }
+
+        private HandSnapshot CaptureHand(string handObjectName, bool tracked)
+        {
+            var snap = new HandSnapshot
+            {
+                tracked = tracked,
+                targetName = "-",
+                rayLength = Phase3HandRayCorrector.DiagnosticRayLengthMeters
+            };
+
+            Transform hand = FindNamedTransform(handObjectName);
+            if (hand == null)
+            {
+                return snap;
+            }
+
+            Transform aim = FindChildRecursive(hand, "Aim Pose");
+            if (aim != null)
+            {
+                // Aim Pose is driven by XRI Aim Position/Rotation (OpenXR pointer/aim).
+                snap.aimValid = tracked && aim.gameObject.activeInHierarchy;
+                snap.aimPosition = aim.position;
+                snap.aimForward = aim.forward;
+            }
+
+            NearFarInteractor nearFar = hand.GetComponentInChildren<NearFarInteractor>(true);
+            XRPokeInteractor poke = hand.GetComponentInChildren<XRPokeInteractor>(true);
+            if (nearFar != null)
+            {
+                snap.selectActive = nearFar.isSelectActive;
+                bool pokeBusy = poke != null && (poke.hasHover || poke.hasSelection || poke.isSelectActive);
+                snap.nearActive = pokeBusy;
+                snap.farActive = nearFar.isActiveAndEnabled && nearFar.enableFarCasting && !pokeBusy;
+
+                if (nearFar.hasHover)
+                {
+                    var targets = nearFar.interactablesHovered;
+                    if (targets != null && targets.Count > 0 && targets[0] is Component c)
+                    {
+                        snap.targetName = c.gameObject.name;
+                    }
+                }
+
+                if (nearFar.farInteractionCaster is CurveInteractionCaster caster)
+                {
+                    snap.rayLength = caster.castDistance;
+                    // Default-layer hits (room/spatial mesh) should be excluded by Phase3HandRayCorrector mask.
+                    snap.hitIsSpatialOrFloor = ((1 << LayerMask.NameToLayer("Default")) & caster.raycastMask.value) != 0;
+                }
+
+                CurveVisualController visual = nearFar.GetComponentInChildren<CurveVisualController>(true);
+                if (visual != null)
+                {
+                    snap.rayLength = visual.restingVisualLineLength;
+                }
+            }
+
+            return snap;
+        }
+
+        private static Transform FindNamedTransform(string name)
+        {
+            GameObject go = GameObject.Find(name);
+            return go != null ? go.transform : null;
+        }
+
+        private static Transform FindChildRecursive(Transform root, string name)
+        {
+            if (root == null)
+            {
+                return null;
+            }
+
+            if (root.name == name)
+            {
+                return root;
+            }
+
+            for (int i = 0; i < root.childCount; i++)
+            {
+                Transform found = FindChildRecursive(root.GetChild(i), name);
+                if (found != null)
+                {
+                    return found;
+                }
+            }
+
+            return null;
         }
 
         private void TryResolveHandSubsystem()
@@ -72,39 +198,44 @@ namespace Norscope
             _handSubsystem = subsystems.Count > 0 ? subsystems[0] : null;
         }
 
-        private static bool HasEnabledInteractorOfType<T>() where T : MonoBehaviour
+        private static void LogChange(ref bool previous, bool current, string label)
         {
-            T[] found = FindObjectsByType<T>(FindObjectsSortMode.None);
-            for (int i = 0; i < found.Length; i++)
+            if (previous == current)
             {
-                if (found[i] != null && found[i].isActiveAndEnabled)
-                {
-                    return true;
-                }
+                return;
             }
 
-            return false;
+            previous = current;
+            Debug.Log("[Norscope HandDiag] " + label + " => " + current);
         }
 
-        private bool IsPinchLikely(bool leftTracked, bool rightTracked)
+        private static void AppendHand(StringBuilder sb, string title, HandSnapshot s)
         {
-            // Approximate pinch from XR select interactors while a hand is tracked.
-            if (!leftTracked && !rightTracked)
-            {
-                return false;
-            }
+            sb.Append(title).AppendLine();
+            sb.Append("Tracked: ").AppendLine(s.tracked ? "Yes" : "No");
+            sb.Append("Aim valid: ").AppendLine(s.aimValid ? "Yes" : "No");
+            sb.Append("Aim pos: ").AppendLine(s.aimPosition.ToString("F3"));
+            sb.Append("Aim fwd: ").AppendLine(s.aimForward.ToString("F3"));
+            sb.Append("Near: ").Append(s.nearActive ? "On" : "Off")
+                .Append("  Far: ").AppendLine(s.farActive ? "On" : "Off");
+            sb.Append("Pinch/Select: ").AppendLine(s.selectActive ? "Active" : "Idle");
+            sb.Append("Target: ").AppendLine(s.targetName);
+            sb.Append("Ray length: ").Append(s.rayLength.ToString("F2")).AppendLine(" m");
+            sb.Append("Default in cast mask: ").AppendLine(s.hitIsSpatialOrFloor ? "Yes (bad)" : "No");
+        }
 
-            XRBaseInputInteractor[] interactors = FindObjectsByType<XRBaseInputInteractor>(FindObjectsSortMode.None);
-            for (int i = 0; i < interactors.Length; i++)
-            {
-                XRBaseInputInteractor interactor = interactors[i];
-                if (interactor != null && interactor.isActiveAndEnabled && interactor.isSelectActive)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+        private struct HandSnapshot
+        {
+            public bool tracked;
+            public bool aimValid;
+            public Vector3 aimPosition;
+            public Vector3 aimForward;
+            public bool nearActive;
+            public bool farActive;
+            public bool selectActive;
+            public string targetName;
+            public float rayLength;
+            public bool hitIsSpatialOrFloor;
         }
     }
 }

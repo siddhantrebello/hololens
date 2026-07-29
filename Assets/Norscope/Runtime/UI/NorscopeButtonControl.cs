@@ -34,7 +34,7 @@ namespace Norscope.UI
 
         [Header("Size")]
         [SerializeField] private Vector2 size = new Vector2(160f, 40f);
-        [SerializeField] private RectOffset padding = new RectOffset(12, 12, 8, 8);
+        [SerializeField] private RectOffset padding;
         [SerializeField] private float spacing = 8f;
 
         [Header("State")]
@@ -82,6 +82,11 @@ namespace Norscope.UI
 
         public void ApplyAll()
         {
+            if (padding == null)
+            {
+                padding = new RectOffset(12, 12, 8, 8);
+            }
+
             if (root == null)
             {
                 root = transform as RectTransform;

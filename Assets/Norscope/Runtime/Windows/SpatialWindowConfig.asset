@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff62121843b8323bfedee527a82a5dad, type: 3}
+  m_Name: SpatialWindowConfig
+  m_EditorClassIdentifier: 
+  spawnDistanceMeters: 1
+  verticalOffsetMeters: -0.1
+  horizontalOffsetMeters: 0
+  defaultWidthMeters: 0.55
+  defaultHeightMeters: 0.4
+  pixelsPerMeter: 1000
+  minimumScale: 0.72727275
+  maximumScale: 1.4545455
+  preserveAspectRatio: 1
+  resizeSensitivity: 1
+  handlesVisible: 1
+  handleWorldSizeMeters: 0.025
+  preserveScaleOnRecenter: 1
+  resetScaleOnRecenter: 0
+  recenterDistanceMeters: 1
+  recenterVerticalOffsetMeters: -0.1
+  moveFollowSharpness: 18

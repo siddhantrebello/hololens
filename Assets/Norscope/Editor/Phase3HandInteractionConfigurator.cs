@@ -3,21 +3,27 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using Unity.XR.CoreUtils;
 using Unity.XR.CoreUtils.Editor;
+using Norscope.Windows;
 using UnityEditor;
 using UnityEditor.Build;
 using UnityEditor.SceneManagement;
 using UnityEditor.XR.OpenXR.Features;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.InputSystem.XR;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit.Interactables.Visuals;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
+using UnityEngine.XR.Interaction.Toolkit.Interactors.Casters;
+using UnityEngine.XR.Interaction.Toolkit.Interactors.Visuals;
 using UnityEngine.XR.Interaction.Toolkit.UI;
 using UnityEngine.XR.Management;
 using UnityEngine.XR.OpenXR;
@@ -35,6 +41,9 @@ namespace Norscope.Editor
         private const string BuildOutputPath = "Builds/UWP";
         private const string XrOriginPrefabPath =
             "Assets/Samples/XR Interaction Toolkit/3.2.1/Hands Interaction Demo/Prefabs/XR Origin Hands (XR Rig).prefab";
+        private const string XriInputActionsPath =
+            "Assets/Samples/XR Interaction Toolkit/3.2.1/Starter Assets/XRI Default Input Actions.inputactions";
+        private const string InteractionTestPanelPath = "Assets/Norscope/UI/Panels/InteractionTestPanel.prefab";
 
         // OpenXR / MR feature ids
         private const string MixedRealityFeatureId = "com.microsoft.openxr.feature.hololens";
@@ -82,6 +91,617 @@ namespace Norscope.Editor
             }
         }
 
+        [MenuItem("Norscope/HoloLens/Apply Phase 3 Hand Ray Fix")]
+        public static void ApplyFixMenu()
+        {
+            try
+            {
+                ApplyFix();
+                Debug.Log("[Norscope Phase3] Hand ray fix applied. Run Validate Hand Interaction next.");
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError("[Norscope Phase3] Apply fix failed:\n" + ex);
+                throw;
+            }
+        }
+
+        [MenuItem("Norscope/HoloLens/Validate Hand Interaction")]
+        public static void ValidateMenu()
+        {
+            bool pass = Validate(out string report);
+            if (pass)
+            {
+                Debug.Log("[Norscope Phase3] Validate Hand Interaction: PASS\n" + report);
+                EditorUtility.DisplayDialog("Validate Hand Interaction", "PASS\n\nSee Console.", "OK");
+            }
+            else
+            {
+                Debug.LogError("[Norscope Phase3] Validate Hand Interaction: FAIL\n" + report);
+                EditorUtility.DisplayDialog("Validate Hand Interaction", "FAIL\n\nSee Console.", "OK");
+            }
+        }
+
+        [MenuItem("Norscope/HoloLens/Build Phase 3 UWP (D3D ARM64)")]
+        public static void BuildPhase3UwpPackageMenu()
+        {
+            try
+            {
+                BuildPhase3UwpPackage();
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError("[Norscope Phase3] Build failed:\n" + ex);
+                EditorUtility.DisplayDialog("Phase 3 Build", "FAILED\n\n" + ex.Message, "OK");
+            }
+        }
+
+        [MenuItem("Norscope/XR/How to use Play Mode Remoting")]
+        public static void RemotingHelp()
+        {
+            const string msg =
+                "Holographic Remoting (Play Mode only)\n\n" +
+                "1. Norscope → XR → Configure Play Mode Remoting\n" +
+                "2. Mixed Reality → Remoting → Holographic Remoting for Play Mode\n" +
+                "3. Enter HoloLens IP\n" +
+                "4. Press Play\n" +
+                "5. Stop Play to disconnect\n\n" +
+                "UWP App Remoting stays OFF. Final approval needs a standalone HL2 install.";
+            EditorUtility.DisplayDialog("Play Mode Remoting", msg, "OK");
+            Debug.Log("[Norscope Remoting] " + msg.Replace("\n", " | "));
+        }
+
+        public static void ApplyFix()
+        {
+            EnsureGrabLayer();
+            ConfigureOpenXrHandFeatures();
+            VerifyAimBindings();
+            ReapplySceneWiring();
+            AssetDatabase.SaveAssets();
+        }
+
+        public static void EnsureGrabLayer()
+        {
+            var tagManager = new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset")[0]);
+            SerializedProperty layers = tagManager.FindProperty("layers");
+            SerializedProperty layer6 = layers.GetArrayElementAtIndex(6);
+            if (layer6.stringValue != Norscope.Phase3HandRayCorrector.GrabLayerName)
+            {
+                layer6.stringValue = Norscope.Phase3HandRayCorrector.GrabLayerName;
+                tagManager.ApplyModifiedProperties();
+            }
+        }
+
+        public static void VerifyAimBindings()
+        {
+            var asset = AssetDatabase.LoadAssetAtPath<InputActionAsset>(XriInputActionsPath);
+            if (asset == null)
+            {
+                throw new Exception("Missing XRI input actions at " + XriInputActionsPath);
+            }
+
+            bool hasHolo = false;
+            bool hasExt = false;
+            foreach (InputActionMap map in asset.actionMaps)
+            {
+                foreach (string name in new[] { "Aim Position", "Aim Rotation" })
+                {
+                    InputAction action = map.FindAction(name, false);
+                    if (action == null)
+                    {
+                        continue;
+                    }
+
+                    foreach (InputBinding b in action.bindings)
+                    {
+                        if (string.IsNullOrEmpty(b.path))
+                        {
+                            continue;
+                        }
+
+                        if (b.path.Contains("HoloLensHand") && b.path.Contains("pointer"))
+                        {
+                            hasHolo = true;
+                        }
+
+                        if ((b.path.Contains("<HandInteraction>") || b.path.Contains("HandInteractionPoses")) &&
+                            b.path.Contains("pointer"))
+                        {
+                            hasExt = true;
+                        }
+                    }
+                }
+            }
+
+            if (!hasHolo)
+            {
+                throw new Exception("Aim actions missing HoloLensHand pointer bindings.");
+            }
+
+            if (hasExt)
+            {
+                Debug.LogWarning("[Norscope Phase3] EXT HandInteraction pointer still on Aim actions.");
+            }
+            else
+            {
+                Debug.Log("[Norscope Phase3] Aim uses HoloLensHand pointer (OpenXR aim).");
+            }
+        }
+
+        /// <summary>
+        /// Lighter re-apply used by the interactive "Apply Phase 3 Hand Ray Fix" menu item.
+        /// Assumes the scene already has an XR Origin (from BuildHandTestScene); does not rebuild it.
+        /// </summary>
+        private static void ReapplySceneWiring()
+        {
+            Scene scene = EditorSceneManager.OpenScene(BootstrapScenePath, OpenSceneMode.Single);
+            DestroyIfExists("VerificationCube");
+            DestroyIfExists("VerificationLabel");
+
+            XROrigin origin = UnityEngine.Object.FindFirstObjectByType<XROrigin>();
+            if (origin == null)
+            {
+                throw new Exception("XR Origin Hands missing from Bootstrap.");
+            }
+
+            // HL2 Phase 3 uses hands only. Controllers from the nested XR Origin sample
+            // duplicate NearFar/Poke interactors and must stay disabled.
+            DisableNamedUnder(origin.transform, "Left Controller");
+            DisableNamedUnder(origin.transform, "Right Controller");
+
+            Norscope.Phase3HandRayCorrector corrector = origin.GetComponent<Norscope.Phase3HandRayCorrector>();
+            if (corrector == null)
+            {
+                corrector = origin.gameObject.AddComponent<Norscope.Phase3HandRayCorrector>();
+            }
+
+            Norscope.Phase3UiPokeSupport pokeSupport = origin.GetComponent<Norscope.Phase3UiPokeSupport>();
+            if (pokeSupport == null)
+            {
+                pokeSupport = origin.gameObject.AddComponent<Norscope.Phase3UiPokeSupport>();
+            }
+
+            corrector.Apply();
+            EditorUtility.SetDirty(corrector);
+            EditorUtility.SetDirty(pokeSupport);
+            foreach (NearFarInteractor nf in UnityEngine.Object.FindObjectsByType<NearFarInteractor>(FindObjectsInactive.Exclude, FindObjectsSortMode.None))
+            {
+                PrefabUtility.RecordPrefabInstancePropertyModifications(nf);
+                foreach (Component c in nf.GetComponentsInChildren<Component>(true))
+                {
+                    if (c != null)
+                    {
+                        PrefabUtility.RecordPrefabInstancePropertyModifications(c);
+                    }
+                }
+            }
+
+            int grabLayer = LayerMask.NameToLayer(Norscope.Phase3HandRayCorrector.GrabLayerName);
+            SetLayer("HandTestCube", grabLayer);
+            SetLayer("HandTestSphere", grabLayer);
+
+            // TrackedDeviceGraphicRaycaster filters by interactor raycastLayerMask.
+            // Far mask is UI|Grab, so canvases must be on UI (not Default).
+            int uiLayer = LayerMask.NameToLayer("UI");
+            SetLayer("HandTestCanvas", uiLayer);
+            SetLayer("InteractionTestCanvas", uiLayer);
+            SetLayer("DiagnosticsPanel", uiLayer);
+            SetLayer("InteractionTestPanel", uiLayer);
+
+            foreach (HandInteractionDiagnostics d in UnityEngine.Object.FindObjectsByType<HandInteractionDiagnostics>(FindObjectsSortMode.None))
+            {
+                d.showHandDiagnostics = true;
+                EditorUtility.SetDirty(d);
+            }
+
+            EditorSceneManager.MarkSceneDirty(scene);
+            EditorSceneManager.SaveScene(scene);
+        }
+
+        public static bool Validate(out string report)
+        {
+            var sb = new StringBuilder();
+            int fails = 0;
+            Scene scene = EditorSceneManager.OpenScene(BootstrapScenePath, OpenSceneMode.Single);
+
+            void Check(bool ok, string label)
+            {
+                sb.Append(ok ? "PASS" : "FAIL").Append(" — ").AppendLine(label);
+                if (!ok)
+                {
+                    fails++;
+                }
+            }
+
+            Check(UnityEngine.Object.FindObjectsByType<XROrigin>(FindObjectsSortMode.None).Length == 1, "exactly one XR Origin");
+            Check(UnityEngine.Object.FindObjectsByType<XRInteractionManager>(FindObjectsSortMode.None).Length == 1, "exactly one XR Interaction Manager");
+            Check(UnityEngine.Object.FindObjectsByType<EventSystem>(FindObjectsSortMode.None).Length == 1, "exactly one EventSystem");
+            Check(UnityEngine.Object.FindObjectsByType<XRUIInputModule>(FindObjectsSortMode.None).Length == 1, "exactly one XRUIInputModule");
+
+            NearFarInteractor[] nearFar = UnityEngine.Object.FindObjectsByType<NearFarInteractor>(FindObjectsInactive.Exclude, FindObjectsSortMode.None)
+                .Where(IsHandInteractor)
+                .ToArray();
+            XRPokeInteractor[] pokes = UnityEngine.Object.FindObjectsByType<XRPokeInteractor>(FindObjectsInactive.Exclude, FindObjectsSortMode.None)
+                .Where(IsHandInteractor)
+                .ToArray();
+            Check(nearFar.Length == 2, "one left+right hand NearFarInteractor (" + nearFar.Length + ")");
+            Check(pokes.Length == 2, "one left+right hand XRPokeInteractor (" + pokes.Length + ")");
+
+            int activeControllerInteractors = UnityEngine.Object.FindObjectsByType<NearFarInteractor>(FindObjectsInactive.Exclude, FindObjectsSortMode.None)
+                .Count(nf => !IsHandInteractor(nf));
+            Check(activeControllerInteractors == 0, "controller NearFarInteractors disabled (" + activeControllerInteractors + " active)");
+
+            Transform leftHand = FindNamedInScene("Left Hand");
+            Transform rightHand = FindNamedInScene("Right Hand");
+            Check(leftHand != null && leftHand.gameObject.activeInHierarchy, "Left Hand active");
+            Check(rightHand != null && rightHand.gameObject.activeInHierarchy, "Right Hand active");
+            Check(leftHand != null && FindChild(leftHand, "Aim Pose") != null &&
+                  leftHand.GetComponentsInChildren<TrackedPoseDriver>(true).Count(d => d.gameObject.name == "Aim Pose") == 1,
+                "Left Hand Aim Pose drivers (1)");
+            Check(rightHand != null && FindChild(rightHand, "Aim Pose") != null &&
+                  rightHand.GetComponentsInChildren<TrackedPoseDriver>(true).Count(d => d.gameObject.name == "Aim Pose") == 1,
+                "Right Hand Aim Pose drivers (1)");
+
+            bool aimOk = true;
+            bool lineOk = true;
+            bool maskOk = true;
+            bool noMagenta = true;
+
+            foreach (NearFarInteractor nf in nearFar)
+            {
+                Transform hand = FindHandRoot(nf.transform);
+                Transform aim = FindChild(hand, "Aim Pose");
+
+                if (nf.farInteractionCaster is CurveInteractionCaster caster)
+                {
+                    if (aim != null && caster.castOrigin != aim)
+                    {
+                        aimOk = false;
+                    }
+
+                    if ((caster.raycastMask.value & 1) != 0)
+                    {
+                        maskOk = false;
+                    }
+
+                    if (Mathf.Abs(caster.castDistance - Norscope.Phase3HandRayCorrector.DiagnosticRayLengthMeters) > 0.05f)
+                    {
+                        lineOk = false;
+                    }
+                }
+                else
+                {
+                    aimOk = false;
+                }
+
+                CurveVisualController visual = nf.GetComponentInChildren<CurveVisualController>(true);
+                if (visual == null || visual.lineOriginTransform != aim ||
+                    Mathf.Abs(visual.restingVisualLineLength - Norscope.Phase3HandRayCorrector.DiagnosticRayLengthMeters) > 0.05f)
+                {
+                    lineOk = false;
+                }
+
+                LineRenderer lr = nf.GetComponentInChildren<LineRenderer>(true);
+                if (lr != null && lr.sharedMaterial != null && lr.sharedMaterial.shader != null &&
+                    lr.sharedMaterial.shader.name.Contains("InternalError"))
+                {
+                    noMagenta = false;
+                }
+            }
+
+            Check(aimOk, "far cast origin = Aim Pose");
+            Check(lineOk, "line visual Aim Pose + ~3m length");
+            Check(maskOk, "Default/spatial excluded from far cast mask");
+            Check(noMagenta, "no magenta ray material");
+            Check(!AimBindsGrip(), "no grip fallback on Aim actions");
+            Check(IsTypeEnabled(BuildTargetGroup.WSA, "MicrosoftHandInteraction"), "Microsoft Hand Interaction enabled");
+            Check(IsTypeEnabled(BuildTargetGroup.WSA, "HandTracking"), "XR Hands subsystem enabled");
+            Check(!IsIdEnabled(BuildTargetGroup.WSA, HandInteractionProfileFeatureId), "XR_EXT Hand Interaction disabled on WSA");
+            Check(!IsIdEnabled(BuildTargetGroup.WSA, AppRemotingFeatureId), "UWP App Remoting disabled");
+
+            GameObject cube = GameObject.Find("HandTestCube");
+            GameObject sphere = GameObject.Find("HandTestSphere");
+            Check(cube != null && cube.GetComponent<XRGrabInteractable>() != null, "cube grab");
+            Check(sphere != null && sphere.GetComponent<XRGrabInteractable>() != null, "sphere grab");
+
+            // Since Phase 4, InteractionTestPanel is runtime-owned by SpatialWindowManager /
+            // SpatialWindowSpawner (spawned on demand) and must NOT exist as a static scene object.
+            Check(ValidateInteractionTestPanelRuntimeRegistration(), "InteractionTestPanel runtime registration valid");
+
+            Check(GameObject.Find("HandTestCanvas") != null, "HandTestCanvas present");
+            GameObject handCanvas = GameObject.Find("HandTestCanvas");
+            if (handCanvas != null)
+            {
+                int uiLayer = LayerMask.NameToLayer("UI");
+                Check(handCanvas.layer == uiLayer, "HandTestCanvas on UI layer");
+            }
+
+            Check(UnityEngine.Object.FindObjectsByType<Norscope.Phase3HandRayCorrector>(FindObjectsSortMode.None).Length >= 1, "Phase3HandRayCorrector present");
+            Check(UnityEngine.Object.FindObjectsByType<Norscope.Phase3UiPokeSupport>(FindObjectsSortMode.None).Length >= 1, "Phase3UiPokeSupport present");
+
+            bool missing = scene.GetRootGameObjects().Any(root => root.GetComponentsInChildren<Component>(true).Any(c => c == null));
+            Check(!missing, "no missing scripts");
+            Check(CountOpenXrErrors() == 0, "no OpenXR deploy-blocking errors");
+
+            report = sb.ToString();
+            return fails == 0;
+        }
+
+        private static bool AimBindsGrip()
+        {
+            var asset = AssetDatabase.LoadAssetAtPath<InputActionAsset>(XriInputActionsPath);
+            if (asset == null)
+            {
+                return false;
+            }
+
+            foreach (InputActionMap map in asset.actionMaps)
+            {
+                foreach (string name in new[] { "Aim Position", "Aim Rotation" })
+                {
+                    InputAction action = map.FindAction(name, false);
+                    if (action == null)
+                    {
+                        continue;
+                    }
+
+                    foreach (InputBinding b in action.bindings)
+                    {
+                        if (string.IsNullOrEmpty(b.path))
+                        {
+                            continue;
+                        }
+
+                        string p = b.path.ToLowerInvariant();
+                        if (p.Contains("grip") || p.Contains("devicepose") || p.Contains("palm") || p.Contains("wrist"))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        private static int CountOpenXrErrors()
+        {
+            try
+            {
+                MethodInfo getIssues = typeof(BuildValidator).GetMethod("GetCurrentValidationIssues", BindingFlags.NonPublic | BindingFlags.Static);
+                var failures = new HashSet<BuildValidationRule>();
+                getIssues.Invoke(null, new object[] { failures, BuildTargetGroup.WSA });
+                return failures.Count(r => r != null && r.Error &&
+                    (r.Message == null ||
+                     (r.Message.IndexOf("Remoting", StringComparison.OrdinalIgnoreCase) < 0 &&
+                      r.Message.IndexOf("InternetClient", StringComparison.OrdinalIgnoreCase) < 0 &&
+                      r.Message.IndexOf("Microphone", StringComparison.OrdinalIgnoreCase) < 0)));
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// InteractionTestPanel has no static scene presence since Phase 4 — it is spawned at
+        /// runtime by SpatialWindowManager/SpatialWindowSpawner. This checks the architecture
+        /// that replaces it is intact, instead of looking for a scene-placed instance.
+        /// </summary>
+        private static bool ValidateInteractionTestPanelRuntimeRegistration()
+        {
+            bool ok = true;
+
+            GameObject panelPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(InteractionTestPanelPath);
+            if (panelPrefab == null)
+            {
+                Debug.LogWarning("[Norscope Phase3] InteractionTestPanel prefab asset missing at " + InteractionTestPanelPath);
+                ok = false;
+            }
+
+            SpatialWindowSpawner[] spawners = UnityEngine.Object.FindObjectsByType<SpatialWindowSpawner>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            if (spawners.Length != 1)
+            {
+                Debug.LogWarning("[Norscope Phase3] Expected exactly one SpatialWindowSpawner, found " + spawners.Length);
+                ok = false;
+            }
+
+            if (spawners.Length == 1 && panelPrefab != null)
+            {
+                var soSpawner = new SerializedObject(spawners[0]);
+                SerializedProperty prefabProp = soSpawner.FindProperty("interactionTestPanelPrefab");
+                GameObject registeredPrefab = prefabProp != null ? prefabProp.objectReferenceValue as GameObject : null;
+                if (registeredPrefab != panelPrefab)
+                {
+                    Debug.LogWarning("[Norscope Phase3] SpatialWindowSpawner.interactionTestPanelPrefab does not reference " + InteractionTestPanelPath);
+                    ok = false;
+                }
+            }
+
+            if (UnityEngine.Object.FindObjectsByType<SpatialWindowManager>(FindObjectsInactive.Include, FindObjectsSortMode.None).Length != 1)
+            {
+                Debug.LogWarning("[Norscope Phase3] Expected exactly one SpatialWindowManager in Bootstrap.");
+                ok = false;
+            }
+
+            GameObject scenePanel = GameObject.Find("InteractionTestPanel");
+            if (scenePanel == null)
+            {
+                Transform[] all = Resources.FindObjectsOfTypeAll<Transform>();
+                foreach (Transform t in all)
+                {
+                    if (t != null && t.name == "InteractionTestPanel" && !string.IsNullOrEmpty(t.gameObject.scene.name))
+                    {
+                        scenePanel = t.gameObject;
+                        break;
+                    }
+                }
+            }
+
+            if (scenePanel != null)
+            {
+                Debug.LogWarning("[Norscope Phase3] InteractionTestPanel must not be scene-placed — runtime ownership belongs to SpatialWindowManager.");
+                ok = false;
+            }
+
+            return ok;
+        }
+
+        public static void BuildPhase3UwpPackage()
+        {
+            if (!Validate(out string report))
+            {
+                throw new Exception("Validate Hand Interaction failed. Fix before packaging.\n" + report);
+            }
+
+            ConfigureOpenXrHandFeatures();
+
+            // Keep SpatialPerception; do not strip hand features (unlike Phase 2).
+            PlayerSettings.WSA.SetCapability(PlayerSettings.WSACapability.SpatialPerception, true);
+            PlayerSettings.bundleVersion = "0.3.2";
+
+            EditorBuildSettings.scenes = new[]
+            {
+                new EditorBuildSettingsScene(BootstrapScenePath, true)
+            };
+
+            EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.WSA, BuildTarget.WSAPlayer);
+            EditorUserBuildSettings.wsaUWPBuildType = WSAUWPBuildType.D3D;
+            EditorUserBuildSettings.wsaArchitecture = "ARM64";
+
+#pragma warning disable CS0618
+            PlayerSettings.SetScriptingBackend(BuildTargetGroup.WSA, ScriptingImplementation.IL2CPP);
+            PlayerSettings.SetArchitecture(BuildTargetGroup.WSA, 2);
+#pragma warning restore CS0618
+            PlayerSettings.WSA.SetTargetDeviceFamily(PlayerSettings.WSATargetFamily.Holographic, true);
+            PlayerSettings.WSA.SetTargetDeviceFamily(PlayerSettings.WSATargetFamily.Desktop, false);
+            PlayerSettings.WSA.SetTargetDeviceFamily(PlayerSettings.WSATargetFamily.Mobile, false);
+
+            Directory.CreateDirectory(BuildOutputPath);
+            AssetDatabase.SaveAssets();
+
+            var options = new BuildPlayerOptions
+            {
+                scenes = new[] { BootstrapScenePath },
+                locationPathName = BuildOutputPath,
+                target = BuildTarget.WSAPlayer,
+                targetGroup = BuildTargetGroup.WSA,
+                options = BuildOptions.None
+            };
+
+            Debug.Log("[Norscope Phase3] Building UWP D3D ARM64 (hands-enabled)...");
+            var buildReport = UnityEditor.BuildPipeline.BuildPlayer(options);
+            if (buildReport.summary.result != UnityEditor.Build.Reporting.BuildResult.Succeeded)
+            {
+                throw new Exception("Unity UWP build failed: " + buildReport.summary.result);
+            }
+
+            Debug.Log("[Norscope Phase3] Unity export succeeded: " + BuildOutputPath +
+                      "\nNext: MSBuild Master ARM64, then WinAppDeployCmd install over USB." +
+                      "\nPackage version: " + PlayerSettings.bundleVersion);
+            EditorUtility.DisplayDialog(
+                "Phase 3 Unity Export",
+                "Unity UWP export succeeded.\n\nNext the agent/MSBuild will package Master ARM64 and install over USB.\nDo not Device Portal remote-launch — open from Start menu.",
+                "OK");
+        }
+
+        private static Transform FindChild(Transform root, string name)
+        {
+            if (root == null)
+            {
+                return null;
+            }
+
+            if (root.name == name)
+            {
+                return root;
+            }
+
+            for (int i = 0; i < root.childCount; i++)
+            {
+                Transform f = FindChild(root.GetChild(i), name);
+                if (f != null)
+                {
+                    return f;
+                }
+            }
+
+            return null;
+        }
+
+        private static void DisableNamedUnder(Transform root, string name)
+        {
+            Transform t = FindChild(root, name);
+            if (t == null)
+            {
+                return;
+            }
+
+            if (t.gameObject.activeSelf)
+            {
+                t.gameObject.SetActive(false);
+                PrefabUtility.RecordPrefabInstancePropertyModifications(t.gameObject);
+                EditorUtility.SetDirty(t.gameObject);
+                Debug.Log("[Norscope Phase3] Disabled " + name + " (HL2 hands-only).");
+            }
+        }
+
+        private static bool IsHandInteractor(Component c)
+        {
+            return FindHandRoot(c.transform) != null;
+        }
+
+        private static Transform FindHandRoot(Transform t)
+        {
+            while (t != null)
+            {
+                if (t.name == "Left Hand" || t.name == "Right Hand")
+                {
+                    return t;
+                }
+
+                t = t.parent;
+            }
+
+            return null;
+        }
+
+        private static Transform FindNamedInScene(string name)
+        {
+            GameObject go = GameObject.Find(name);
+            return go != null ? go.transform : null;
+        }
+
+        private static void SetLayer(string name, int layer)
+        {
+            GameObject go = GameObject.Find(name);
+            if (go == null || layer < 0)
+            {
+                return;
+            }
+
+            foreach (Transform t in go.GetComponentsInChildren<Transform>(true))
+            {
+                t.gameObject.layer = layer;
+            }
+
+            EditorUtility.SetDirty(go);
+        }
+
+        private static bool IsTypeEnabled(BuildTargetGroup group, string typeName)
+        {
+            OpenXRSettings settings = OpenXRSettings.GetSettingsForBuildTargetGroup(group);
+            FieldInfo field = typeof(OpenXRSettings).GetField("features", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+            OpenXRFeature[] features = field != null ? field.GetValue(settings) as OpenXRFeature[] : null;
+            return features != null && features.Any(f => f != null && f.GetType().Name == typeName && f.enabled);
+        }
+
+        private static bool IsIdEnabled(BuildTargetGroup group, string id)
+        {
+            OpenXRFeature feature = FeatureHelpers.GetFeatureWithIdForBuildTarget(group, id);
+            return feature != null && feature.enabled;
+        }
+
         private static void ImportRequiredSamples()
         {
             // Samples are copied into Assets/Samples (Starter Assets + Hands Interaction Demo + HandVisualizer).
@@ -110,8 +730,9 @@ namespace Norscope.Editor
             SetFeatureEnabledByTypeName(BuildTargetGroup.WSA, "HandTracking", true);          // XR Hands subsystem
             SetFeatureEnabledByTypeName(BuildTargetGroup.WSA, "MicrosoftHandInteraction", true); // MSFT hand interaction profile
 
-            // XR_EXT_hand_interaction profile used by modern XRI hand aim/pinch paths.
-            SetFeatureEnabledById(BuildTargetGroup.WSA, HandInteractionProfileFeatureId, true);
+            // HL2: use Microsoft Hand Interaction aim/pointer only.
+            // Keeping XR_EXT Hand Interaction enabled creates a competing pointer pose and skews far rays.
+            SetFeatureEnabledById(BuildTargetGroup.WSA, HandInteractionProfileFeatureId, false);
 
             OpenXRSettings openXr = OpenXRSettings.GetSettingsForBuildTargetGroup(BuildTargetGroup.WSA);
             if (openXr != null)
@@ -129,6 +750,14 @@ namespace Norscope.Editor
             }
 
             LogEnabledOpenXrFeatures(BuildTargetGroup.WSA);
+
+            // Standalone target (Play Mode Remoting / in-editor hand testing) needs the same
+            // Microsoft Hand Interaction profile, with XR_EXT Hand Interaction kept off.
+            FeatureHelpers.RefreshFeatures(BuildTargetGroup.Standalone);
+            SetFeatureEnabledByTypeName(BuildTargetGroup.Standalone, "MicrosoftHandInteraction", true);
+            SetFeatureEnabledById(BuildTargetGroup.Standalone, HandInteractionProfileFeatureId, false);
+            SetFeatureEnabledByTypeName(BuildTargetGroup.Standalone, "HandTracking", true);
+            SetFeatureEnabledById(BuildTargetGroup.Standalone, MrHandTrackingFeatureId, true);
         }
 
         private static void SetFeatureEnabledById(BuildTargetGroup group, string featureId, bool enabled)
@@ -251,7 +880,38 @@ namespace Norscope.Editor
             CreateHandTestCanvas();
             CreateDiagnosticsPanel();
 
-            // Ensure XR Origin camera is clear for passthrough.
+            EnsureGrabLayer();
+            DisableNamedUnder(origin.transform, "Left Controller");
+            DisableNamedUnder(origin.transform, "Right Controller");
+
+            var corrector = origin.GetComponent<Norscope.Phase3HandRayCorrector>();
+            if (corrector == null)
+            {
+                corrector = origin.AddComponent<Norscope.Phase3HandRayCorrector>();
+            }
+
+            var pokeSupport = origin.GetComponent<Norscope.Phase3UiPokeSupport>();
+            if (pokeSupport == null)
+            {
+                pokeSupport = origin.AddComponent<Norscope.Phase3UiPokeSupport>();
+            }
+
+            corrector.Apply();
+            EditorUtility.SetDirty(corrector);
+            EditorUtility.SetDirty(pokeSupport);
+            foreach (NearFarInteractor nf in UnityEngine.Object.FindObjectsByType<NearFarInteractor>(FindObjectsInactive.Exclude, FindObjectsSortMode.None))
+            {
+                PrefabUtility.RecordPrefabInstancePropertyModifications(nf);
+                foreach (Component c in nf.GetComponentsInChildren<Component>(true))
+                {
+                    if (c != null)
+                    {
+                        PrefabUtility.RecordPrefabInstancePropertyModifications(c);
+                    }
+                }
+            }
+
+            // Camera under XR Origin for passthrough.
             Camera xrCam = origin.GetComponentInChildren<Camera>();
             if (xrCam != null)
             {
@@ -328,6 +988,12 @@ namespace Norscope.Editor
             go.transform.position = position;
             go.transform.localScale = Vector3.one * 0.15f;
 
+            int grabLayer = LayerMask.NameToLayer(Norscope.Phase3HandRayCorrector.GrabLayerName);
+            if (grabLayer >= 0)
+            {
+                go.layer = grabLayer;
+            }
+
             Rigidbody rb = go.GetComponent<Rigidbody>();
             if (rb == null)
             {
@@ -383,6 +1049,7 @@ namespace Norscope.Editor
         private static void CreateHandTestCanvas()
         {
             GameObject canvasGo = new GameObject("HandTestCanvas");
+            canvasGo.layer = LayerMask.NameToLayer("UI");
             canvasGo.transform.position = new Vector3(0f, 1.15f, 1.2f);
             canvasGo.transform.localScale = Vector3.one * 0.001f;
 
@@ -418,6 +1085,7 @@ namespace Norscope.Editor
         private static void CreateDiagnosticsPanel()
         {
             GameObject canvasGo = new GameObject("DiagnosticsPanel");
+            canvasGo.layer = LayerMask.NameToLayer("UI");
             canvasGo.transform.position = new Vector3(-0.55f, 0.45f, 1.1f);
             canvasGo.transform.localScale = Vector3.one * 0.001f;
 
@@ -442,7 +1110,7 @@ namespace Norscope.Editor
             statusRt.anchoredPosition = new Vector2(0f, -10f);
 
             var diagnostics = canvasGo.AddComponent<Norscope.HandInteractionDiagnostics>();
-            diagnostics.showDiagnostics = true;
+            diagnostics.showHandDiagnostics = true;
             diagnostics.statusText = status;
         }
 
@@ -621,13 +1289,14 @@ namespace Norscope.Editor
 
         private static void BuildUwpArm64MasterInternal()
         {
-            NamedBuildTarget wsa = NamedBuildTarget.FromBuildTargetGroup(BuildTargetGroup.WSA);
-            EditorUserBuildSettings.SwitchActiveBuildTarget(wsa, BuildTarget.WSAPlayer);
+            EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.WSA, BuildTarget.WSAPlayer);
             EditorUserBuildSettings.wsaUWPBuildType = WSAUWPBuildType.D3D;
             EditorUserBuildSettings.wsaArchitecture = "ARM64";
 
-            PlayerSettings.SetScriptingBackend(wsa, ScriptingImplementation.IL2CPP);
-            PlayerSettings.SetArchitecture(wsa, 2);
+#pragma warning disable CS0618
+            PlayerSettings.SetScriptingBackend(BuildTargetGroup.WSA, ScriptingImplementation.IL2CPP);
+            PlayerSettings.SetArchitecture(BuildTargetGroup.WSA, 2);
+#pragma warning restore CS0618
             PlayerSettings.WSA.SetTargetDeviceFamily(PlayerSettings.WSATargetFamily.Holographic, true);
             PlayerSettings.WSA.SetTargetDeviceFamily(PlayerSettings.WSATargetFamily.Desktop, false);
             PlayerSettings.WSA.SetTargetDeviceFamily(PlayerSettings.WSATargetFamily.Mobile, false);

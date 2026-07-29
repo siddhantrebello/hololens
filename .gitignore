@@ -61,3 +61,5 @@ BurstDebugInformation_DoNotShip/
 # Local tooling
 *.log
 *.csproj.user
+.claude/
+.codex/

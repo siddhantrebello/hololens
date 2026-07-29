@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a75e3b2a68aa1c24e9d7d15fde9e9bea, type: 3}
+  m_Name: Replace RAM
+  m_EditorClassIdentifier: 
+  taskId: replace-ram
+  displayName: Replace RAM
+  description: Swap an existing memory module for a new one.
+  icon: {fileID: 21300000, guid: 2deb64c5dd04087499331b4f3a029c93, type: 3}
+  estimatedDuration: 10 min
+  difficulty: 0
+  isEnabled: 1
+  steps:
+  - stepTitle: Power Down and Ground Yourself
+    instruction: Shut down, unplug, and touch a grounded metal surface to discharge
+      static.
+    image: {fileID: 0}
+    warning: Static electricity can silently damage memory modules.
+    verification: 
+  - stepTitle: Access the RAM Slots
+    instruction: Remove the back panel or dedicated memory cover.
+    image: {fileID: 0}
+    warning: 
+    verification: 
+  - stepTitle: Remove the Old Module
+    instruction: Spread the retaining clips outward until the module pops up, then
+      slide it out at an angle.
+    image: {fileID: 0}
+    warning: 
+    verification: 
+  - stepTitle: Insert the New Module
+    instruction: Align the notch on the new module with the slot, insert at an angle,
+      and press down firmly until the clips lock.
+    image: {fileID: 0}
+    warning: "Uneven pressure can crack the module or the slot \u2014 press evenly
+      on both ends."
+    verification: 
+  - stepTitle: Verify Detection
+    instruction: Power on and check the system information or BIOS to confirm the
+      new capacity is recognized.
+    image: {fileID: 0}
+    warning: 
+    verification: Total installed memory shown in the OS should match the new module's
+      rated capacity.

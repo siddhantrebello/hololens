@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a75e3b2a68aa1c24e9d7d15fde9e9bea, type: 3}
+  m_Name: Replace Battery
+  m_EditorClassIdentifier: 
+  taskId: replace-battery
+  displayName: Replace Battery
+  description: Remove the old battery and install a new one.
+  icon: {fileID: 21300000, guid: 2deb64c5dd04087499331b4f3a029c93, type: 3}
+  estimatedDuration: 15 min
+  difficulty: 0
+  isEnabled: 1
+  steps:
+  - stepTitle: Power Down Fully
+    instruction: Shut down the laptop and unplug the charger.
+    image: {fileID: 0}
+    warning: 
+    verification: 
+  - stepTitle: Remove the Back Panel
+    instruction: Unscrew and remove the bottom access panel.
+    image: {fileID: 0}
+    warning: 
+    verification: 
+  - stepTitle: Disconnect the Old Battery
+    instruction: Unclip the battery connector and remove the retaining screws.
+    image: {fileID: 0}
+    warning: If the battery is swollen, handle it carefully and do not puncture it.
+    verification: 
+  - stepTitle: Install the New Battery
+    instruction: Place the new battery in the same orientation, secure the screws,
+      and reconnect the connector.
+    image: {fileID: 0}
+    warning: 
+    verification: 
+  - stepTitle: Test the New Battery
+    instruction: Reassemble the panel, power on, and confirm the OS detects the battery
+      and it begins charging.
+    image: {fileID: 0}
+    warning: 
+    verification: Battery icon should show a charging state and report an accurate
+      charge percentage.
