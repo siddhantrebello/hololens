@@ -1,0 +1,12 @@
+namespace Norscope.AskAI
+{
+    /// <summary>Ask AI mock workflow states. Controller owns all transitions.</summary>
+    public enum AskAiWorkflowState
+    {
+        Ready = 0,
+        Listening = 1,
+        Processing = 2,
+        Answer = 3,
+        Error = 4
+    }
+}

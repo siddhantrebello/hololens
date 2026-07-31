@@ -1,0 +1,259 @@
+using System.Collections;
+using Norscope.Audio;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace Norscope.AskAI
+{
+    /// <summary>
+    /// Owns Ask AI workflow state transitions and timing. Presentation is delegated to AskAiView.
+    /// </summary>
+    [DisallowMultipleComponent]
+    public sealed class AskAiWorkflowController : MonoBehaviour
+    {
+        private const float ListeningSeconds = 2f;
+        private const float ProcessingSeconds = 1.5f;
+
+        [SerializeField] private AskAiView view;
+        [SerializeField] private Button primaryButton;
+
+        private IAskAiService _service;
+        private AskAiWorkflowState _state = AskAiWorkflowState.Ready;
+        private Coroutine _workflowRoutine;
+        private bool _listenersWired;
+
+        public AskAiWorkflowState CurrentState => _state;
+
+        public void Configure(AskAiView askAiView, Button primary, IAskAiService service = null)
+        {
+            view = askAiView;
+            primaryButton = primary;
+            _service = service ?? new MockAskAiService();
+            WireListeners();
+        }
+
+        private void Awake()
+        {
+            if (_service == null)
+                _service = new MockAskAiService();
+            if (view == null)
+                view = GetComponent<AskAiView>();
+            if (primaryButton == null && view != null)
+                primaryButton = view.PrimaryButton;
+            WireListeners();
+        }
+
+        private void OnEnable()
+        {
+            ResetToReady(animate: false);
+        }
+
+        private void OnDisable()
+        {
+            CancelWorkflow();
+            view?.SnapReadyPresentation();
+        }
+
+        private void OnDestroy()
+        {
+            CancelWorkflow();
+            UnwireListeners();
+        }
+
+        private void WireListeners()
+        {
+            if (_listenersWired || primaryButton == null)
+                return;
+            primaryButton.onClick.RemoveListener(OnPrimaryClicked);
+            primaryButton.onClick.AddListener(OnPrimaryClicked);
+            _listenersWired = true;
+        }
+
+        private void UnwireListeners()
+        {
+            if (!_listenersWired || primaryButton == null)
+                return;
+            primaryButton.onClick.RemoveListener(OnPrimaryClicked);
+            _listenersWired = false;
+        }
+
+        private void OnPrimaryClicked()
+        {
+            if (_state == AskAiWorkflowState.Listening ||
+                _state == AskAiWorkflowState.Processing)
+            {
+                return;
+            }
+
+            UIAudioManager.Play(UIAudioEvent.ButtonClick);
+
+            if (_state == AskAiWorkflowState.Error)
+            {
+                StartWorkflow();
+                return;
+            }
+
+            // Ready or Answer → clean new session
+            StartWorkflow();
+        }
+
+        private void StartWorkflow()
+        {
+            CancelWorkflow();
+            _workflowRoutine = StartCoroutine(RunWorkflow());
+        }
+
+        private void CancelWorkflow()
+        {
+            if (_workflowRoutine == null)
+                return;
+            StopCoroutine(_workflowRoutine);
+            _workflowRoutine = null;
+        }
+
+        private IEnumerator RunWorkflow()
+        {
+            EnterState(
+                AskAiWorkflowState.Listening,
+                "Listening...",
+                body: string.Empty,
+                buttonLabel: "Ask AI",
+                buttonEnabled: false,
+                hintVisible: false,
+                microphoneActive: true,
+                processingActive: false);
+            UIAudioManager.Play(UIAudioEvent.VoiceStartListening);
+
+            yield return WaitOrCancelled(ListeningSeconds);
+            if (_workflowRoutine == null)
+                yield break;
+
+            string transcript = _service != null
+                ? _service.GetMockTranscript()
+                : MockAskAiService.DefaultTranscript;
+
+            UIAudioManager.Play(UIAudioEvent.VoiceStopListening);
+            UIAudioManager.Play(UIAudioEvent.VoiceRecognized);
+
+            EnterState(
+                AskAiWorkflowState.Listening,
+                "Listening...",
+                body: transcript,
+                buttonLabel: "Ask AI",
+                buttonEnabled: false,
+                hintVisible: false,
+                microphoneActive: true,
+                processingActive: false);
+
+            // Brief beat so transcript is visible before Analyzing
+            yield return WaitOrCancelled(0.15f);
+            if (_workflowRoutine == null)
+                yield break;
+
+            EnterState(
+                AskAiWorkflowState.Processing,
+                "Analyzing...",
+                body: transcript,
+                buttonLabel: "Ask AI",
+                buttonEnabled: false,
+                hintVisible: false,
+                microphoneActive: false,
+                processingActive: true);
+            UIAudioManager.Play(UIAudioEvent.AIThinking);
+
+            yield return WaitOrCancelled(ProcessingSeconds);
+            if (_workflowRoutine == null)
+                yield break;
+
+            string answer = _service != null
+                ? _service.GetMockAnswer()
+                : MockAskAiService.DefaultAnswer;
+
+            EnterState(
+                AskAiWorkflowState.Answer,
+                "Answer",
+                body: answer,
+                buttonLabel: "Ask AI",
+                buttonEnabled: true,
+                hintVisible: false,
+                microphoneActive: false,
+                processingActive: false);
+            UIAudioManager.Play(UIAudioEvent.AIResponse);
+
+            _workflowRoutine = null;
+        }
+
+        private IEnumerator WaitOrCancelled(float seconds)
+        {
+            float remaining = Mathf.Max(0f, seconds);
+            while (remaining > 0f)
+            {
+                if (_workflowRoutine == null)
+                    yield break;
+                remaining -= Time.unscaledDeltaTime;
+                yield return null;
+            }
+        }
+
+        private void ResetToReady(bool animate)
+        {
+            CancelWorkflow();
+            EnterState(
+                AskAiWorkflowState.Ready,
+                "Ready",
+                body: string.Empty,
+                buttonLabel: "Ask AI",
+                buttonEnabled: true,
+                hintVisible: true,
+                microphoneActive: false,
+                processingActive: false,
+                animate);
+            view?.SnapReadyPresentation();
+        }
+
+        private void EnterState(
+            AskAiWorkflowState state,
+            string status,
+            string body,
+            string buttonLabel,
+            bool buttonEnabled,
+            bool hintVisible,
+            bool microphoneActive,
+            bool processingActive,
+            bool animate = true)
+        {
+            _state = state;
+            if (view != null)
+            {
+                view.Render(
+                    state,
+                    status,
+                    body,
+                    buttonLabel,
+                    buttonEnabled,
+                    hintVisible,
+                    microphoneActive,
+                    processingActive,
+                    animate);
+            }
+        }
+
+        /// <summary>Test helper for Error path without expanding mock service.</summary>
+        public void ShowError(string message)
+        {
+            CancelWorkflow();
+            EnterState(
+                AskAiWorkflowState.Error,
+                "Error",
+                body: string.IsNullOrEmpty(message)
+                    ? "Something went wrong. Please try again."
+                    : message,
+                buttonLabel: "Try Again",
+                buttonEnabled: true,
+                hintVisible: false,
+                microphoneActive: false,
+                processingActive: false);
+            UIAudioManager.Play(UIAudioEvent.Error);
+        }
+    }
+}

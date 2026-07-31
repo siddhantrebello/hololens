@@ -1,0 +1,352 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 722e672470771bc458f12062869791ab, type: 3}
+  m_Name: GermanLocalizationTable
+  m_EditorClassIdentifier: 
+  locale: de
+  entries:
+  - key: active_task.active_task_cancel_active_task
+    value: 
+  - key: active_task.active_task_capture_photo_add_voice_note
+    value: 
+  - key: active_task.active_task_confirm_and_continue
+    value: 
+  - key: active_task.active_task_evidence
+    value: 
+  - key: active_task.active_task_no_evidence_added
+    value: 
+  - key: active_task.active_task_pending
+    value: 
+  - key: active_task.active_task_return_home
+    value: 
+  - key: active_task.active_task_safety
+    value: 
+  - key: active_task.active_task_v4_2_1_hololens_2
+    value: 
+  - key: active_task.active_task_verification_required
+    value: 
+  - key: active_task.active_task_workflow_steps
+    value: 
+  - key: active_task.active_task_your_current_task_progress_will_be_disca
+    value: 
+  - key: active_task.dialog_cancel_task
+    value: 
+  - key: active_task.dialog_confirm_cancel
+    value: 
+  - key: active_task.dialog_continue_task
+    value: 
+  - key: active_task.report_generate
+    value: 
+  - key: active_task.safety
+    value: 
+  - key: active_task.task_complete
+    value: 
+  - key: active_task.task_finish
+    value: 
+  - key: active_task.task_previous
+    value: 
+  - key: active_task.verification_required
+    value: 
+  - key: common.unavailable
+    value: "Nicht verf\xFCgbar"
+  - key: difficulty.advanced
+    value: Fortgeschritten
+  - key: difficulty.beginner
+    value: Einfach
+  - key: difficulty.intermediate
+    value: Mittel
+  - key: home.home_ask_ai
+    value: 
+  - key: home.home_equipment_analytics_inspection_histories_and_co
+    value: 
+  - key: home.home_intelligent_diagnostics_part_recommendations_an
+    value: 
+  - key: home.home_manage_work_orders_and_field_inspection_checkli
+    value: 
+  - key: home.home_norscope
+    value: 
+  - key: home.home_reports
+    value: 
+  - key: home.home_storage
+    value: 
+  - key: home.home_subtitle
+    value: 
+  - key: home.home_tasks
+    value: 
+  - key: home.home_technical_documentation_schematics_and_equipmen
+    value: 
+  - key: home.home_title
+    value: 
+  - key: home.home_v4_2_1_hololens_2
+    value: 
+  - key: home.home_version_information_licensing_details_and_suppo
+    value: 
+  - key: home.home_workspace_preferences_notifications_and_hololen
+    value: 
+  - key: home.settings_about
+    value: 
+  - key: home.settings_title
+    value: 
+  - key: launcher.home_title
+    value: 
+  - key: settings.common_technician
+    value: 
+  - key: settings.home_title
+    value: 
+  - key: settings.language_english
+    value: 
+  - key: settings.language_german
+    value: 
+  - key: settings.language_german_native
+    value: 
+  - key: settings.settings_about
+    value: 
+  - key: settings.settings_active_language
+    value: 
+  - key: settings.settings_alert_sounds
+    value: 
+  - key: settings.settings_application
+    value: 
+  - key: settings.settings_audio
+    value: 
+  - key: settings.settings_audio_integration_pending_phase_2c
+    value: 
+  - key: settings.settings_auto_brightness
+    value: 
+  - key: settings.settings_available_in_phase_2c
+    value: 
+  - key: settings.settings_brightness
+    value: 
+  - key: settings.settings_build
+    value: 
+  - key: settings.settings_change_language
+    value: 
+  - key: settings.settings_choose_language
+    value: 
+  - key: settings.settings_de
+    value: 
+  - key: settings.settings_display
+    value: 
+  - key: settings.settings_en
+    value: 
+  - key: settings.settings_english_and_deutsch_available
+    value: 
+  - key: settings.settings_interface_language
+    value: 
+  - key: settings.settings_language
+    value: 
+  - key: settings.settings_language_switching_is_installed_in_phase_2b
+    value: 
+  - key: settings.settings_language_switching_will_update_all_norscope
+    value: 
+  - key: settings.settings_large
+    value: 
+  - key: settings.settings_license
+    value: 
+  - key: settings.settings_live_preview
+    value: 
+  - key: settings.settings_managed_by_hololens_system
+    value: 
+  - key: settings.settings_master_volume
+    value: 
+  - key: settings.settings_medium
+    value: 
+  - key: settings.settings_microphone
+    value: 
+  - key: settings.settings_norscope_enterprise_hololens_2
+    value: 
+  - key: settings.settings_platform
+    value: 
+  - key: settings.settings_runtime_version
+    value: 
+  - key: settings.settings_small
+    value: 
+  - key: settings.settings_speech_alerts
+    value: 
+  - key: settings.settings_text_size
+    value: 
+  - key: settings.settings_text_size_brightness
+    value: 
+  - key: settings.settings_text_size_scaling_is_installed_in_phase_2d
+    value: 
+  - key: settings.settings_the_interface_updates_immediately_after_sel
+    value: 
+  - key: settings.settings_title
+    value: 
+  - key: settings.settings_translation_preview
+    value: 
+  - key: settings.settings_version
+    value: 
+  - key: settings.settings_version_info
+    value: 
+  - key: settings.settings_voice_guidance
+    value: 
+  - key: settings.settings_voice_guidance_not_installed
+    value: 
+  - key: settings.settings_voice_input_not_installed
+    value: 
+  - key: settings.settings_x_large
+    value: 
+  - key: settings.status_offline
+    value: 
+  - key: settings.task_completed
+    value: 
+  - key: settings.task_library_title
+    value: 
+  - key: status.not_captured
+    value: Nicht aufgenommen
+  - key: status.not_recorded
+    value: Nicht erfasst
+  - key: status.offline
+    value: Offline
+  - key: status.offline_ready
+    value: Offline bereit
+  - key: task.all_steps_completed
+    value: Alle Arbeitsschritte wurden abgeschlossen.
+  - key: task.completed_steps
+    value: Alle {0} abgeschlossen
+  - key: task.completion.success
+    value: Wartungsablauf erfolgreich abgeschlossen
+  - key: task.generic_name
+    value: Aufgabe
+  - key: task.guided_steps.many
+    value: "{0} gef\xFChrte Schritte"
+  - key: task.guided_steps.one
+    value: "{0} gef\xFChrter Schritt"
+  - key: task.guided_workflow
+    value: "Gef\xFChrter Wartungsablauf"
+  - key: task.in_progress
+    value: In Bearbeitung
+  - key: task.more_steps.many
+    value: +{0} weitere Schritte
+  - key: task.more_steps.one
+    value: +{0} weiterer Schritt
+  - key: task.step_of
+    value: Schritt {0} von {1}
+  - key: task.steps.many
+    value: '{0} Schritte'
+  - key: task.steps.one
+    value: '{0} Schritt'
+  - key: task.steps_progress
+    value: '{0} / {1} Schritte'
+  - key: task.time_remaining
+    value: Noch ca. {0}
+  - key: task.updated
+    value: Aktualisiert {0}
+  - key: task.verification.not_required
+    value: Nicht erforderlich
+  - key: task.verification.pending
+    value: Ausstehend
+  - key: task.workflow_completed
+    value: Arbeitsablauf abgeschlossen
+  - key: task_complete.captured_photos_video
+    value: 
+  - key: task_complete.not_captured
+    value: 
+  - key: task_complete.task_complete
+    value: 
+  - key: task_complete.task_complete_ai_verification
+    value: 
+  - key: task_complete.task_complete_all_task_steps_have_been_completed
+    value: 
+  - key: task_complete.task_complete_completed
+    value: 
+  - key: task_complete.task_complete_completed_c48179
+    value: 
+  - key: task_complete.task_complete_completed_successfully
+    value: 
+  - key: task_complete.task_complete_duration
+    value: 
+  - key: task_complete.task_complete_evidence
+    value: 
+  - key: task_complete.task_complete_execution_log
+    value: 
+  - key: task_complete.task_complete_future_feature
+    value: 
+  - key: task_complete.task_complete_generate_report_placeholder
+    value: 
+  - key: task_complete.task_complete_generated_outputs
+    value: 
+  - key: task_complete.task_complete_maintenance_report
+    value: 
+  - key: task_complete.task_complete_not_captured
+    value: 
+  - key: task_complete.task_complete_not_generated
+    value: 
+  - key: task_complete.task_complete_not_implemented
+    value: 
+  - key: task_complete.task_complete_not_recorded
+    value: 
+  - key: task_complete.task_complete_not_required
+    value: 
+  - key: task_complete.task_complete_offline
+    value: 
+  - key: task_complete.task_complete_supervisor_review
+    value: 
+  - key: task_complete.task_complete_task_completed
+    value: 
+  - key: task_complete.task_complete_v4_2_1_hololens_2
+    value: 
+  - key: task_complete.task_complete_verification
+    value: 
+  - key: task_complete.task_complete_verified
+    value: 
+  - key: task_complete.task_complete_visual_inspection
+    value: 
+  - key: task_complete.task_complete_voice_notes
+    value: 
+  - key: task_complete.task_complete_workflow_steps
+    value: 
+  - key: task_complete.task_completed
+    value: 
+  - key: task_complete.task_return_home
+    value: 
+  - key: task_library.task_library_all
+    value: 
+  - key: task_library.task_library_category
+    value: 
+  - key: task_library.task_library_cleaning
+    value: 
+  - key: task_library.task_library_details
+    value: 
+  - key: task_library.task_library_difficulty
+    value: 
+  - key: task_library.task_library_duration
+    value: 
+  - key: task_library.task_library_electrical
+    value: 
+  - key: task_library.task_library_empty
+    value: 
+  - key: task_library.task_library_inspection
+    value: 
+  - key: task_library.task_library_mechanical
+    value: 
+  - key: task_library.task_library_most_recent
+    value: 
+  - key: task_library.task_library_norscope
+    value: 
+  - key: task_library.task_library_offline_available
+    value: 
+  - key: task_library.task_library_search_tasks
+    value: 
+  - key: task_library.task_library_select_a_maintenance_workflow
+    value: 
+  - key: task_library.task_library_steps
+    value: 
+  - key: task_library.task_library_steps_preview
+    value: 
+  - key: task_library.task_library_title
+    value: 
+  - key: task_library.task_library_v4_2_1_hololens_2
+    value: 
+  - key: task_library.task_start
+    value: 

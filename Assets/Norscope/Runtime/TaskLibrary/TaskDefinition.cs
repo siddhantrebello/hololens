@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Norscope.Localization;
 
 namespace Norscope.TaskLibrary
 {
@@ -12,8 +13,13 @@ namespace Norscope.TaskLibrary
         [SerializeField] private Sprite icon;
         [SerializeField] private string estimatedDuration = string.Empty;
         [SerializeField] private TaskDifficulty difficulty = TaskDifficulty.Beginner;
+        [SerializeField] private string category = "Maintenance";
+        [SerializeField] private bool offlineAvailable;
+        [SerializeField] private string lastUpdated = string.Empty;
         [SerializeField] private bool isEnabled = true;
         [SerializeField] private List<TaskStep> steps = new List<TaskStep>();
+        [SerializeField] private List<LocalizedTaskContent> localizedContent =
+            new List<LocalizedTaskContent>();
 
         public string TaskId => taskId;
         public string DisplayName => displayName;
@@ -21,7 +27,11 @@ namespace Norscope.TaskLibrary
         public Sprite Icon => icon;
         public string EstimatedDuration => estimatedDuration;
         public TaskDifficulty Difficulty => difficulty;
+        public string Category => category;
+        public bool OfflineAvailable => offlineAvailable;
+        public string LastUpdated => lastUpdated;
         public bool IsEnabled => isEnabled;
         public IReadOnlyList<TaskStep> Steps => steps;
+        public IReadOnlyList<LocalizedTaskContent> LocalizedContent => localizedContent;
     }
 }

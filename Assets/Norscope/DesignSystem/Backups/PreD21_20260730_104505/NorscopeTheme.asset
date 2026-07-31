@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a8e0d3e919f5535b92ab4c72ba27eb, type: 3}
+  m_Name: NorscopeTheme
+  m_EditorClassIdentifier: 
+  panelBackground: {r: 0.055, g: 0.071, b: 0.094, a: 0.94}
+  elevatedPanelBackground: {r: 0.082, g: 0.106, b: 0.137, a: 0.97}
+  primaryAccent: {r: 0.3, g: 0.76, b: 0.84, a: 1}
+  secondaryAccent: {r: 0.35, g: 0.55, b: 0.82, a: 1}
+  primaryText: {r: 0.945, g: 0.957, b: 0.969, a: 1}
+  secondaryText: {r: 0.65, g: 0.69, b: 0.75, a: 1}
+  border: {r: 0.22, g: 0.267, b: 0.325, a: 0.72}
+  hover: {r: 0.09944, g: 0.15832, b: 0.19323999, a: 0.9724}
+  pressed: {r: 0.072160006, g: 0.09328, b: 0.12056, a: 0.97360003}
+  disabled: {r: 0.39, g: 0.43, b: 0.49, a: 1}
+  success: {r: 0.31, g: 0.72, b: 0.48, a: 1}
+  warning: {r: 0.91, g: 0.62, b: 0.22, a: 1}
+  error: {r: 0.86, g: 0.34, b: 0.35, a: 1}
+  fonts:
+    titleFont: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+    headingFont: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+    bodyFont: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+    captionFont: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  titleSize: 24
+  headingSize: 18
+  bodySize: 14
+  captionSize: 11.5
+  smallCornerRadius: 7
+  mediumCornerRadius: 10
+  largeCornerRadius: 12
+  thinBorderWidth: 1
+  standardBorderWidth: 1
+  spaceExtraSmall: 4
+  spaceSmall: 8
+  spaceMedium: 12
+  spaceLarge: 16
+  spaceExtraLarge: 24
+  hoverScale: 1.005
+  pressedScale: 0.985
+  transitionDuration: 0.14
+  disabledOpacity: 0.42

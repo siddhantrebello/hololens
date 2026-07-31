@@ -1,0 +1,93 @@
+{
+    "schemaVersion": 1,
+    "capturedUtc": "2026-07-30T16:27:03.4499168Z",
+    "backupFolder": "Assets/Norscope/UI/Panels/_Backups/SettingsPhase2A_20260730_162703",
+    "settingsPanelExisted": false,
+    "settingsConfigurationExisted": false,
+    "entries": [
+        {
+            "path": "Assets/Norscope/Scenes/Bootstrap.unity",
+            "sha256": "250215a71d48bec386b0edbcf2a23f98ba0e8f8410e5f8156c27561638101bd8",
+            "length": 76570,
+            "existed": true
+        },
+        {
+            "path": "Assets/Norscope/UI/Panels/HomePanel.prefab",
+            "sha256": "ca69e08c1e016cd0ea9bd5495ac4c244a0b7453681f7c105c4b6ef8dac4f8b3a",
+            "length": 293120,
+            "existed": true
+        },
+        {
+            "path": "Assets/Norscope/UI/Panels/HomeLauncher.prefab",
+            "sha256": "8d7e3e28290629057e61b9cfa0c504311ddefb04d0abb8527f69614ad7308bf1",
+            "length": 34869,
+            "existed": true
+        },
+        {
+            "path": "Assets/Norscope/UI/Panels/TaskLibraryPanel.prefab",
+            "sha256": "1bd274eb9b7cf979f44f1d6fea81c44dee6c7cbf170785160d117423843adaaf",
+            "length": 292716,
+            "existed": true
+        },
+        {
+            "path": "Assets/Norscope/UI/Controls/TaskCard.prefab",
+            "sha256": "f7873806ee634a919994f0fac0f850e529aeb5d61781260828125516c57f03b5",
+            "length": 44995,
+            "existed": true
+        },
+        {
+            "path": "Assets/Norscope/UI/Panels/ActiveTaskPanel.prefab",
+            "sha256": "83feff85c42b3eab91249bb887548e9cba5388e23644b8f0f42655bf15eb5452",
+            "length": 377951,
+            "existed": true
+        },
+        {
+            "path": "Assets/Norscope/UI/Panels/TaskCompletionPanel.prefab",
+            "sha256": "d1c9ee80b64ca75a043097722608425a27861c1f6fb006a2eb0c5786134c0fd1",
+            "length": 306816,
+            "existed": true
+        },
+        {
+            "path": "Assets/Norscope/UI/Controls/NavigationBackButton.prefab",
+            "sha256": "977d2d379df5ba2693ae04ca289de0191d5ddd1228bbe37832790fac7421af5c",
+            "length": 14260,
+            "existed": true
+        },
+        {
+            "path": "Assets/Norscope/UI/Controls/NorscopeCloseButton.prefab",
+            "sha256": "68157f3f58568485a16e2520f62646a79e2d37f4e12fbe7a1295da974e140daa",
+            "length": 18691,
+            "existed": true
+        },
+        {
+            "path": "Assets/Norscope/Runtime/Navigation/PanelRegistry.cs",
+            "sha256": "4042d8e00066b5d6b358531b380689a7ea555794044561b188bf0b6f125b81d2",
+            "length": 5727,
+            "existed": true
+        },
+        {
+            "path": "Assets/Norscope/Runtime/Navigation/PanelNavigationService.cs",
+            "sha256": "aa460c98eec6a21bf01f41213260c923f04e6b9ef215c652152dede6b853a4e3",
+            "length": 5563,
+            "existed": true
+        },
+        {
+            "path": "Assets/Norscope/Runtime/Windows/SpatialWindowManager.cs",
+            "sha256": "37d58e3c604fdf4683b9f12fc120ac1a0c33a0c9639e285ded11c419c535d8ac",
+            "length": 4134,
+            "existed": true
+        },
+        {
+            "path": "Assets/Norscope/Runtime/Windows/SpatialWindow.cs",
+            "sha256": "6dd27a79915de8acf1493cc4b7c43199d0193a3e43565dbb61468ebc2a33efbc",
+            "length": 17380,
+            "existed": true
+        },
+        {
+            "path": "ProjectSettings/ProjectSettings.asset",
+            "sha256": "532aa6b167f53809d414a412360a0d300917998a23502d39a9be8adcd1e58928",
+            "length": 24395,
+            "existed": true
+        }
+    ]
+}

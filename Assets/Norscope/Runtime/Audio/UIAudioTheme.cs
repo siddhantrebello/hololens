@@ -13,6 +13,7 @@ namespace Norscope.Audio
     {
         [Header("Buttons & Panels")]
         [SerializeField] private AudioClip buttonClick;
+        [SerializeField] private AudioClip homeNavigate;
         [SerializeField] private AudioClip panelOpen;
         [SerializeField] private AudioClip panelClose;
         [SerializeField] private AudioClip panelMoveStart;
@@ -68,6 +69,7 @@ namespace Norscope.Audio
             switch (audioEvent)
             {
                 case UIAudioEvent.ButtonClick: return buttonClick;
+                case UIAudioEvent.HomeNavigate: return homeNavigate;
                 case UIAudioEvent.PanelOpen: return panelOpen;
                 case UIAudioEvent.PanelClose: return panelClose;
                 case UIAudioEvent.PanelMoveStart: return panelMoveStart;

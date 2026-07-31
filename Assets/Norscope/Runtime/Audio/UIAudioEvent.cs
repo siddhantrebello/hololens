@@ -38,6 +38,9 @@ namespace Norscope.Audio
         ReportGenerated,
         FileDownloaded,
         FileUploaded,
-        StorageOperation
+        StorageOperation,
+
+        /// <summary>Home launcher / navigate-to-Home only. Never reuse for ordinary UI.</summary>
+        HomeNavigate
     }
 }

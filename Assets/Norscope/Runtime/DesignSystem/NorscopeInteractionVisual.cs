@@ -13,6 +13,7 @@ namespace Norscope.DesignSystem
         MonoBehaviour,
         IPointerEnterHandler,
         IPointerExitHandler,
+        IPointerMoveHandler,
         IPointerDownHandler,
         IPointerUpHandler,
         ISelectHandler,
@@ -30,6 +31,7 @@ namespace Norscope.DesignSystem
         private NorscopeVisualState _explicitState;
         private NorscopeVisualState _currentState;
         private NorscopeDesignProvider _subscribedProvider;
+        private float _lastHoverSignalTime = -999f;
 
         public NorscopeVisualRole VisualRole => visualRole;
         public Selectable ObservedSelectable => observedSelectable;
@@ -50,6 +52,9 @@ namespace Norscope.DesignSystem
         private void OnEnable()
         {
             SubscribeToProvider();
+            _hovered = false;
+            _pressed = false;
+            _focused = false;
             _currentState = ResolveState();
             ApplyState(_currentState, true);
         }
@@ -60,11 +65,15 @@ namespace Norscope.DesignSystem
             _hovered = false;
             _pressed = false;
             _focused = false;
+            _currentState = NorscopeVisualState.Idle;
+            if (highlightController != null)
+                highlightController.TransitionTo(null, 0f, null, false);
         }
 
         private void Update()
         {
             SubscribeToProvider();
+            ReconcilePointerState();
             NorscopeVisualState state = ResolveState();
             if (state != _currentState)
             {
@@ -74,26 +83,34 @@ namespace Norscope.DesignSystem
             }
 
             if (highlightController != null)
-            {
                 highlightController.Tick(Time.unscaledDeltaTime);
-            }
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (!IsInteractable()) return;
-            _hovered = true;
+            NoteHover();
+        }
+
+        public void OnPointerMove(PointerEventData eventData)
+        {
+            if (!IsInteractable()) return;
+            if (_hovered || eventData != null && eventData.pointerEnter != null)
+                NoteHover();
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             _hovered = false;
             _pressed = false;
+            _focused = false;
+            NorscopeUiPointerState.ClearSelectionIfOurs(transform, observedSelectable);
         }
 
         public void OnPointerDown(PointerEventData eventData)
         {
             if (!IsInteractable()) return;
+            NoteHover();
             _pressed = true;
         }
 
@@ -125,6 +142,28 @@ namespace Norscope.DesignSystem
             _hasExplicitState = false;
         }
 
+        private void NoteHover()
+        {
+            _hovered = true;
+            _lastHoverSignalTime = Time.unscaledTime;
+        }
+
+        private void ReconcilePointerState()
+        {
+            if (_focused &&
+                !NorscopeUiPointerState.IsStillSelected(transform, observedSelectable))
+            {
+                _focused = false;
+            }
+
+            if ((_hovered || _pressed) &&
+                !NorscopeUiPointerState.IsHoverFresh(_lastHoverSignalTime))
+            {
+                _hovered = false;
+                _pressed = false;
+            }
+        }
+
         private NorscopeVisualState ResolveState()
         {
             if (!IsInteractable()) return NorscopeVisualState.Disabled;
@@ -134,9 +173,7 @@ namespace Norscope.DesignSystem
 
             NorscopeDesignProfile profile = ResolveProfile();
             if (_hovered && profile != null && profile.features.enableHoverGlow)
-            {
                 return NorscopeVisualState.Hovered;
-            }
 
             return NorscopeVisualState.Idle;
         }
@@ -147,9 +184,7 @@ namespace Norscope.DesignSystem
             if (profile == null || highlightController == null)
             {
                 if (highlightController != null)
-                {
                     highlightController.TransitionTo(null, 0f, null, false);
-                }
                 return;
             }
 
@@ -211,9 +246,7 @@ namespace Norscope.DesignSystem
             UnsubscribeFromProvider();
             _subscribedProvider = provider;
             if (_subscribedProvider != null)
-            {
                 _subscribedProvider.ProfileChanged += OnProfileChanged;
-            }
         }
 
         private void UnsubscribeFromProvider()

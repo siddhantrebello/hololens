@@ -12,39 +12,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1a8e0d3e919f5535b92ab4c72ba27eb, type: 3}
   m_Name: NorscopeTheme
   m_EditorClassIdentifier: 
-  panelBackground: {r: 0.075, g: 0.102, b: 0.141, a: 0.92}
-  elevatedPanelBackground: {r: 0.102, g: 0.137, b: 0.188, a: 0.96}
-  primaryAccent: {r: 0.133, g: 0.827, b: 0.933, a: 1}
-  secondaryAccent: {r: 0.231, g: 0.51, b: 0.965, a: 1}
-  primaryText: {r: 0.949, g: 0.957, b: 0.969, a: 1}
-  secondaryText: {r: 0.631, g: 0.655, b: 0.702, a: 1}
-  border: {r: 0.149, g: 0.188, b: 0.255, a: 1}
-  hover: {r: 0.122, g: 0.161, b: 0.216, a: 1}
-  pressed: {r: 0.09, g: 0.12, b: 0.165, a: 1}
-  disabled: {r: 0.404, g: 0.439, b: 0.522, a: 1}
-  success: {r: 0.133, g: 0.773, b: 0.369, a: 1}
-  warning: {r: 0.961, g: 0.62, b: 0.043, a: 1}
-  error: {r: 0.937, g: 0.267, b: 0.267, a: 1}
+  panelBackground: {r: 0.055, g: 0.071, b: 0.094, a: 0.94}
+  elevatedPanelBackground: {r: 0.082, g: 0.106, b: 0.137, a: 0.97}
+  primaryAccent: {r: 0.3, g: 0.76, b: 0.84, a: 1}
+  secondaryAccent: {r: 0.35, g: 0.55, b: 0.82, a: 1}
+  primaryText: {r: 0.945, g: 0.957, b: 0.969, a: 1}
+  secondaryText: {r: 0.65, g: 0.69, b: 0.75, a: 1}
+  border: {r: 0.22, g: 0.267, b: 0.325, a: 0.72}
+  hover: {r: 0.09944, g: 0.15832, b: 0.19323999, a: 0.9724}
+  pressed: {r: 0.072160006, g: 0.09328, b: 0.12056, a: 0.97360003}
+  disabled: {r: 0.39, g: 0.43, b: 0.49, a: 1}
+  success: {r: 0.31, g: 0.72, b: 0.48, a: 1}
+  warning: {r: 0.91, g: 0.62, b: 0.22, a: 1}
+  error: {r: 0.86, g: 0.34, b: 0.35, a: 1}
   fonts:
     titleFont: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
     headingFont: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
     bodyFont: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
     captionFont: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
-  titleSize: 26
-  headingSize: 20
+  titleSize: 24
+  headingSize: 18
   bodySize: 14
-  captionSize: 11
-  smallCornerRadius: 6
-  mediumCornerRadius: 8
+  captionSize: 11.5
+  smallCornerRadius: 7
+  mediumCornerRadius: 10
   largeCornerRadius: 12
   thinBorderWidth: 1
-  standardBorderWidth: 2
+  standardBorderWidth: 1
   spaceExtraSmall: 4
   spaceSmall: 8
   spaceMedium: 12
   spaceLarge: 16
   spaceExtraLarge: 24
-  hoverScale: 1.02
-  pressedScale: 0.96
-  transitionDuration: 0.12
-  disabledOpacity: 0.45
+  hoverScale: 1.005
+  pressedScale: 0.985
+  transitionDuration: 0.14
+  disabledOpacity: 0.42

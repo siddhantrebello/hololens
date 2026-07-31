@@ -1,0 +1,3 @@
+Ask AI Phase 2 Speech baseline 20260731_165754
+Microphone was False
+Listening used 2s mock timer

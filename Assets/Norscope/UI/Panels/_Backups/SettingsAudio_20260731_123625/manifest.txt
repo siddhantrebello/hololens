@@ -1,0 +1,3 @@
+Settings Audio baseline 2026-07-31T12:36:25.4706184+02:00
+Assets/Norscope/UI/Panels/SettingsPanel.prefab
+Assets/Norscope/Scenes/Bootstrap.unity

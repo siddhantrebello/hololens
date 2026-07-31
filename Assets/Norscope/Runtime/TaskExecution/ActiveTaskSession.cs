@@ -63,5 +63,14 @@ namespace Norscope.TaskExecution
             IsComplete = true;
             return true;
         }
+
+        public bool Cancel()
+        {
+            if (SelectedTask == null) return false;
+            SelectedTask = null;
+            CurrentStepIndex = 0;
+            IsComplete = false;
+            return true;
+        }
     }
 }

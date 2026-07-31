@@ -1,0 +1,65 @@
+{
+    "capturedUtc": "2026-07-30T10:45:07.3199546Z",
+    "entries": [
+        {
+            "source": "Assets/Norscope/UI/Panels/HomePanel.prefab",
+            "backup": "Assets/Norscope/DesignSystem/Backups/PreD21_20260730_104505/HomePanel.prefab",
+            "sha256": "9e88f35abdba0d785869d5935e7b2bf9b0c09e630077eeb1244e4bdd36a881f6"
+        },
+        {
+            "source": "Assets/Norscope/UI/Panels/TaskLibraryPanel.prefab",
+            "backup": "Assets/Norscope/DesignSystem/Backups/PreD21_20260730_104505/TaskLibraryPanel.prefab",
+            "sha256": "ed5a195e6bf40a48422e55b9b6003f40964f3cd73645c8c6e040f07d4f0907a5"
+        },
+        {
+            "source": "Assets/Norscope/UI/Panels/ActiveTaskPanel.prefab",
+            "backup": "Assets/Norscope/DesignSystem/Backups/PreD21_20260730_104505/ActiveTaskPanel.prefab",
+            "sha256": "25ebf7852ba8a3edb93148be8a44ec9ff3d3f6c8a12b54a2cb6698f7161efd19"
+        },
+        {
+            "source": "Assets/Norscope/UI/Panels/TaskCompletionPanel.prefab",
+            "backup": "Assets/Norscope/DesignSystem/Backups/PreD21_20260730_104505/TaskCompletionPanel.prefab",
+            "sha256": "e91f651182905504b979c31e3f5811db10eaa30ab1decb60ca6e458ce0723066"
+        },
+        {
+            "source": "Assets/Norscope/UI/Controls/TaskCard.prefab",
+            "backup": "Assets/Norscope/DesignSystem/Backups/PreD21_20260730_104505/TaskCard.prefab",
+            "sha256": "c81f382d20a9b5746b0536c4f122950a32a13dac8eb918fcf3219d6a4d6de8bb"
+        },
+        {
+            "source": "Assets/Norscope/UI/Controls/NavigationBackButton.prefab",
+            "backup": "Assets/Norscope/DesignSystem/Backups/PreD21_20260730_104505/NavigationBackButton.prefab",
+            "sha256": "977d2d379df5ba2693ae04ca289de0191d5ddd1228bbe37832790fac7421af5c"
+        },
+        {
+            "source": "Assets/Norscope/UI/Controls/NorscopeCloseButton.prefab",
+            "backup": "Assets/Norscope/DesignSystem/Backups/PreD21_20260730_104505/NorscopeCloseButton.prefab",
+            "sha256": "68157f3f58568485a16e2520f62646a79e2d37f4e12fbe7a1295da974e140daa"
+        },
+        {
+            "source": "Assets/Norscope/UI/Controls/NorscopePrimaryButton.prefab",
+            "backup": "Assets/Norscope/DesignSystem/Backups/PreD21_20260730_104505/NorscopePrimaryButton.prefab",
+            "sha256": "54ffea39176777c3976157f08d7199151c94ab28f7d18ccacf0f0c30149959a9"
+        },
+        {
+            "source": "Assets/Norscope/UI/Controls/NorscopeSecondaryButton.prefab",
+            "backup": "Assets/Norscope/DesignSystem/Backups/PreD21_20260730_104505/NorscopeSecondaryButton.prefab",
+            "sha256": "1ed7b5ec9bb54d52b33abb13424738f137203975a589d3e2ac03a90b90e065f4"
+        },
+        {
+            "source": "Assets/Norscope/DesignSystem/Prefabs/NorscopeInteractionVisualLayer.prefab",
+            "backup": "Assets/Norscope/DesignSystem/Backups/PreD21_20260730_104505/NorscopeInteractionVisualLayer.prefab",
+            "sha256": "8e5da16d1e504fd09b6ea046709a2a43a3c72f85776ada3d82bfcdbec574c4c6"
+        },
+        {
+            "source": "Assets/Norscope/DesignSystem/Profiles/NorscopeDesignProfile.asset",
+            "backup": "Assets/Norscope/DesignSystem/Backups/PreD21_20260730_104505/NorscopeDesignProfile.asset",
+            "sha256": "238c0c95464b035094c7e871a18d7c769b83b70c09397f4890d4606251be192f"
+        },
+        {
+            "source": "Assets/Norscope/UI/DesignSystem/Themes/NorscopeTheme.asset",
+            "backup": "Assets/Norscope/DesignSystem/Backups/PreD21_20260730_104505/NorscopeTheme.asset",
+            "sha256": "69eddfe5988c3e5f1484bd1f01b398c6aae60ee5104bfc87aa89f123a45e1ce4"
+        }
+    ]
+}

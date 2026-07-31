@@ -1,0 +1,265 @@
+using System.Collections;
+using Norscope.DesignSystem;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace Norscope.AskAI
+{
+    /// <summary>
+    /// Presentation-only Ask AI surface. Never transitions workflow state.
+    /// </summary>
+    [DisallowMultipleComponent]
+    public sealed class AskAiView : MonoBehaviour
+    {
+        [SerializeField] private TMP_Text statusText;
+        [SerializeField] private TMP_Text hintText;
+        [SerializeField] private TMP_Text bodyText;
+        [SerializeField] private Button primaryButton;
+        [SerializeField] private TMP_Text primaryButtonLabel;
+        [SerializeField] private Image microphoneImage;
+        [SerializeField] private RectTransform microphoneRoot;
+        [SerializeField] private CanvasGroup contentGroup;
+        [SerializeField] private GameObject processingIndicator;
+        [SerializeField] private float fadeDuration = 0.18f;
+        [SerializeField] private float micPulseScale = 1.08f;
+        [SerializeField] private float micPulseSeconds = 0.55f;
+
+        private Coroutine _fadeRoutine;
+        private Coroutine _pulseRoutine;
+        private Vector3 _micRestScale = Vector3.one;
+        private bool _micRestCaptured;
+
+        public Button PrimaryButton => primaryButton;
+
+        public void Configure(
+            TMP_Text status,
+            TMP_Text hint,
+            TMP_Text body,
+            Button primary,
+            TMP_Text primaryLabel,
+            Image microphone,
+            RectTransform micRoot,
+            CanvasGroup content,
+            GameObject processing)
+        {
+            statusText = status;
+            hintText = hint;
+            bodyText = body;
+            primaryButton = primary;
+            primaryButtonLabel = primaryLabel;
+            microphoneImage = microphone;
+            microphoneRoot = micRoot;
+            contentGroup = content;
+            processingIndicator = processing;
+            CaptureMicRest();
+        }
+
+        private void Awake()
+        {
+            CaptureMicRest();
+        }
+
+        private void OnDisable()
+        {
+            StopPresentationRoutines();
+            ResetMicScale();
+        }
+
+        private void OnDestroy()
+        {
+            StopPresentationRoutines();
+        }
+
+        public void SetBodyText(string body)
+        {
+            if (bodyText == null)
+                return;
+
+            bool hasBody = !string.IsNullOrEmpty(body);
+            bodyText.gameObject.SetActive(hasBody);
+            bodyText.text = body ?? string.Empty;
+        }
+
+        public void Render(
+            AskAiWorkflowState state,
+            string status,
+            string body,
+            string buttonLabel,
+            bool buttonEnabled,
+            bool hintVisible,
+            bool microphoneActive,
+            bool processingActive,
+            bool animate)
+        {
+            bool motion = animate && MotionEnabled();
+
+            if (statusText != null)
+                statusText.text = status ?? string.Empty;
+
+            if (hintText != null)
+            {
+                hintText.gameObject.SetActive(hintVisible);
+                if (hintVisible && string.IsNullOrEmpty(hintText.text))
+                    hintText.text = "Press Ask AI and speak naturally.";
+            }
+
+            if (bodyText != null)
+            {
+                bool hasBody = !string.IsNullOrEmpty(body);
+                bodyText.gameObject.SetActive(hasBody);
+                bodyText.text = body ?? string.Empty;
+            }
+
+            if (primaryButtonLabel != null)
+                primaryButtonLabel.text = buttonLabel ?? string.Empty;
+
+            if (primaryButton != null)
+                primaryButton.interactable = buttonEnabled;
+
+            if (processingIndicator != null)
+                processingIndicator.SetActive(processingActive);
+
+            ApplyMicrophoneVisual(microphoneActive, motion);
+            FadeContent(motion);
+        }
+
+        public void SnapReadyPresentation()
+        {
+            StopPresentationRoutines();
+            ResetMicScale();
+            if (contentGroup != null)
+            {
+                contentGroup.alpha = 1f;
+                contentGroup.interactable = true;
+                contentGroup.blocksRaycasts = true;
+            }
+        }
+
+        private void FadeContent(bool motion)
+        {
+            if (contentGroup == null)
+                return;
+
+            if (!motion)
+            {
+                if (_fadeRoutine != null)
+                {
+                    StopCoroutine(_fadeRoutine);
+                    _fadeRoutine = null;
+                }
+
+                contentGroup.alpha = 1f;
+                return;
+            }
+
+            if (_fadeRoutine != null)
+                StopCoroutine(_fadeRoutine);
+            _fadeRoutine = StartCoroutine(FadeRoutine());
+        }
+
+        private IEnumerator FadeRoutine()
+        {
+            contentGroup.alpha = 0.35f;
+            float duration = Mathf.Max(0.01f, fadeDuration);
+            float t = 0f;
+            while (t < duration)
+            {
+                t += Time.unscaledDeltaTime;
+                float u = Mathf.Clamp01(t / duration);
+                contentGroup.alpha = Mathf.Lerp(0.35f, 1f, u * u * (3f - 2f * u));
+                yield return null;
+            }
+
+            contentGroup.alpha = 1f;
+            _fadeRoutine = null;
+        }
+
+        private void ApplyMicrophoneVisual(bool active, bool motion)
+        {
+            CaptureMicRest();
+            if (microphoneImage != null)
+            {
+                Color c = microphoneImage.color;
+                c.a = active ? 1f : 0.72f;
+                microphoneImage.color = c;
+            }
+
+            if (_pulseRoutine != null)
+            {
+                StopCoroutine(_pulseRoutine);
+                _pulseRoutine = null;
+            }
+
+            if (!active || !motion || microphoneRoot == null)
+            {
+                ResetMicScale();
+                return;
+            }
+
+            _pulseRoutine = StartCoroutine(PulseRoutine());
+        }
+
+        private IEnumerator PulseRoutine()
+        {
+            while (true)
+            {
+                float half = Mathf.Max(0.05f, micPulseSeconds * 0.5f);
+                yield return ScaleMic(_micRestScale, _micRestScale * micPulseScale, half);
+                yield return ScaleMic(_micRestScale * micPulseScale, _micRestScale, half);
+            }
+        }
+
+        private IEnumerator ScaleMic(Vector3 from, Vector3 to, float duration)
+        {
+            float t = 0f;
+            while (t < duration)
+            {
+                t += Time.unscaledDeltaTime;
+                float u = Mathf.Clamp01(t / duration);
+                float e = u * u * (3f - 2f * u);
+                microphoneRoot.localScale = Vector3.LerpUnclamped(from, to, e);
+                yield return null;
+            }
+
+            microphoneRoot.localScale = to;
+        }
+
+        private void CaptureMicRest()
+        {
+            if (_micRestCaptured || microphoneRoot == null)
+                return;
+            _micRestScale = microphoneRoot.localScale;
+            _micRestCaptured = true;
+        }
+
+        private void ResetMicScale()
+        {
+            if (microphoneRoot != null && _micRestCaptured)
+                microphoneRoot.localScale = _micRestScale;
+        }
+
+        private void StopPresentationRoutines()
+        {
+            if (_fadeRoutine != null)
+            {
+                StopCoroutine(_fadeRoutine);
+                _fadeRoutine = null;
+            }
+
+            if (_pulseRoutine != null)
+            {
+                StopCoroutine(_pulseRoutine);
+                _pulseRoutine = null;
+            }
+        }
+
+        private static bool MotionEnabled()
+        {
+            NorscopeDesignProvider provider = NorscopeDesignProvider.Instance;
+            return provider == null ||
+                   provider.ActiveProfile == null ||
+                   provider.ActiveProfile.features.enableMotion;
+        }
+    }
+}

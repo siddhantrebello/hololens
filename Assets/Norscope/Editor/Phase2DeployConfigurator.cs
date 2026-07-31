@@ -126,7 +126,10 @@ namespace Norscope.Editor
         private static void ConfigurePlayerCapabilities()
         {
             PlayerSettings.WSA.SetCapability(PlayerSettings.WSACapability.SpatialPerception, true);
-            PlayerSettings.WSA.SetCapability(PlayerSettings.WSACapability.Microphone, false);
+            // Ask AI Phase 2 requires microphone for DictationRecognizer.
+            PlayerSettings.WSA.SetCapability(PlayerSettings.WSACapability.Microphone, true);
+            // Ask AI Phase 3 requires webcam for PhotoCapture stills.
+            PlayerSettings.WSA.SetCapability(PlayerSettings.WSACapability.WebCam, true);
             PlayerSettings.WSA.SetCapability(PlayerSettings.WSACapability.InternetClient, false);
             PlayerSettings.WSA.SetCapability(PlayerSettings.WSACapability.InternetClientServer, false);
             PlayerSettings.WSA.SetCapability(PlayerSettings.WSACapability.PrivateNetworkClientServer, false);
@@ -258,9 +261,9 @@ namespace Norscope.Editor
 
             ConfigureHmdTrackedPoseDriver(tpd);
 
-            // Verification content — world space only, no UI canvas.
-            EnsureVerificationCube();
-            EnsureVerificationLabel();
+            // Temporary Phase 2 verification content is retired from production.
+            DestroyIfPresent("VerificationCube");
+            DestroyIfPresent("VerificationLabel");
 
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);
@@ -547,6 +550,15 @@ namespace Norscope.Editor
             }
 
             return null;
+        }
+
+        private static void DestroyIfPresent(string objectName)
+        {
+            GameObject target = GameObject.Find(objectName);
+            if (target != null)
+            {
+                UnityEngine.Object.DestroyImmediate(target);
+            }
         }
     }
 }

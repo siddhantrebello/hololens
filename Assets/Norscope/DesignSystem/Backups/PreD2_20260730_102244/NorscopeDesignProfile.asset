@@ -1,0 +1,1115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a834a2076981494bb82c10379215158, type: 3}
+  m_Name: NorscopeDesignProfile
+  m_EditorClassIdentifier: 
+  schemaVersion: 1
+  features:
+    enableHoverGlow: 1
+    enableMotion: 1
+    enableHighlightPulse: 0
+    enableScanEffect: 0
+    enablePanelShadows: 1
+    enableVerificationGlow: 1
+    enableFloatingLabels: 1
+    enableNotifications: 1
+    enableTransparency: 1
+    enableDepthResponse: 1
+  colors:
+    surfacePrimary: {r: 0.075, g: 0.102, b: 0.141, a: 0.92}
+    surfaceElevated: {r: 0.102, g: 0.137, b: 0.188, a: 0.96}
+    surfaceOverlay: {r: 0.102, g: 0.137, b: 0.188, a: 0.55}
+    borderSubtle: {r: 0.149, g: 0.188, b: 0.255, a: 1}
+    borderStrong: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+    textPrimary: {r: 0.949, g: 0.957, b: 0.969, a: 1}
+    textSecondary: {r: 0.631, g: 0.655, b: 0.702, a: 1}
+    textDisabled: {r: 0.404, g: 0.439, b: 0.522, a: 1}
+    accentPrimary: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+    accentSecondary: {r: 0.231, g: 0.51, b: 0.965, a: 1}
+    information: {r: 0.231, g: 0.51, b: 0.965, a: 1}
+    success: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+    warning: {r: 0.961, g: 0.62, b: 0.043, a: 1}
+    error: {r: 0.937, g: 0.267, b: 0.267, a: 1}
+    verification: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+    selection: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+  panels:
+    acrylicStrength: 0.18
+    transparency: 0.08
+    cornerRadius: 12
+    borderThickness: 1
+    shadowColor: {r: 0, g: 0, b: 0, a: 0.35}
+    shadowStrength: 0.18
+    edgeGlowColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+    edgeGlowStrength: 0.22
+    depthSeparation: 0.002
+  buttons:
+    standard:
+      idle:
+        surfaceColor: {r: 0.102, g: 0.137, b: 0.188, a: 0.96}
+        edgeColor: {r: 0.149, g: 0.188, b: 0.255, a: 1}
+        surfaceOpacity: 0
+        edgeOpacity: 0.12
+        outlineStrength: 0.6
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      hovered:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0.055
+        edgeOpacity: 0.48
+        outlineStrength: 1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      pressed:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0.075
+        edgeOpacity: 0.62
+        outlineStrength: 1.2
+        luminanceStrength: 1
+        visualScale: 0.98
+        depthOffset: 0
+      selected:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0.065
+        edgeOpacity: 0.55
+        outlineStrength: 1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      disabled:
+        surfaceColor: {r: 0.404, g: 0.439, b: 0.522, a: 1}
+        edgeColor: {r: 0.404, g: 0.439, b: 0.522, a: 1}
+        surfaceOpacity: 0.015
+        edgeOpacity: 0.08
+        outlineStrength: 0.5
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      highlighted:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0.08
+        edgeOpacity: 0.68
+        outlineStrength: 1.2
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      verified:
+        surfaceColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        edgeColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        surfaceOpacity: 0.075
+        edgeOpacity: 0.62
+        outlineStrength: 1.1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      completed:
+        surfaceColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        edgeColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        surfaceOpacity: 0.045
+        edgeOpacity: 0.42
+        outlineStrength: 0.9
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+    primary:
+      idle:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0
+        edgeOpacity: 0.12
+        outlineStrength: 0.6
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      hovered:
+        surfaceColor: {r: 0.949, g: 0.957, b: 0.969, a: 1}
+        edgeColor: {r: 0.949, g: 0.957, b: 0.969, a: 1}
+        surfaceOpacity: 0.055
+        edgeOpacity: 0.48
+        outlineStrength: 1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      pressed:
+        surfaceColor: {r: 0.949, g: 0.957, b: 0.969, a: 1}
+        edgeColor: {r: 0.949, g: 0.957, b: 0.969, a: 1}
+        surfaceOpacity: 0.075
+        edgeOpacity: 0.62
+        outlineStrength: 1.2
+        luminanceStrength: 1
+        visualScale: 0.98
+        depthOffset: 0
+      selected:
+        surfaceColor: {r: 0.949, g: 0.957, b: 0.969, a: 1}
+        edgeColor: {r: 0.949, g: 0.957, b: 0.969, a: 1}
+        surfaceOpacity: 0.065
+        edgeOpacity: 0.55
+        outlineStrength: 1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      disabled:
+        surfaceColor: {r: 0.404, g: 0.439, b: 0.522, a: 1}
+        edgeColor: {r: 0.404, g: 0.439, b: 0.522, a: 1}
+        surfaceOpacity: 0.015
+        edgeOpacity: 0.08
+        outlineStrength: 0.5
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      highlighted:
+        surfaceColor: {r: 0.949, g: 0.957, b: 0.969, a: 1}
+        edgeColor: {r: 0.949, g: 0.957, b: 0.969, a: 1}
+        surfaceOpacity: 0.08
+        edgeOpacity: 0.68
+        outlineStrength: 1.2
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      verified:
+        surfaceColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        edgeColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        surfaceOpacity: 0.075
+        edgeOpacity: 0.62
+        outlineStrength: 1.1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      completed:
+        surfaceColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        edgeColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        surfaceOpacity: 0.045
+        edgeOpacity: 0.42
+        outlineStrength: 0.9
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+    navigation:
+      idle:
+        surfaceColor: {r: 0.102, g: 0.137, b: 0.188, a: 0.96}
+        edgeColor: {r: 0.149, g: 0.188, b: 0.255, a: 1}
+        surfaceOpacity: 0
+        edgeOpacity: 0.12
+        outlineStrength: 0.6
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      hovered:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0.055
+        edgeOpacity: 0.48
+        outlineStrength: 1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      pressed:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0.075
+        edgeOpacity: 0.62
+        outlineStrength: 1.2
+        luminanceStrength: 1
+        visualScale: 0.98
+        depthOffset: 0
+      selected:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0.065
+        edgeOpacity: 0.55
+        outlineStrength: 1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      disabled:
+        surfaceColor: {r: 0.404, g: 0.439, b: 0.522, a: 1}
+        edgeColor: {r: 0.404, g: 0.439, b: 0.522, a: 1}
+        surfaceOpacity: 0.015
+        edgeOpacity: 0.08
+        outlineStrength: 0.5
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      highlighted:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0.08
+        edgeOpacity: 0.68
+        outlineStrength: 1.2
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      verified:
+        surfaceColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        edgeColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        surfaceOpacity: 0.075
+        edgeOpacity: 0.62
+        outlineStrength: 1.1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      completed:
+        surfaceColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        edgeColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        surfaceOpacity: 0.045
+        edgeOpacity: 0.42
+        outlineStrength: 0.9
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+  cards:
+    homeCard:
+      idle:
+        surfaceColor: {r: 0.102, g: 0.137, b: 0.188, a: 0.96}
+        edgeColor: {r: 0.149, g: 0.188, b: 0.255, a: 1}
+        surfaceOpacity: 0
+        edgeOpacity: 0.12
+        outlineStrength: 0.6
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      hovered:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0.03
+        edgeOpacity: 0.2
+        outlineStrength: 0.1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      pressed:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0.075
+        edgeOpacity: 0.62
+        outlineStrength: 1.2
+        luminanceStrength: 1
+        visualScale: 0.98
+        depthOffset: 0
+      selected:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0.065
+        edgeOpacity: 0.55
+        outlineStrength: 1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      disabled:
+        surfaceColor: {r: 0.404, g: 0.439, b: 0.522, a: 1}
+        edgeColor: {r: 0.404, g: 0.439, b: 0.522, a: 1}
+        surfaceOpacity: 0.015
+        edgeOpacity: 0.08
+        outlineStrength: 0.5
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      highlighted:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0.08
+        edgeOpacity: 0.68
+        outlineStrength: 1.2
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      verified:
+        surfaceColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        edgeColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        surfaceOpacity: 0.075
+        edgeOpacity: 0.62
+        outlineStrength: 1.1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      completed:
+        surfaceColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        edgeColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        surfaceOpacity: 0.045
+        edgeOpacity: 0.42
+        outlineStrength: 0.9
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+    taskCard:
+      idle:
+        surfaceColor: {r: 0.102, g: 0.137, b: 0.188, a: 0.96}
+        edgeColor: {r: 0.149, g: 0.188, b: 0.255, a: 1}
+        surfaceOpacity: 0
+        edgeOpacity: 0.12
+        outlineStrength: 0.6
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      hovered:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0.055
+        edgeOpacity: 0.11
+        outlineStrength: 1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      pressed:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0.075
+        edgeOpacity: 0.62
+        outlineStrength: 1.2
+        luminanceStrength: 1
+        visualScale: 0.98
+        depthOffset: 0
+      selected:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0.065
+        edgeOpacity: 0.55
+        outlineStrength: 1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      disabled:
+        surfaceColor: {r: 0.404, g: 0.439, b: 0.522, a: 1}
+        edgeColor: {r: 0.404, g: 0.439, b: 0.522, a: 1}
+        surfaceOpacity: 0.015
+        edgeOpacity: 0.08
+        outlineStrength: 0.5
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      highlighted:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0.08
+        edgeOpacity: 0.68
+        outlineStrength: 1.2
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      verified:
+        surfaceColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        edgeColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        surfaceOpacity: 0.075
+        edgeOpacity: 0.62
+        outlineStrength: 1.1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      completed:
+        surfaceColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        edgeColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        surfaceOpacity: 0.045
+        edgeOpacity: 0.42
+        outlineStrength: 0.9
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+    reportCard:
+      idle:
+        surfaceColor: {r: 0.102, g: 0.137, b: 0.188, a: 0.96}
+        edgeColor: {r: 0.149, g: 0.188, b: 0.255, a: 1}
+        surfaceOpacity: 0
+        edgeOpacity: 0.12
+        outlineStrength: 0.6
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      hovered:
+        surfaceColor: {r: 0.231, g: 0.51, b: 0.965, a: 1}
+        edgeColor: {r: 0.231, g: 0.51, b: 0.965, a: 1}
+        surfaceOpacity: 0.055
+        edgeOpacity: 0.48
+        outlineStrength: 1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      pressed:
+        surfaceColor: {r: 0.231, g: 0.51, b: 0.965, a: 1}
+        edgeColor: {r: 0.231, g: 0.51, b: 0.965, a: 1}
+        surfaceOpacity: 0.075
+        edgeOpacity: 0.62
+        outlineStrength: 1.2
+        luminanceStrength: 1
+        visualScale: 0.98
+        depthOffset: 0
+      selected:
+        surfaceColor: {r: 0.231, g: 0.51, b: 0.965, a: 1}
+        edgeColor: {r: 0.231, g: 0.51, b: 0.965, a: 1}
+        surfaceOpacity: 0.065
+        edgeOpacity: 0.55
+        outlineStrength: 1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      disabled:
+        surfaceColor: {r: 0.404, g: 0.439, b: 0.522, a: 1}
+        edgeColor: {r: 0.404, g: 0.439, b: 0.522, a: 1}
+        surfaceOpacity: 0.015
+        edgeOpacity: 0.08
+        outlineStrength: 0.5
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      highlighted:
+        surfaceColor: {r: 0.231, g: 0.51, b: 0.965, a: 1}
+        edgeColor: {r: 0.231, g: 0.51, b: 0.965, a: 1}
+        surfaceOpacity: 0.08
+        edgeOpacity: 0.68
+        outlineStrength: 1.2
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      verified:
+        surfaceColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        edgeColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        surfaceOpacity: 0.075
+        edgeOpacity: 0.62
+        outlineStrength: 1.1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      completed:
+        surfaceColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        edgeColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        surfaceOpacity: 0.045
+        edgeOpacity: 0.42
+        outlineStrength: 0.9
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+  typography:
+    primaryFont: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+    displaySize: 26
+    panelTitleSize: 26
+    sectionTitleSize: 20
+    cardTitleSize: 20
+    bodySize: 14
+    captionSize: 11
+    metadataSize: 11
+    labelSize: 14
+    lineSpacing: 0
+    paragraphSpacing: 8
+    characterSpacing: 0
+    titleWeight: 600
+    bodyWeight: 400
+  motion:
+    hoverInDuration: 0.15
+    hoverOutDuration: 0.18
+    pressDuration: 0.09
+    releaseDuration: 0.15
+    selectionDuration: 0.16
+    verificationDuration: 0.28
+    completionDuration: 0.22
+    fadeDuration: 0.18
+    slideDuration: 0.2
+    labelDelay: 0.12
+    defaultEase:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    hoverEase:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    pressEase:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    verificationEase:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  highlights:
+    outlineColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+    outlineStrength: 1
+    innerGlowColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+    innerGlowStrength: 0.05
+    scanColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+    scanDuration: 0.4
+    scanWidth: 0.08
+    pulseAmplitude: 0.01
+    pulseDuration: 2.4
+    verificationColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+    verificationRippleDuration: 0.28
+    completedColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+    completedOpacity: 0.5
+  floatingLabels:
+    font: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+    fontSize: 14
+    textColor: {r: 0.949, g: 0.957, b: 0.969, a: 1}
+    backgroundColor: {r: 0.075, g: 0.102, b: 0.141, a: 0.85}
+    borderColor: {r: 0.149, g: 0.188, b: 0.255, a: 1}
+    leaderLineColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+    leaderLineWidth: 1
+    opacity: 0.95
+    fadeInDuration: 0.18
+    fadeOutDuration: 0.2
+    distanceScale: 1
+    maximumWidth: 320
+  notifications:
+    information:
+      surfaceColor: {r: 0.102, g: 0.137, b: 0.188, a: 0.96}
+      borderColor: {r: 0.231, g: 0.51, b: 0.965, a: 1}
+      textColor: {r: 0.949, g: 0.957, b: 0.969, a: 1}
+      optionalIcon: {fileID: 0}
+      visibleDuration: 4
+    success:
+      surfaceColor: {r: 0.102, g: 0.137, b: 0.188, a: 0.96}
+      borderColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+      textColor: {r: 0.949, g: 0.957, b: 0.969, a: 1}
+      optionalIcon: {fileID: 0}
+      visibleDuration: 4
+    warning:
+      surfaceColor: {r: 0.102, g: 0.137, b: 0.188, a: 0.96}
+      borderColor: {r: 0.961, g: 0.62, b: 0.043, a: 1}
+      textColor: {r: 0.949, g: 0.957, b: 0.969, a: 1}
+      optionalIcon: {fileID: 0}
+      visibleDuration: 4
+    error:
+      surfaceColor: {r: 0.102, g: 0.137, b: 0.188, a: 0.96}
+      borderColor: {r: 0.937, g: 0.267, b: 0.267, a: 1}
+      textColor: {r: 0.949, g: 0.957, b: 0.969, a: 1}
+      optionalIcon: {fileID: 0}
+      visibleDuration: 4
+  futureAr:
+    componentHighlight:
+      idle:
+        surfaceColor: {r: 0, g: 0, b: 0, a: 0}
+        edgeColor: {r: 0.149, g: 0.188, b: 0.255, a: 1}
+        surfaceOpacity: 0
+        edgeOpacity: 0.12
+        outlineStrength: 0.6
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      hovered:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0.055
+        edgeOpacity: 0.48
+        outlineStrength: 1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      pressed:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0.075
+        edgeOpacity: 0.62
+        outlineStrength: 1.2
+        luminanceStrength: 1
+        visualScale: 0.98
+        depthOffset: 0
+      selected:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0.065
+        edgeOpacity: 0.55
+        outlineStrength: 1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      disabled:
+        surfaceColor: {r: 0.404, g: 0.439, b: 0.522, a: 1}
+        edgeColor: {r: 0.404, g: 0.439, b: 0.522, a: 1}
+        surfaceOpacity: 0.015
+        edgeOpacity: 0.08
+        outlineStrength: 0.5
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      highlighted:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0.08
+        edgeOpacity: 0.68
+        outlineStrength: 1.2
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      verified:
+        surfaceColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        edgeColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        surfaceOpacity: 0.075
+        edgeOpacity: 0.62
+        outlineStrength: 1.1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      completed:
+        surfaceColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        edgeColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        surfaceOpacity: 0.045
+        edgeOpacity: 0.42
+        outlineStrength: 0.9
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+    directionalArrow:
+      idle:
+        surfaceColor: {r: 0, g: 0, b: 0, a: 0}
+        edgeColor: {r: 0.149, g: 0.188, b: 0.255, a: 1}
+        surfaceOpacity: 0
+        edgeOpacity: 0.12
+        outlineStrength: 0.6
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      hovered:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0.055
+        edgeOpacity: 0.48
+        outlineStrength: 1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      pressed:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0.075
+        edgeOpacity: 0.62
+        outlineStrength: 1.2
+        luminanceStrength: 1
+        visualScale: 0.98
+        depthOffset: 0
+      selected:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0.065
+        edgeOpacity: 0.55
+        outlineStrength: 1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      disabled:
+        surfaceColor: {r: 0.404, g: 0.439, b: 0.522, a: 1}
+        edgeColor: {r: 0.404, g: 0.439, b: 0.522, a: 1}
+        surfaceOpacity: 0.015
+        edgeOpacity: 0.08
+        outlineStrength: 0.5
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      highlighted:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0.08
+        edgeOpacity: 0.68
+        outlineStrength: 1.2
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      verified:
+        surfaceColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        edgeColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        surfaceOpacity: 0.075
+        edgeOpacity: 0.62
+        outlineStrength: 1.1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      completed:
+        surfaceColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        edgeColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        surfaceOpacity: 0.045
+        edgeOpacity: 0.42
+        outlineStrength: 0.9
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+    ghostComponent:
+      idle:
+        surfaceColor: {r: 0, g: 0, b: 0, a: 0}
+        edgeColor: {r: 0.149, g: 0.188, b: 0.255, a: 1}
+        surfaceOpacity: 0
+        edgeOpacity: 0.12
+        outlineStrength: 0.6
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      hovered:
+        surfaceColor: {r: 0.231, g: 0.51, b: 0.965, a: 1}
+        edgeColor: {r: 0.231, g: 0.51, b: 0.965, a: 1}
+        surfaceOpacity: 0.055
+        edgeOpacity: 0.48
+        outlineStrength: 1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      pressed:
+        surfaceColor: {r: 0.231, g: 0.51, b: 0.965, a: 1}
+        edgeColor: {r: 0.231, g: 0.51, b: 0.965, a: 1}
+        surfaceOpacity: 0.075
+        edgeOpacity: 0.62
+        outlineStrength: 1.2
+        luminanceStrength: 1
+        visualScale: 0.98
+        depthOffset: 0
+      selected:
+        surfaceColor: {r: 0.231, g: 0.51, b: 0.965, a: 1}
+        edgeColor: {r: 0.231, g: 0.51, b: 0.965, a: 1}
+        surfaceOpacity: 0.065
+        edgeOpacity: 0.55
+        outlineStrength: 1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      disabled:
+        surfaceColor: {r: 0.404, g: 0.439, b: 0.522, a: 1}
+        edgeColor: {r: 0.404, g: 0.439, b: 0.522, a: 1}
+        surfaceOpacity: 0.015
+        edgeOpacity: 0.08
+        outlineStrength: 0.5
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      highlighted:
+        surfaceColor: {r: 0.231, g: 0.51, b: 0.965, a: 1}
+        edgeColor: {r: 0.231, g: 0.51, b: 0.965, a: 1}
+        surfaceOpacity: 0.08
+        edgeOpacity: 0.68
+        outlineStrength: 1.2
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      verified:
+        surfaceColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        edgeColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        surfaceOpacity: 0.075
+        edgeOpacity: 0.62
+        outlineStrength: 1.1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      completed:
+        surfaceColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        edgeColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        surfaceOpacity: 0.045
+        edgeOpacity: 0.42
+        outlineStrength: 0.9
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+    stepMarker:
+      idle:
+        surfaceColor: {r: 0, g: 0, b: 0, a: 0}
+        edgeColor: {r: 0.149, g: 0.188, b: 0.255, a: 1}
+        surfaceOpacity: 0
+        edgeOpacity: 0.12
+        outlineStrength: 0.6
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      hovered:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0.055
+        edgeOpacity: 0.48
+        outlineStrength: 1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      pressed:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0.075
+        edgeOpacity: 0.62
+        outlineStrength: 1.2
+        luminanceStrength: 1
+        visualScale: 0.98
+        depthOffset: 0
+      selected:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0.065
+        edgeOpacity: 0.55
+        outlineStrength: 1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      disabled:
+        surfaceColor: {r: 0.404, g: 0.439, b: 0.522, a: 1}
+        edgeColor: {r: 0.404, g: 0.439, b: 0.522, a: 1}
+        surfaceOpacity: 0.015
+        edgeOpacity: 0.08
+        outlineStrength: 0.5
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      highlighted:
+        surfaceColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        edgeColor: {r: 0.133, g: 0.827, b: 0.933, a: 1}
+        surfaceOpacity: 0.08
+        edgeOpacity: 0.68
+        outlineStrength: 1.2
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      verified:
+        surfaceColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        edgeColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        surfaceOpacity: 0.075
+        edgeOpacity: 0.62
+        outlineStrength: 1.1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      completed:
+        surfaceColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        edgeColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        surfaceOpacity: 0.045
+        edgeOpacity: 0.42
+        outlineStrength: 0.9
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+    safetyZone:
+      idle:
+        surfaceColor: {r: 0, g: 0, b: 0, a: 0}
+        edgeColor: {r: 0.961, g: 0.62, b: 0.043, a: 1}
+        surfaceOpacity: 0
+        edgeOpacity: 0.12
+        outlineStrength: 0.6
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      hovered:
+        surfaceColor: {r: 0.961, g: 0.62, b: 0.043, a: 1}
+        edgeColor: {r: 0.961, g: 0.62, b: 0.043, a: 1}
+        surfaceOpacity: 0.055
+        edgeOpacity: 0.48
+        outlineStrength: 1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      pressed:
+        surfaceColor: {r: 0.961, g: 0.62, b: 0.043, a: 1}
+        edgeColor: {r: 0.961, g: 0.62, b: 0.043, a: 1}
+        surfaceOpacity: 0.075
+        edgeOpacity: 0.62
+        outlineStrength: 1.2
+        luminanceStrength: 1
+        visualScale: 0.98
+        depthOffset: 0
+      selected:
+        surfaceColor: {r: 0.961, g: 0.62, b: 0.043, a: 1}
+        edgeColor: {r: 0.961, g: 0.62, b: 0.043, a: 1}
+        surfaceOpacity: 0.065
+        edgeOpacity: 0.55
+        outlineStrength: 1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      disabled:
+        surfaceColor: {r: 0.404, g: 0.439, b: 0.522, a: 1}
+        edgeColor: {r: 0.404, g: 0.439, b: 0.522, a: 1}
+        surfaceOpacity: 0.015
+        edgeOpacity: 0.08
+        outlineStrength: 0.5
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      highlighted:
+        surfaceColor: {r: 0.961, g: 0.62, b: 0.043, a: 1}
+        edgeColor: {r: 0.961, g: 0.62, b: 0.043, a: 1}
+        surfaceOpacity: 0.08
+        edgeOpacity: 0.68
+        outlineStrength: 1.2
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      verified:
+        surfaceColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        edgeColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        surfaceOpacity: 0.075
+        edgeOpacity: 0.62
+        outlineStrength: 1.1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      completed:
+        surfaceColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        edgeColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        surfaceOpacity: 0.045
+        edgeOpacity: 0.42
+        outlineStrength: 0.9
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+    cadOverlay:
+      idle:
+        surfaceColor: {r: 0, g: 0, b: 0, a: 0}
+        edgeColor: {r: 0.149, g: 0.188, b: 0.255, a: 1}
+        surfaceOpacity: 0
+        edgeOpacity: 0.12
+        outlineStrength: 0.6
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      hovered:
+        surfaceColor: {r: 0.231, g: 0.51, b: 0.965, a: 1}
+        edgeColor: {r: 0.231, g: 0.51, b: 0.965, a: 1}
+        surfaceOpacity: 0.055
+        edgeOpacity: 0.48
+        outlineStrength: 1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      pressed:
+        surfaceColor: {r: 0.231, g: 0.51, b: 0.965, a: 1}
+        edgeColor: {r: 0.231, g: 0.51, b: 0.965, a: 1}
+        surfaceOpacity: 0.075
+        edgeOpacity: 0.62
+        outlineStrength: 1.2
+        luminanceStrength: 1
+        visualScale: 0.98
+        depthOffset: 0
+      selected:
+        surfaceColor: {r: 0.231, g: 0.51, b: 0.965, a: 1}
+        edgeColor: {r: 0.231, g: 0.51, b: 0.965, a: 1}
+        surfaceOpacity: 0.065
+        edgeOpacity: 0.55
+        outlineStrength: 1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      disabled:
+        surfaceColor: {r: 0.404, g: 0.439, b: 0.522, a: 1}
+        edgeColor: {r: 0.404, g: 0.439, b: 0.522, a: 1}
+        surfaceOpacity: 0.015
+        edgeOpacity: 0.08
+        outlineStrength: 0.5
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      highlighted:
+        surfaceColor: {r: 0.231, g: 0.51, b: 0.965, a: 1}
+        edgeColor: {r: 0.231, g: 0.51, b: 0.965, a: 1}
+        surfaceOpacity: 0.08
+        edgeOpacity: 0.68
+        outlineStrength: 1.2
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      verified:
+        surfaceColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        edgeColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        surfaceOpacity: 0.075
+        edgeOpacity: 0.62
+        outlineStrength: 1.1
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+      completed:
+        surfaceColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        edgeColor: {r: 0.133, g: 0.773, b: 0.369, a: 1}
+        surfaceOpacity: 0.045
+        edgeOpacity: 0.42
+        outlineStrength: 0.9
+        luminanceStrength: 1
+        visualScale: 1
+        depthOffset: 0
+    maximumTransparentLayers: 2
+    distanceFadeStart: 2
+    distanceFadeEnd: 5
+  performance:
+    maximumOutlinePasses: 1
+    maximumTransparentOverlayLayers: 2
+    allowPulseOnHoloLens: 0
+    allowScanOnHoloLens: 0
+  legacyThemeCompatibility: {fileID: 11400000, guid: 999f3cb932c477644bbf492e013a1903, type: 2}

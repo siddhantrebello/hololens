@@ -1,0 +1,352 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 722e672470771bc458f12062869791ab, type: 3}
+  m_Name: EnglishLocalizationTable
+  m_EditorClassIdentifier: 
+  locale: en
+  entries:
+  - key: active_task.active_task_cancel_active_task
+    value: active_task.cancel_active_task
+  - key: active_task.active_task_capture_photo_add_voice_note
+    value: active_task.capture_photo_add_voice_note
+  - key: active_task.active_task_confirm_and_continue
+    value: active_task.confirm_and_continue
+  - key: active_task.active_task_evidence
+    value: active_task.evidence
+  - key: active_task.active_task_no_evidence_added
+    value: active_task.no_evidence_added
+  - key: active_task.active_task_pending
+    value: active_task.pending
+  - key: active_task.active_task_return_home
+    value: active_task.return_home
+  - key: active_task.active_task_safety
+    value: active_task.safety
+  - key: active_task.active_task_v4_2_1_hololens_2
+    value: active_task.v4_2_1_hololens_2
+  - key: active_task.active_task_verification_required
+    value: active_task.verification_required
+  - key: active_task.active_task_workflow_steps
+    value: active_task.workflow_steps
+  - key: active_task.active_task_your_current_task_progress_will_be_disca
+    value: active_task.your_current_task_progress_will_be_discarded
+  - key: active_task.dialog_cancel_task
+    value: dialog.cancel_task
+  - key: active_task.dialog_confirm_cancel
+    value: dialog.confirm_cancel
+  - key: active_task.dialog_continue_task
+    value: dialog.continue_task
+  - key: active_task.report_generate
+    value: report.generate
+  - key: active_task.safety
+    value: SAFETY
+  - key: active_task.task_complete
+    value: task.complete
+  - key: active_task.task_finish
+    value: task.finish
+  - key: active_task.task_previous
+    value: task.previous
+  - key: active_task.verification_required
+    value: VERIFICATION REQUIRED
+  - key: common.unavailable
+    value: Unavailable
+  - key: difficulty.advanced
+    value: Advanced
+  - key: difficulty.beginner
+    value: Beginner
+  - key: difficulty.intermediate
+    value: Intermediate
+  - key: home.home_ask_ai
+    value: home.ask_ai
+  - key: home.home_equipment_analytics_inspection_histories_and_co
+    value: home.equipment_analytics_inspection_histories_and_complia
+  - key: home.home_intelligent_diagnostics_part_recommendations_an
+    value: home.intelligent_diagnostics_part_recommendations_and_gui
+  - key: home.home_manage_work_orders_and_field_inspection_checkli
+    value: home.manage_work_orders_and_field_inspection_checklists_a
+  - key: home.home_norscope
+    value: home.norscope
+  - key: home.home_reports
+    value: home.reports
+  - key: home.home_storage
+    value: home.storage
+  - key: home.home_subtitle
+    value: home.subtitle
+  - key: home.home_tasks
+    value: home.tasks
+  - key: home.home_technical_documentation_schematics_and_equipmen
+    value: home.technical_documentation_schematics_and_equipment_ass
+  - key: home.home_title
+    value: home.title
+  - key: home.home_v4_2_1_hololens_2
+    value: home.v4_2_1_hololens_2
+  - key: home.home_version_information_licensing_details_and_suppo
+    value: home.version_information_licensing_details_and_support_re
+  - key: home.home_workspace_preferences_notifications_and_hololen
+    value: home.workspace_preferences_notifications_and_hololens_dev
+  - key: home.settings_about
+    value: settings.about
+  - key: home.settings_title
+    value: settings.title
+  - key: launcher.home_title
+    value: home.title
+  - key: settings.common_technician
+    value: common.technician
+  - key: settings.home_title
+    value: home.title
+  - key: settings.language_english
+    value: language.english
+  - key: settings.language_german
+    value: language.german
+  - key: settings.language_german_native
+    value: language.german_native
+  - key: settings.settings_about
+    value: settings.about
+  - key: settings.settings_active_language
+    value: settings.active_language
+  - key: settings.settings_alert_sounds
+    value: settings.alert_sounds
+  - key: settings.settings_application
+    value: settings.application
+  - key: settings.settings_audio
+    value: settings.audio
+  - key: settings.settings_audio_integration_pending_phase_2c
+    value: settings.audio_integration_pending_phase_2c
+  - key: settings.settings_auto_brightness
+    value: settings.auto_brightness
+  - key: settings.settings_available_in_phase_2c
+    value: settings.available_in_phase_2c
+  - key: settings.settings_brightness
+    value: settings.brightness
+  - key: settings.settings_build
+    value: settings.build
+  - key: settings.settings_change_language
+    value: settings.change_language
+  - key: settings.settings_choose_language
+    value: settings.choose_language
+  - key: settings.settings_de
+    value: settings.de
+  - key: settings.settings_display
+    value: settings.display
+  - key: settings.settings_en
+    value: settings.en
+  - key: settings.settings_english_and_deutsch_available
+    value: settings.english_and_deutsch_available
+  - key: settings.settings_interface_language
+    value: settings.interface_language
+  - key: settings.settings_language
+    value: settings.language
+  - key: settings.settings_language_switching_is_installed_in_phase_2b
+    value: settings.language_switching_is_installed_in_phase_2b
+  - key: settings.settings_language_switching_will_update_all_norscope
+    value: settings.language_switching_will_update_all_norscope_screens
+  - key: settings.settings_large
+    value: settings.large
+  - key: settings.settings_license
+    value: settings.license
+  - key: settings.settings_live_preview
+    value: settings.live_preview
+  - key: settings.settings_managed_by_hololens_system
+    value: settings.managed_by_hololens_system
+  - key: settings.settings_master_volume
+    value: settings.master_volume
+  - key: settings.settings_medium
+    value: settings.medium
+  - key: settings.settings_microphone
+    value: settings.microphone
+  - key: settings.settings_norscope_enterprise_hololens_2
+    value: settings.norscope_enterprise_hololens_2
+  - key: settings.settings_platform
+    value: settings.platform
+  - key: settings.settings_runtime_version
+    value: settings.runtime_version
+  - key: settings.settings_small
+    value: settings.small
+  - key: settings.settings_speech_alerts
+    value: settings.speech_alerts
+  - key: settings.settings_text_size
+    value: settings.text_size
+  - key: settings.settings_text_size_brightness
+    value: settings.text_size_brightness
+  - key: settings.settings_text_size_scaling_is_installed_in_phase_2d
+    value: settings.text_size_scaling_is_installed_in_phase_2d
+  - key: settings.settings_the_interface_updates_immediately_after_sel
+    value: settings.the_interface_updates_immediately_after_selection
+  - key: settings.settings_title
+    value: settings.title
+  - key: settings.settings_translation_preview
+    value: settings.translation_preview
+  - key: settings.settings_version
+    value: settings.version
+  - key: settings.settings_version_info
+    value: settings.version_info
+  - key: settings.settings_voice_guidance
+    value: settings.voice_guidance
+  - key: settings.settings_voice_guidance_not_installed
+    value: settings.voice_guidance_not_installed
+  - key: settings.settings_voice_input_not_installed
+    value: settings.voice_input_not_installed
+  - key: settings.settings_x_large
+    value: settings.x_large
+  - key: settings.status_offline
+    value: status.offline
+  - key: settings.task_completed
+    value: task.completed
+  - key: settings.task_library_title
+    value: task_library.title
+  - key: status.not_captured
+    value: Not captured
+  - key: status.not_recorded
+    value: Not recorded
+  - key: status.offline
+    value: Offline
+  - key: status.offline_ready
+    value: Offline ready
+  - key: task.all_steps_completed
+    value: All task steps have been completed.
+  - key: task.completed_steps
+    value: All {0} completed
+  - key: task.completion.success
+    value: Maintenance workflow successfully completed
+  - key: task.generic_name
+    value: Task
+  - key: task.guided_steps.many
+    value: '{0} guided steps'
+  - key: task.guided_steps.one
+    value: '{0} guided step'
+  - key: task.guided_workflow
+    value: Guided maintenance workflow
+  - key: task.in_progress
+    value: In progress
+  - key: task.more_steps.many
+    value: +{0} more steps
+  - key: task.more_steps.one
+    value: +{0} more step
+  - key: task.step_of
+    value: Step {0} of {1}
+  - key: task.steps.many
+    value: '{0} steps'
+  - key: task.steps.one
+    value: '{0} step'
+  - key: task.steps_progress
+    value: '{0} / {1} steps'
+  - key: task.time_remaining
+    value: ~{0} remaining
+  - key: task.updated
+    value: Updated {0}
+  - key: task.verification.not_required
+    value: Not required
+  - key: task.verification.pending
+    value: Pending
+  - key: task.workflow_completed
+    value: Workflow completed
+  - key: task_complete.captured_photos_video
+    value: Captured Photos / Video
+  - key: task_complete.not_captured
+    value: Not captured
+  - key: task_complete.task_complete
+    value: task.complete
+  - key: task_complete.task_complete_ai_verification
+    value: task_complete.ai_verification
+  - key: task_complete.task_complete_all_task_steps_have_been_completed
+    value: task_complete.all_task_steps_have_been_completed
+  - key: task_complete.task_complete_completed
+    value: task_complete.completed
+  - key: task_complete.task_complete_completed_c48179
+    value: task_complete.completed_c48179
+  - key: task_complete.task_complete_completed_successfully
+    value: task_complete.completed_successfully
+  - key: task_complete.task_complete_duration
+    value: task_complete.duration
+  - key: task_complete.task_complete_evidence
+    value: task_complete.evidence
+  - key: task_complete.task_complete_execution_log
+    value: task_complete.execution_log
+  - key: task_complete.task_complete_future_feature
+    value: task_complete.future_feature
+  - key: task_complete.task_complete_generate_report_placeholder
+    value: task_complete.generate_report_placeholder
+  - key: task_complete.task_complete_generated_outputs
+    value: task_complete.generated_outputs
+  - key: task_complete.task_complete_maintenance_report
+    value: task_complete.maintenance_report
+  - key: task_complete.task_complete_not_captured
+    value: task_complete.not_captured
+  - key: task_complete.task_complete_not_generated
+    value: task_complete.not_generated
+  - key: task_complete.task_complete_not_implemented
+    value: task_complete.not_implemented
+  - key: task_complete.task_complete_not_recorded
+    value: task_complete.not_recorded
+  - key: task_complete.task_complete_not_required
+    value: task_complete.not_required
+  - key: task_complete.task_complete_offline
+    value: task_complete.offline
+  - key: task_complete.task_complete_supervisor_review
+    value: task_complete.supervisor_review
+  - key: task_complete.task_complete_task_completed
+    value: task_complete.task_completed
+  - key: task_complete.task_complete_v4_2_1_hololens_2
+    value: task_complete.v4_2_1_hololens_2
+  - key: task_complete.task_complete_verification
+    value: task_complete.verification
+  - key: task_complete.task_complete_verified
+    value: task_complete.verified
+  - key: task_complete.task_complete_visual_inspection
+    value: task_complete.visual_inspection
+  - key: task_complete.task_complete_voice_notes
+    value: task_complete.voice_notes
+  - key: task_complete.task_complete_workflow_steps
+    value: task_complete.workflow_steps
+  - key: task_complete.task_completed
+    value: task.completed
+  - key: task_complete.task_return_home
+    value: task.return_home
+  - key: task_library.task_library_all
+    value: task_library.all
+  - key: task_library.task_library_category
+    value: task_library.category
+  - key: task_library.task_library_cleaning
+    value: task_library.cleaning
+  - key: task_library.task_library_details
+    value: task_library.details
+  - key: task_library.task_library_difficulty
+    value: task_library.difficulty
+  - key: task_library.task_library_duration
+    value: task_library.duration
+  - key: task_library.task_library_electrical
+    value: task_library.electrical
+  - key: task_library.task_library_empty
+    value: task_library.empty
+  - key: task_library.task_library_inspection
+    value: task_library.inspection
+  - key: task_library.task_library_mechanical
+    value: task_library.mechanical
+  - key: task_library.task_library_most_recent
+    value: task_library.most_recent
+  - key: task_library.task_library_norscope
+    value: task_library.norscope
+  - key: task_library.task_library_offline_available
+    value: task_library.offline_available
+  - key: task_library.task_library_search_tasks
+    value: task_library.search_tasks
+  - key: task_library.task_library_select_a_maintenance_workflow
+    value: task_library.select_a_maintenance_workflow
+  - key: task_library.task_library_steps
+    value: task_library.steps
+  - key: task_library.task_library_steps_preview
+    value: task_library.steps_preview
+  - key: task_library.task_library_title
+    value: task_library.title
+  - key: task_library.task_library_v4_2_1_hololens_2
+    value: task_library.v4_2_1_hololens_2
+  - key: task_library.task_start
+    value: task.start

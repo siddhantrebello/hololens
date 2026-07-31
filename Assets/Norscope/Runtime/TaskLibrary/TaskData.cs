@@ -16,6 +16,9 @@ namespace Norscope.TaskLibrary
         public string description = string.Empty;
         public string estimatedDuration = string.Empty;
         public TaskDifficulty difficulty = TaskDifficulty.Beginner;
+        public string category = string.Empty;
+        public bool offlineAvailable;
+        public string lastUpdated = string.Empty;
         public Sprite icon;
         public List<TaskStep> steps = new List<TaskStep>();
     }

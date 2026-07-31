@@ -1,0 +1,2 @@
+Settings About baseline 2026-07-31T14:41:26.4052998+02:00
+Assets/Norscope/UI/Panels/SettingsPanel.prefab

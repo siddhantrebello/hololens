@@ -822,7 +822,7 @@ PlayerSettings:
       SpatialPerception: True
       InternetClient: False
       WebCam: True
-      Microphone: False
+      Microphone: True
   metroTargetDeviceFamilies:
     Desktop: False
     Holographic: True

@@ -1,0 +1,514 @@
+using System.Collections;
+using System.Text;
+using Norscope.Audio;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace Norscope.AskAI
+{
+    /// <summary>
+    /// Owns Ask AI workflow state transitions. Speech capture is abstracted;
+    /// platform dictation APIs stay behind IAskAiSpeechCapture.
+    /// </summary>
+    [DisallowMultipleComponent]
+    public sealed class AskAiWorkflowController : MonoBehaviour
+    {
+        private const float ProcessingSeconds = 1.5f;
+        private const float MaxListeningSeconds = 15f;
+        private const float TranscriptHoldSeconds = 0.15f;
+
+        [SerializeField] private AskAiView view;
+        [SerializeField] private Button primaryButton;
+
+        private IAskAiService _answerService;
+        private IAskAiSpeechCapture _speechCapture;
+        private AskAiWorkflowState _state = AskAiWorkflowState.Ready;
+        private Coroutine _workflowRoutine;
+        private Coroutine _listeningTimeoutRoutine;
+        private bool _listenersWired;
+        private bool _sessionActive;
+        private bool _completionHandled;
+        private bool _voiceStartPlayed;
+        private bool _voiceStopPlayed;
+        private bool _voiceRecognizedPlayed;
+
+        private readonly StringBuilder _finalTranscript = new StringBuilder();
+        private string _currentHypothesis = string.Empty;
+        private string _lastAppendedResult = string.Empty;
+
+        public AskAiWorkflowState CurrentState => _state;
+
+        public void Configure(
+            AskAiView askAiView,
+            Button primary,
+            IAskAiService answerService = null,
+            IAskAiSpeechCapture speechCapture = null)
+        {
+            view = askAiView;
+            primaryButton = primary;
+            _answerService = answerService ?? new MockAskAiService();
+            ReplaceSpeechCapture(speechCapture);
+            WireListeners();
+        }
+
+        private void Awake()
+        {
+            if (_answerService == null)
+                _answerService = new MockAskAiService();
+            if (_speechCapture == null)
+                ReplaceSpeechCapture(AskAiSpeechCaptureFactory.Create());
+            if (view == null)
+                view = GetComponent<AskAiView>();
+            if (primaryButton == null && view != null)
+                primaryButton = view.PrimaryButton;
+            WireListeners();
+        }
+
+        private void OnEnable()
+        {
+            ResetToReady(animate: false);
+        }
+
+        private void OnDisable()
+        {
+            CancelWorkflow(suppressCallbacks: true);
+            view?.SnapReadyPresentation();
+        }
+
+        private void OnDestroy()
+        {
+            CancelWorkflow(suppressCallbacks: true);
+            UnwireListeners();
+            DisposeSpeechCapture();
+        }
+
+        private void Update()
+        {
+            if (!_sessionActive || _speechCapture == null)
+                return;
+
+            while (_speechCapture.TryDequeue(out AskAiSpeechEvent speechEvent))
+                HandleSpeechEvent(speechEvent);
+        }
+
+        private void WireListeners()
+        {
+            if (_listenersWired || primaryButton == null)
+                return;
+            primaryButton.onClick.RemoveListener(OnPrimaryClicked);
+            primaryButton.onClick.AddListener(OnPrimaryClicked);
+            _listenersWired = true;
+        }
+
+        private void UnwireListeners()
+        {
+            if (!_listenersWired || primaryButton == null)
+                return;
+            primaryButton.onClick.RemoveListener(OnPrimaryClicked);
+            _listenersWired = false;
+        }
+
+        private void OnPrimaryClicked()
+        {
+            if (_state == AskAiWorkflowState.Listening ||
+                _state == AskAiWorkflowState.Processing)
+            {
+                return;
+            }
+
+            UIAudioManager.Play(UIAudioEvent.ButtonClick);
+            StartWorkflow();
+        }
+
+        private void StartWorkflow()
+        {
+            CancelWorkflow(suppressCallbacks: true);
+            ClearTranscriptState();
+            _completionHandled = false;
+            _voiceStartPlayed = false;
+            _voiceStopPlayed = false;
+            _voiceRecognizedPlayed = false;
+
+            if (_speechCapture == null)
+                ReplaceSpeechCapture(AskAiSpeechCaptureFactory.Create());
+
+            EnterState(
+                AskAiWorkflowState.Listening,
+                "Listening...",
+                body: string.Empty,
+                buttonLabel: "Ask AI",
+                buttonEnabled: false,
+                hintVisible: false,
+                microphoneActive: true,
+                processingActive: false);
+
+            if (!_speechCapture.TryStart(out string startError))
+            {
+                ShowSpeechError(string.IsNullOrWhiteSpace(startError)
+                    ? "Speech recognition is unavailable. Check the device speech and privacy settings."
+                    : startError);
+                return;
+            }
+
+            _sessionActive = true;
+            PlayVoiceStartOnce();
+            _listeningTimeoutRoutine = StartCoroutine(ListeningSafetyTimeout());
+        }
+
+        private IEnumerator ListeningSafetyTimeout()
+        {
+            float remaining = MaxListeningSeconds;
+            while (remaining > 0f)
+            {
+                if (!_sessionActive || _state != AskAiWorkflowState.Listening)
+                    yield break;
+                remaining -= Time.unscaledDeltaTime;
+                yield return null;
+            }
+
+            if (!_sessionActive || _completionHandled ||
+                _state != AskAiWorkflowState.Listening)
+                yield break;
+
+            StopSpeechCapture();
+            PlayVoiceStopOnce();
+            FinalizeListeningSession(AskAiSpeechCompletionCause.TimeoutExceeded);
+        }
+
+        private void HandleSpeechEvent(AskAiSpeechEvent speechEvent)
+        {
+            if (!_sessionActive || _completionHandled)
+                return;
+
+            switch (speechEvent.Kind)
+            {
+                case AskAiSpeechEventKind.Hypothesis:
+                    _currentHypothesis = speechEvent.Text ?? string.Empty;
+                    RefreshListeningBody();
+                    break;
+
+                case AskAiSpeechEventKind.Result:
+                    AppendFinalResult(speechEvent.Text);
+                    _currentHypothesis = string.Empty;
+                    RefreshListeningBody();
+                    // Do not enter Processing until Completed / safety timeout.
+                    break;
+
+                case AskAiSpeechEventKind.Completed:
+                    PlayVoiceStopOnce();
+                    FinalizeListeningSession(speechEvent.Cause);
+                    break;
+
+                case AskAiSpeechEventKind.Error:
+                    PlayVoiceStopOnce();
+                    ShowSpeechError(string.IsNullOrWhiteSpace(speechEvent.ErrorMessage)
+                        ? "Speech recognition is unavailable. Check the device speech and privacy settings."
+                        : speechEvent.ErrorMessage);
+                    break;
+            }
+        }
+
+        private void AppendFinalResult(string text)
+        {
+            string normalized = NormalizeWhitespace(text);
+            if (string.IsNullOrEmpty(normalized))
+                return;
+
+            if (!string.IsNullOrEmpty(_lastAppendedResult) &&
+                string.Equals(normalized, _lastAppendedResult, System.StringComparison.Ordinal))
+            {
+                return;
+            }
+
+            string existing = _finalTranscript.ToString();
+            if (!string.IsNullOrEmpty(existing) &&
+                existing.EndsWith(normalized, System.StringComparison.Ordinal))
+            {
+                _lastAppendedResult = normalized;
+                return;
+            }
+
+            if (_finalTranscript.Length > 0)
+                _finalTranscript.Append(' ');
+            _finalTranscript.Append(normalized);
+            _lastAppendedResult = normalized;
+        }
+
+        private void RefreshListeningBody()
+        {
+            if (_state != AskAiWorkflowState.Listening || view == null)
+                return;
+
+            string finalized = _finalTranscript.ToString().Trim();
+            string hypothesis = (_currentHypothesis ?? string.Empty).Trim();
+            string body;
+            if (string.IsNullOrEmpty(finalized))
+                body = hypothesis;
+            else if (string.IsNullOrEmpty(hypothesis))
+                body = finalized;
+            else if (hypothesis.StartsWith(finalized, System.StringComparison.OrdinalIgnoreCase))
+                body = hypothesis;
+            else
+                body = finalized + " " + hypothesis;
+
+            view.SetBodyText(body);
+        }
+
+        private void FinalizeListeningSession(AskAiSpeechCompletionCause cause)
+        {
+            if (_completionHandled)
+                return;
+            _completionHandled = true;
+            _sessionActive = false;
+            StopListeningTimeout();
+            StopSpeechCapture();
+
+            string transcript = NormalizeWhitespace(_finalTranscript.ToString());
+            bool usable = !string.IsNullOrEmpty(transcript);
+
+            if (!usable)
+            {
+                ShowNoSpeechDetected(cause);
+                return;
+            }
+
+            PlayVoiceRecognizedOnce();
+            _workflowRoutine = StartCoroutine(ContinueToProcessing(transcript));
+        }
+
+        private IEnumerator ContinueToProcessing(string transcript)
+        {
+            EnterState(
+                AskAiWorkflowState.Listening,
+                "Listening...",
+                body: transcript,
+                buttonLabel: "Ask AI",
+                buttonEnabled: false,
+                hintVisible: false,
+                microphoneActive: false,
+                processingActive: false);
+
+            yield return WaitOrCancelled(TranscriptHoldSeconds);
+            if (_workflowRoutine == null)
+                yield break;
+
+            EnterState(
+                AskAiWorkflowState.Processing,
+                "Analyzing...",
+                body: transcript,
+                buttonLabel: "Ask AI",
+                buttonEnabled: false,
+                hintVisible: false,
+                microphoneActive: false,
+                processingActive: true);
+            UIAudioManager.Play(UIAudioEvent.AIThinking);
+
+            yield return WaitOrCancelled(ProcessingSeconds);
+            if (_workflowRoutine == null)
+                yield break;
+
+            string answer = _answerService != null
+                ? _answerService.GetMockAnswer()
+                : MockAskAiService.DefaultAnswer;
+
+            EnterState(
+                AskAiWorkflowState.Answer,
+                "Answer",
+                body: answer,
+                buttonLabel: "Ask AI",
+                buttonEnabled: true,
+                hintVisible: false,
+                microphoneActive: false,
+                processingActive: false);
+            UIAudioManager.Play(UIAudioEvent.AIResponse);
+
+            _workflowRoutine = null;
+        }
+
+        private void ShowNoSpeechDetected(AskAiSpeechCompletionCause cause)
+        {
+            EnterState(
+                AskAiWorkflowState.Error,
+                "Error",
+                body: "No speech detected. Please try again.",
+                buttonLabel: "Ask AI",
+                buttonEnabled: true,
+                hintVisible: false,
+                microphoneActive: false,
+                processingActive: false);
+            UIAudioManager.Play(UIAudioEvent.Error);
+        }
+
+        private void ShowSpeechError(string message)
+        {
+            _completionHandled = true;
+            _sessionActive = false;
+            StopListeningTimeout();
+            StopSpeechCapture();
+            EnterState(
+                AskAiWorkflowState.Error,
+                "Error",
+                body: message,
+                buttonLabel: "Ask AI",
+                buttonEnabled: true,
+                hintVisible: false,
+                microphoneActive: false,
+                processingActive: false);
+            UIAudioManager.Play(UIAudioEvent.Error);
+        }
+
+        private IEnumerator WaitOrCancelled(float seconds)
+        {
+            float remaining = Mathf.Max(0f, seconds);
+            while (remaining > 0f)
+            {
+                if (_workflowRoutine == null)
+                    yield break;
+                remaining -= Time.unscaledDeltaTime;
+                yield return null;
+            }
+        }
+
+        private void CancelWorkflow(bool suppressCallbacks)
+        {
+            if (suppressCallbacks)
+                _completionHandled = true;
+
+            _sessionActive = false;
+            StopListeningTimeout();
+
+            if (_workflowRoutine != null)
+            {
+                StopCoroutine(_workflowRoutine);
+                _workflowRoutine = null;
+            }
+
+            StopSpeechCapture();
+            ClearTranscriptState();
+        }
+
+        private void ResetToReady(bool animate)
+        {
+            CancelWorkflow(suppressCallbacks: true);
+            _completionHandled = false;
+            EnterState(
+                AskAiWorkflowState.Ready,
+                "Ready",
+                body: string.Empty,
+                buttonLabel: "Ask AI",
+                buttonEnabled: true,
+                hintVisible: true,
+                microphoneActive: false,
+                processingActive: false,
+                animate);
+            view?.SnapReadyPresentation();
+        }
+
+        private void EnterState(
+            AskAiWorkflowState state,
+            string status,
+            string body,
+            string buttonLabel,
+            bool buttonEnabled,
+            bool hintVisible,
+            bool microphoneActive,
+            bool processingActive,
+            bool animate = true)
+        {
+            _state = state;
+            if (view != null)
+            {
+                view.Render(
+                    state,
+                    status,
+                    body,
+                    buttonLabel,
+                    buttonEnabled,
+                    hintVisible,
+                    microphoneActive,
+                    processingActive,
+                    animate);
+            }
+        }
+
+        private void ClearTranscriptState()
+        {
+            _finalTranscript.Length = 0;
+            _currentHypothesis = string.Empty;
+            _lastAppendedResult = string.Empty;
+        }
+
+        private void StopSpeechCapture()
+        {
+            if (_speechCapture == null)
+                return;
+            _speechCapture.Stop();
+            while (_speechCapture.TryDequeue(out _)) { }
+        }
+
+        private void StopListeningTimeout()
+        {
+            if (_listeningTimeoutRoutine == null)
+                return;
+            StopCoroutine(_listeningTimeoutRoutine);
+            _listeningTimeoutRoutine = null;
+        }
+
+        private void ReplaceSpeechCapture(IAskAiSpeechCapture capture)
+        {
+            DisposeSpeechCapture();
+            _speechCapture = capture ?? AskAiSpeechCaptureFactory.Create();
+        }
+
+        private void DisposeSpeechCapture()
+        {
+            if (_speechCapture == null)
+                return;
+            _speechCapture.Dispose();
+            _speechCapture = null;
+        }
+
+        private void PlayVoiceStartOnce()
+        {
+            if (_voiceStartPlayed)
+                return;
+            _voiceStartPlayed = true;
+            UIAudioManager.Play(UIAudioEvent.VoiceStartListening);
+        }
+
+        private void PlayVoiceStopOnce()
+        {
+            if (_voiceStopPlayed)
+                return;
+            _voiceStopPlayed = true;
+            UIAudioManager.Play(UIAudioEvent.VoiceStopListening);
+        }
+
+        private void PlayVoiceRecognizedOnce()
+        {
+            if (_voiceRecognizedPlayed)
+                return;
+            _voiceRecognizedPlayed = true;
+            UIAudioManager.Play(UIAudioEvent.VoiceRecognized);
+        }
+
+        private static string NormalizeWhitespace(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                return string.Empty;
+
+            string[] parts = value.Trim().Split(
+                (char[])null,
+                System.StringSplitOptions.RemoveEmptyEntries);
+            return string.Join(" ", parts);
+        }
+
+        /// <summary>Retained for tests / future failure injection.</summary>
+        public void ShowError(string message)
+        {
+            ShowSpeechError(string.IsNullOrEmpty(message)
+                ? "Something went wrong. Please try again."
+                : message);
+        }
+    }
+}

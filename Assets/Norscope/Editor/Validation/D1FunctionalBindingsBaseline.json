@@ -1,0 +1,844 @@
+{
+    "schemaVersion": 1,
+    "capturedUtc": "2026-07-29T16:50:15.2024119Z",
+    "prefabs": [
+        {
+            "assetPath": "Assets/Norscope/UI/Panels/HomePanel.prefab",
+            "hierarchyPaths": [
+                "HomePanel",
+                "HomePanel/Background",
+                "HomePanel/Border",
+                "HomePanel/Content",
+                "HomePanel/Content/Card_About",
+                "HomePanel/Content/Card_About/Background",
+                "HomePanel/Content/Card_About/Icon",
+                "HomePanel/Content/Card_About/Subtitle",
+                "HomePanel/Content/Card_About/Title",
+                "HomePanel/Content/Card_AskAI",
+                "HomePanel/Content/Card_AskAI/Background",
+                "HomePanel/Content/Card_AskAI/Icon",
+                "HomePanel/Content/Card_AskAI/Subtitle",
+                "HomePanel/Content/Card_AskAI/Title",
+                "HomePanel/Content/Card_Reports",
+                "HomePanel/Content/Card_Reports/Background",
+                "HomePanel/Content/Card_Reports/Icon",
+                "HomePanel/Content/Card_Reports/Subtitle",
+                "HomePanel/Content/Card_Reports/Title",
+                "HomePanel/Content/Card_Settings",
+                "HomePanel/Content/Card_Settings/Background",
+                "HomePanel/Content/Card_Settings/Icon",
+                "HomePanel/Content/Card_Settings/Subtitle",
+                "HomePanel/Content/Card_Settings/Title",
+                "HomePanel/Content/Card_Storage",
+                "HomePanel/Content/Card_Storage/Background",
+                "HomePanel/Content/Card_Storage/Icon",
+                "HomePanel/Content/Card_Storage/Subtitle",
+                "HomePanel/Content/Card_Storage/Title",
+                "HomePanel/Content/Card_TaskLibrary",
+                "HomePanel/Content/Card_TaskLibrary/Background",
+                "HomePanel/Content/Card_TaskLibrary/Icon",
+                "HomePanel/Content/Card_TaskLibrary/Subtitle",
+                "HomePanel/Content/Card_TaskLibrary/Title",
+                "HomePanel/ResizeHandles",
+                "HomePanel/ResizeHandles/BottomRight",
+                "HomePanel/TitleBar",
+                "HomePanel/TitleBar/CloseButton",
+                "HomePanel/TitleBar/CloseButton/Icon",
+                "HomePanel/TitleBar/CloseButton/Label",
+                "HomePanel/TitleBar/GrabRegion",
+                "HomePanel/TitleBar/Title"
+            ],
+            "buttons": [
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_About",
+                    "componentIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:766345067231560536",
+                    "targetGraphicIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:7364050729275338357",
+                    "transition": 1,
+                    "interactable": true,
+                    "persistentListeners": []
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_AskAI",
+                    "componentIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:6197850513053042793",
+                    "targetGraphicIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:1935982034091292542",
+                    "transition": 1,
+                    "interactable": true,
+                    "persistentListeners": []
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_Reports",
+                    "componentIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:4123053017566709309",
+                    "targetGraphicIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:1460015551430815584",
+                    "transition": 1,
+                    "interactable": true,
+                    "persistentListeners": []
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_Settings",
+                    "componentIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:1569943992073753680",
+                    "targetGraphicIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:143203840972730191",
+                    "transition": 1,
+                    "interactable": true,
+                    "persistentListeners": []
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_Storage",
+                    "componentIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:661394754207289541",
+                    "targetGraphicIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:2208517463073421254",
+                    "transition": 1,
+                    "interactable": true,
+                    "persistentListeners": []
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_TaskLibrary",
+                    "componentIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:1722417177022399228",
+                    "targetGraphicIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:3904663978770679763",
+                    "transition": 1,
+                    "interactable": true,
+                    "persistentListeners": []
+                },
+                {
+                    "hierarchyPath": "HomePanel/TitleBar/CloseButton",
+                    "componentIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:4418702921377819280",
+                    "targetGraphicIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:5445066019541809895",
+                    "transition": 1,
+                    "interactable": true,
+                    "persistentListeners": []
+                }
+            ],
+            "sprites": [
+                {
+                    "hierarchyPath": "HomePanel/Background",
+                    "imageIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:1979867755732548921",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "HomePanel/Border",
+                    "imageIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:1771505895824785072",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_About",
+                    "imageIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:5623562676789345885",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_About/Background",
+                    "imageIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:7364050729275338357",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_About/Icon",
+                    "imageIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:3172516127796436110",
+                    "spriteIdentity": "db0a2c4a77fb42d4ebd7acfdf52dbd0d:21300000"
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_AskAI",
+                    "imageIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:2673809477628068220",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_AskAI/Background",
+                    "imageIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:1935982034091292542",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_AskAI/Icon",
+                    "imageIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:2668518893174895664",
+                    "spriteIdentity": "39ebf8c118147114f8d08fa6e4c11c81:21300000"
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_Reports",
+                    "imageIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:8970362242425758239",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_Reports/Background",
+                    "imageIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:1460015551430815584",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_Reports/Icon",
+                    "imageIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:7066070362262142422",
+                    "spriteIdentity": "582aed6efb66bb54da1d2a3ac092209a:21300000"
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_Settings",
+                    "imageIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:680706611042011502",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_Settings/Background",
+                    "imageIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:143203840972730191",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_Settings/Icon",
+                    "imageIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:8006252462630527886",
+                    "spriteIdentity": "6b1d875247c08bc4691b1d43497bfe1d:21300000"
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_Storage",
+                    "imageIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:4435312742135129069",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_Storage/Background",
+                    "imageIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:2208517463073421254",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_Storage/Icon",
+                    "imageIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:2419588411103206925",
+                    "spriteIdentity": "0f1f8a0fe217dd24abb881efc097145d:21300000"
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_TaskLibrary",
+                    "imageIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:3097539167997609470",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_TaskLibrary/Background",
+                    "imageIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:3904663978770679763",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_TaskLibrary/Icon",
+                    "imageIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:7979468202774519646",
+                    "spriteIdentity": "2deb64c5dd04087499331b4f3a029c93:21300000"
+                },
+                {
+                    "hierarchyPath": "HomePanel/ResizeHandles/BottomRight",
+                    "imageIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:6108770927173758514",
+                    "spriteIdentity": "null"
+                },
+                {
+                    "hierarchyPath": "HomePanel/TitleBar",
+                    "imageIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:282300937483880829",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "HomePanel/TitleBar/CloseButton",
+                    "imageIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:5445066019541809895",
+                    "spriteIdentity": "dfa445fa7b1139164225d027eedd3e2a:21300000"
+                },
+                {
+                    "hierarchyPath": "HomePanel/TitleBar/CloseButton/Icon",
+                    "imageIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:289123915166746347",
+                    "spriteIdentity": "19130d2c0d4e0b199c653c62ad7fbf9e:21300000"
+                },
+                {
+                    "hierarchyPath": "HomePanel/TitleBar/GrabRegion",
+                    "imageIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:7752072588447392417",
+                    "spriteIdentity": "null"
+                }
+            ],
+            "functionalComponents": [
+                {
+                    "hierarchyPath": "HomePanel",
+                    "typeName": "Norscope.Windows.SpatialWindowBindings",
+                    "componentIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:6582590544367651579",
+                    "fieldSnapshot": "grabRegion=a45a3a727c7529d4aa100e4c1ca0f076:1090621705199768733|resizeHandle=a45a3a727c7529d4aa100e4c1ca0f076:1674131491182048436|closeButtonRoot=a45a3a727c7529d4aa100e4c1ca0f076:9153707750460421272"
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_About",
+                    "typeName": "Norscope.Navigation.HomePanelCard",
+                    "componentIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:1857345422113079687",
+                    "fieldSnapshot": "targetPanel=8|button=a45a3a727c7529d4aa100e4c1ca0f076:766345067231560536|background=a45a3a727c7529d4aa100e4c1ca0f076:7364050729275338357|border=a45a3a727c7529d4aa100e4c1ca0f076:5623562676789345885|icon=a45a3a727c7529d4aa100e4c1ca0f076:3172516127796436110|title=a45a3a727c7529d4aa100e4c1ca0f076:5557004359713100400|subtitle=a45a3a727c7529d4aa100e4c1ca0f076:2281179394332898876|theme=999f3cb932c477644bbf492e013a1903:11400000"
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_AskAI",
+                    "typeName": "Norscope.Navigation.HomePanelCard",
+                    "componentIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:479879182616017967",
+                    "fieldSnapshot": "targetPanel=4|button=a45a3a727c7529d4aa100e4c1ca0f076:6197850513053042793|background=a45a3a727c7529d4aa100e4c1ca0f076:1935982034091292542|border=a45a3a727c7529d4aa100e4c1ca0f076:2673809477628068220|icon=a45a3a727c7529d4aa100e4c1ca0f076:2668518893174895664|title=a45a3a727c7529d4aa100e4c1ca0f076:3697858822633392909|subtitle=a45a3a727c7529d4aa100e4c1ca0f076:4937510160356017848|theme=999f3cb932c477644bbf492e013a1903:11400000"
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_Reports",
+                    "typeName": "Norscope.Navigation.HomePanelCard",
+                    "componentIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:7907815861672726685",
+                    "fieldSnapshot": "targetPanel=5|button=a45a3a727c7529d4aa100e4c1ca0f076:4123053017566709309|background=a45a3a727c7529d4aa100e4c1ca0f076:1460015551430815584|border=a45a3a727c7529d4aa100e4c1ca0f076:8970362242425758239|icon=a45a3a727c7529d4aa100e4c1ca0f076:7066070362262142422|title=a45a3a727c7529d4aa100e4c1ca0f076:5198828838009204311|subtitle=a45a3a727c7529d4aa100e4c1ca0f076:5554789500934803166|theme=999f3cb932c477644bbf492e013a1903:11400000"
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_Settings",
+                    "typeName": "Norscope.Navigation.HomePanelCard",
+                    "componentIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:7483150644683328733",
+                    "fieldSnapshot": "targetPanel=6|button=a45a3a727c7529d4aa100e4c1ca0f076:1569943992073753680|background=a45a3a727c7529d4aa100e4c1ca0f076:143203840972730191|border=a45a3a727c7529d4aa100e4c1ca0f076:680706611042011502|icon=a45a3a727c7529d4aa100e4c1ca0f076:8006252462630527886|title=a45a3a727c7529d4aa100e4c1ca0f076:466558389582592071|subtitle=a45a3a727c7529d4aa100e4c1ca0f076:2833617919207038584|theme=999f3cb932c477644bbf492e013a1903:11400000"
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_Storage",
+                    "typeName": "Norscope.Navigation.HomePanelCard",
+                    "componentIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:2103196138586136391",
+                    "fieldSnapshot": "targetPanel=7|button=a45a3a727c7529d4aa100e4c1ca0f076:661394754207289541|background=a45a3a727c7529d4aa100e4c1ca0f076:2208517463073421254|border=a45a3a727c7529d4aa100e4c1ca0f076:4435312742135129069|icon=a45a3a727c7529d4aa100e4c1ca0f076:2419588411103206925|title=a45a3a727c7529d4aa100e4c1ca0f076:988943007720056260|subtitle=a45a3a727c7529d4aa100e4c1ca0f076:2795037884752694346|theme=999f3cb932c477644bbf492e013a1903:11400000"
+                },
+                {
+                    "hierarchyPath": "HomePanel/Content/Card_TaskLibrary",
+                    "typeName": "Norscope.Navigation.HomePanelCard",
+                    "componentIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:7754810389061657580",
+                    "fieldSnapshot": "targetPanel=2|button=a45a3a727c7529d4aa100e4c1ca0f076:1722417177022399228|background=a45a3a727c7529d4aa100e4c1ca0f076:3904663978770679763|border=a45a3a727c7529d4aa100e4c1ca0f076:3097539167997609470|icon=a45a3a727c7529d4aa100e4c1ca0f076:7979468202774519646|title=a45a3a727c7529d4aa100e4c1ca0f076:1246557067733562931|subtitle=a45a3a727c7529d4aa100e4c1ca0f076:84592194628173264|theme=999f3cb932c477644bbf492e013a1903:11400000"
+                }
+            ]
+        },
+        {
+            "assetPath": "Assets/Norscope/UI/Panels/TaskLibraryPanel.prefab",
+            "hierarchyPaths": [
+                "TaskLibraryPanel",
+                "TaskLibraryPanel/Background",
+                "TaskLibraryPanel/Border",
+                "TaskLibraryPanel/ResizeHandles",
+                "TaskLibraryPanel/ResizeHandles/BottomRight",
+                "TaskLibraryPanel/ScrollView",
+                "TaskLibraryPanel/ScrollView/Viewport",
+                "TaskLibraryPanel/ScrollView/Viewport/Content",
+                "TaskLibraryPanel/TitleBar",
+                "TaskLibraryPanel/TitleBar/BackButtonSlot",
+                "TaskLibraryPanel/TitleBar/BackButtonSlot/BackButton",
+                "TaskLibraryPanel/TitleBar/BackButtonSlot/BackButton/Label",
+                "TaskLibraryPanel/TitleBar/CloseButton",
+                "TaskLibraryPanel/TitleBar/CloseButton/Icon",
+                "TaskLibraryPanel/TitleBar/CloseButton/Label",
+                "TaskLibraryPanel/TitleBar/GrabRegion",
+                "TaskLibraryPanel/TitleBar/Title"
+            ],
+            "buttons": [
+                {
+                    "hierarchyPath": "TaskLibraryPanel/TitleBar/BackButtonSlot/BackButton",
+                    "componentIdentity": "6569d5d852a66fb4e82ade670ff0c8cd:2432343590213251631",
+                    "targetGraphicIdentity": "6569d5d852a66fb4e82ade670ff0c8cd:1551141398975409299",
+                    "transition": 1,
+                    "interactable": true,
+                    "persistentListeners": []
+                },
+                {
+                    "hierarchyPath": "TaskLibraryPanel/TitleBar/CloseButton",
+                    "componentIdentity": "6569d5d852a66fb4e82ade670ff0c8cd:880956684918621204",
+                    "targetGraphicIdentity": "6569d5d852a66fb4e82ade670ff0c8cd:8861792383821861987",
+                    "transition": 1,
+                    "interactable": true,
+                    "persistentListeners": []
+                }
+            ],
+            "sprites": [
+                {
+                    "hierarchyPath": "TaskLibraryPanel/Background",
+                    "imageIdentity": "6569d5d852a66fb4e82ade670ff0c8cd:3496195604902966639",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "TaskLibraryPanel/Border",
+                    "imageIdentity": "6569d5d852a66fb4e82ade670ff0c8cd:8975542579929040487",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "TaskLibraryPanel/ResizeHandles/BottomRight",
+                    "imageIdentity": "6569d5d852a66fb4e82ade670ff0c8cd:6026656074058769902",
+                    "spriteIdentity": "null"
+                },
+                {
+                    "hierarchyPath": "TaskLibraryPanel/ScrollView/Viewport",
+                    "imageIdentity": "6569d5d852a66fb4e82ade670ff0c8cd:1388878368656893501",
+                    "spriteIdentity": "null"
+                },
+                {
+                    "hierarchyPath": "TaskLibraryPanel/TitleBar",
+                    "imageIdentity": "6569d5d852a66fb4e82ade670ff0c8cd:4323625189216804813",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "TaskLibraryPanel/TitleBar/BackButtonSlot/BackButton",
+                    "imageIdentity": "6569d5d852a66fb4e82ade670ff0c8cd:1551141398975409299",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "TaskLibraryPanel/TitleBar/CloseButton",
+                    "imageIdentity": "6569d5d852a66fb4e82ade670ff0c8cd:8861792383821861987",
+                    "spriteIdentity": "dfa445fa7b1139164225d027eedd3e2a:21300000"
+                },
+                {
+                    "hierarchyPath": "TaskLibraryPanel/TitleBar/CloseButton/Icon",
+                    "imageIdentity": "6569d5d852a66fb4e82ade670ff0c8cd:3848474461488916591",
+                    "spriteIdentity": "19130d2c0d4e0b199c653c62ad7fbf9e:21300000"
+                },
+                {
+                    "hierarchyPath": "TaskLibraryPanel/TitleBar/GrabRegion",
+                    "imageIdentity": "6569d5d852a66fb4e82ade670ff0c8cd:2066402394713492096",
+                    "spriteIdentity": "null"
+                }
+            ],
+            "functionalComponents": [
+                {
+                    "hierarchyPath": "TaskLibraryPanel",
+                    "typeName": "Norscope.Navigation.PanelNavigationBinding",
+                    "componentIdentity": "6569d5d852a66fb4e82ade670ff0c8cd:2913519505330135132",
+                    "fieldSnapshot": "panelType=2|backButton=6569d5d852a66fb4e82ade670ff0c8cd:2432343590213251631|fallbackParent=1"
+                },
+                {
+                    "hierarchyPath": "TaskLibraryPanel",
+                    "typeName": "Norscope.Windows.SpatialWindowBindings",
+                    "componentIdentity": "6569d5d852a66fb4e82ade670ff0c8cd:5685768570908424510",
+                    "fieldSnapshot": "grabRegion=6569d5d852a66fb4e82ade670ff0c8cd:8465262646792873757|resizeHandle=6569d5d852a66fb4e82ade670ff0c8cd:8271289731221629199|closeButtonRoot=6569d5d852a66fb4e82ade670ff0c8cd:5648405885430454812"
+                }
+            ]
+        },
+        {
+            "assetPath": "Assets/Norscope/UI/Panels/ActiveTaskPanel.prefab",
+            "hierarchyPaths": [
+                "ActiveTaskPanel",
+                "ActiveTaskPanel/CompletionView",
+                "ActiveTaskPanel/CompletionView/CompletionActions",
+                "ActiveTaskPanel/CompletionView/CompletionActions/GenerateReportButton",
+                "ActiveTaskPanel/CompletionView/CompletionActions/GenerateReportButton/Label",
+                "ActiveTaskPanel/CompletionView/CompletionActions/ReturnHomeButton",
+                "ActiveTaskPanel/CompletionView/CompletionActions/ReturnHomeButton/Label",
+                "ActiveTaskPanel/CompletionView/CompletionHeading",
+                "ActiveTaskPanel/CompletionView/CompletionMessage",
+                "ActiveTaskPanel/CompletionView/CompletionTaskTitle",
+                "ActiveTaskPanel/ResizeHandles",
+                "ActiveTaskPanel/ResizeHandles/BottomRight",
+                "ActiveTaskPanel/TaskView",
+                "ActiveTaskPanel/TaskView/BottomNavigation",
+                "ActiveTaskPanel/TaskView/BottomNavigation/FinishButton",
+                "ActiveTaskPanel/TaskView/BottomNavigation/FinishButton/Label",
+                "ActiveTaskPanel/TaskView/BottomNavigation/NextButton",
+                "ActiveTaskPanel/TaskView/BottomNavigation/NextButton/Label",
+                "ActiveTaskPanel/TaskView/BottomNavigation/PreviousButton",
+                "ActiveTaskPanel/TaskView/BottomNavigation/PreviousButton/Label",
+                "ActiveTaskPanel/TaskView/BottomNavigation/Spacer",
+                "ActiveTaskPanel/TaskView/MainContent",
+                "ActiveTaskPanel/TaskView/MainContent/ImageSection",
+                "ActiveTaskPanel/TaskView/MainContent/ImageSection/ReferenceImage",
+                "ActiveTaskPanel/TaskView/MainContent/Instruction",
+                "ActiveTaskPanel/TaskView/MainContent/StepTitle",
+                "ActiveTaskPanel/TaskView/MainContent/VerificationSection",
+                "ActiveTaskPanel/TaskView/MainContent/VerificationSection/VerificationText",
+                "ActiveTaskPanel/TaskView/MainContent/WarningSection",
+                "ActiveTaskPanel/TaskView/MainContent/WarningSection/WarningText",
+                "ActiveTaskPanel/TaskView/StepHeader",
+                "ActiveTaskPanel/TaskView/StepHeader/ProgressTrack",
+                "ActiveTaskPanel/TaskView/StepHeader/ProgressTrack/ProgressFill",
+                "ActiveTaskPanel/TaskView/StepHeader/StepCounter",
+                "ActiveTaskPanel/TitleBar",
+                "ActiveTaskPanel/TitleBar/BackButtonSlot",
+                "ActiveTaskPanel/TitleBar/BackButtonSlot/BackButton",
+                "ActiveTaskPanel/TitleBar/BackButtonSlot/BackButton/Label",
+                "ActiveTaskPanel/TitleBar/CloseButton",
+                "ActiveTaskPanel/TitleBar/CloseButton/Label",
+                "ActiveTaskPanel/TitleBar/GrabRegion",
+                "ActiveTaskPanel/TitleBar/TaskTitle"
+            ],
+            "buttons": [
+                {
+                    "hierarchyPath": "ActiveTaskPanel/CompletionView/CompletionActions/GenerateReportButton",
+                    "componentIdentity": "e85f3c16377614947a7d971d2769b0a4:5662248893593160793",
+                    "targetGraphicIdentity": "e85f3c16377614947a7d971d2769b0a4:1475363457619498537",
+                    "transition": 1,
+                    "interactable": true,
+                    "persistentListeners": []
+                },
+                {
+                    "hierarchyPath": "ActiveTaskPanel/CompletionView/CompletionActions/ReturnHomeButton",
+                    "componentIdentity": "e85f3c16377614947a7d971d2769b0a4:2591314699361300395",
+                    "targetGraphicIdentity": "e85f3c16377614947a7d971d2769b0a4:5545490168883112018",
+                    "transition": 1,
+                    "interactable": true,
+                    "persistentListeners": []
+                },
+                {
+                    "hierarchyPath": "ActiveTaskPanel/TaskView/BottomNavigation/FinishButton",
+                    "componentIdentity": "e85f3c16377614947a7d971d2769b0a4:474411507161774188",
+                    "targetGraphicIdentity": "e85f3c16377614947a7d971d2769b0a4:2759920256503301722",
+                    "transition": 1,
+                    "interactable": true,
+                    "persistentListeners": []
+                },
+                {
+                    "hierarchyPath": "ActiveTaskPanel/TaskView/BottomNavigation/NextButton",
+                    "componentIdentity": "e85f3c16377614947a7d971d2769b0a4:116602298267214196",
+                    "targetGraphicIdentity": "e85f3c16377614947a7d971d2769b0a4:7269140478187563578",
+                    "transition": 1,
+                    "interactable": true,
+                    "persistentListeners": []
+                },
+                {
+                    "hierarchyPath": "ActiveTaskPanel/TaskView/BottomNavigation/PreviousButton",
+                    "componentIdentity": "e85f3c16377614947a7d971d2769b0a4:336516168499486161",
+                    "targetGraphicIdentity": "e85f3c16377614947a7d971d2769b0a4:4334371788958654434",
+                    "transition": 1,
+                    "interactable": true,
+                    "persistentListeners": []
+                },
+                {
+                    "hierarchyPath": "ActiveTaskPanel/TitleBar/BackButtonSlot/BackButton",
+                    "componentIdentity": "e85f3c16377614947a7d971d2769b0a4:2182357105906201315",
+                    "targetGraphicIdentity": "e85f3c16377614947a7d971d2769b0a4:3030609464468810847",
+                    "transition": 1,
+                    "interactable": true,
+                    "persistentListeners": []
+                },
+                {
+                    "hierarchyPath": "ActiveTaskPanel/TitleBar/CloseButton",
+                    "componentIdentity": "e85f3c16377614947a7d971d2769b0a4:3483340932278858594",
+                    "targetGraphicIdentity": "e85f3c16377614947a7d971d2769b0a4:279559254014533585",
+                    "transition": 1,
+                    "interactable": true,
+                    "persistentListeners": []
+                }
+            ],
+            "sprites": [
+                {
+                    "hierarchyPath": "ActiveTaskPanel",
+                    "imageIdentity": "e85f3c16377614947a7d971d2769b0a4:7759824986843185067",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "ActiveTaskPanel/CompletionView/CompletionActions/GenerateReportButton",
+                    "imageIdentity": "e85f3c16377614947a7d971d2769b0a4:1475363457619498537",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "ActiveTaskPanel/CompletionView/CompletionActions/ReturnHomeButton",
+                    "imageIdentity": "e85f3c16377614947a7d971d2769b0a4:5545490168883112018",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "ActiveTaskPanel/ResizeHandles/BottomRight",
+                    "imageIdentity": "e85f3c16377614947a7d971d2769b0a4:5506304311145083466",
+                    "spriteIdentity": "null"
+                },
+                {
+                    "hierarchyPath": "ActiveTaskPanel/TaskView/BottomNavigation/FinishButton",
+                    "imageIdentity": "e85f3c16377614947a7d971d2769b0a4:2759920256503301722",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "ActiveTaskPanel/TaskView/BottomNavigation/NextButton",
+                    "imageIdentity": "e85f3c16377614947a7d971d2769b0a4:7269140478187563578",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "ActiveTaskPanel/TaskView/BottomNavigation/PreviousButton",
+                    "imageIdentity": "e85f3c16377614947a7d971d2769b0a4:4334371788958654434",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "ActiveTaskPanel/TaskView/MainContent/ImageSection",
+                    "imageIdentity": "e85f3c16377614947a7d971d2769b0a4:2760864123620313653",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "ActiveTaskPanel/TaskView/MainContent/ImageSection/ReferenceImage",
+                    "imageIdentity": "e85f3c16377614947a7d971d2769b0a4:6485449932736761922",
+                    "spriteIdentity": "null"
+                },
+                {
+                    "hierarchyPath": "ActiveTaskPanel/TaskView/MainContent/VerificationSection",
+                    "imageIdentity": "e85f3c16377614947a7d971d2769b0a4:7113818579993391815",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "ActiveTaskPanel/TaskView/MainContent/WarningSection",
+                    "imageIdentity": "e85f3c16377614947a7d971d2769b0a4:6392776878395946238",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "ActiveTaskPanel/TaskView/StepHeader/ProgressTrack",
+                    "imageIdentity": "e85f3c16377614947a7d971d2769b0a4:3045344994420502984",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "ActiveTaskPanel/TaskView/StepHeader/ProgressTrack/ProgressFill",
+                    "imageIdentity": "e85f3c16377614947a7d971d2769b0a4:1933222245360846189",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "ActiveTaskPanel/TitleBar",
+                    "imageIdentity": "e85f3c16377614947a7d971d2769b0a4:2099685013991516969",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "ActiveTaskPanel/TitleBar/BackButtonSlot/BackButton",
+                    "imageIdentity": "e85f3c16377614947a7d971d2769b0a4:3030609464468810847",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "ActiveTaskPanel/TitleBar/CloseButton",
+                    "imageIdentity": "e85f3c16377614947a7d971d2769b0a4:279559254014533585",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "ActiveTaskPanel/TitleBar/GrabRegion",
+                    "imageIdentity": "e85f3c16377614947a7d971d2769b0a4:6709490210693497499",
+                    "spriteIdentity": "null"
+                }
+            ],
+            "functionalComponents": [
+                {
+                    "hierarchyPath": "ActiveTaskPanel",
+                    "typeName": "Norscope.Navigation.PanelNavigationBinding",
+                    "componentIdentity": "e85f3c16377614947a7d971d2769b0a4:8782633141090154487",
+                    "fieldSnapshot": "panelType=3|backButton=e85f3c16377614947a7d971d2769b0a4:2182357105906201315|fallbackParent=2"
+                },
+                {
+                    "hierarchyPath": "ActiveTaskPanel",
+                    "typeName": "Norscope.TaskExecution.ActiveTaskPanel",
+                    "componentIdentity": "e85f3c16377614947a7d971d2769b0a4:8248337216962247614",
+                    "fieldSnapshot": "taskView=e85f3c16377614947a7d971d2769b0a4:7400141401139749256|completionView=e85f3c16377614947a7d971d2769b0a4:4244211536238804990|titleText=e85f3c16377614947a7d971d2769b0a4:2072695442330305901|stepCounterText=e85f3c16377614947a7d971d2769b0a4:5428629055218593793|progressFill=e85f3c16377614947a7d971d2769b0a4:1933222245360846189|stepTitleText=e85f3c16377614947a7d971d2769b0a4:8759246613775710629|instructionText=e85f3c16377614947a7d971d2769b0a4:6156534976789203400|imageSection=e85f3c16377614947a7d971d2769b0a4:1185681367874104995|referenceImage=e85f3c16377614947a7d971d2769b0a4:6485449932736761922|warningSection=e85f3c16377614947a7d971d2769b0a4:3904829899462745364|warningText=e85f3c16377614947a7d971d2769b0a4:3222860437558289642|verificationSection=e85f3c16377614947a7d971d2769b0a4:8066070945120599273|verificationText=e85f3c16377614947a7d971d2769b0a4:3823318897326111438|previousButton=e85f3c16377614947a7d971d2769b0a4:336516168499486161|nextButton=e85f3c16377614947a7d971d2769b0a4:116602298267214196|finishButton=e85f3c16377614947a7d971d2769b0a4:474411507161774188|completionTaskTitleText=e85f3c16377614947a7d971d2769b0a4:3176397955629550492|completionMessageText=e85f3c16377614947a7d971d2769b0a4:5099225040817795514|returnHomeButton=e85f3c16377614947a7d971d2769b0a4:2591314699361300395|generateReportButton=e85f3c16377614947a7d971d2769b0a4:5662248893593160793"
+                },
+                {
+                    "hierarchyPath": "ActiveTaskPanel",
+                    "typeName": "Norscope.Windows.SpatialWindowBindings",
+                    "componentIdentity": "e85f3c16377614947a7d971d2769b0a4:3610350193347963219",
+                    "fieldSnapshot": "grabRegion=e85f3c16377614947a7d971d2769b0a4:7909390782558317180|resizeHandle=e85f3c16377614947a7d971d2769b0a4:2010014375219525114|closeButtonRoot=e85f3c16377614947a7d971d2769b0a4:7386750583942764757"
+                }
+            ]
+        },
+        {
+            "assetPath": "Assets/Norscope/UI/Controls/TaskCard.prefab",
+            "hierarchyPaths": [
+                "TaskCard",
+                "TaskCard/Background",
+                "TaskCard/Icon",
+                "TaskCard/MetaColumn",
+                "TaskCard/MetaColumn/DifficultyBadge",
+                "TaskCard/MetaColumn/DifficultyBadge/Label",
+                "TaskCard/MetaColumn/Duration",
+                "TaskCard/TextColumn",
+                "TaskCard/TextColumn/Description",
+                "TaskCard/TextColumn/TaskTitle"
+            ],
+            "buttons": [
+                {
+                    "hierarchyPath": "TaskCard",
+                    "componentIdentity": "c5dc95c4fbd5cc54eaf2e3542df2fd91:1637228948200526976",
+                    "targetGraphicIdentity": "c5dc95c4fbd5cc54eaf2e3542df2fd91:8019032585479096514",
+                    "transition": 0,
+                    "interactable": true,
+                    "persistentListeners": []
+                }
+            ],
+            "sprites": [
+                {
+                    "hierarchyPath": "TaskCard",
+                    "imageIdentity": "c5dc95c4fbd5cc54eaf2e3542df2fd91:8019032585479096514",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "TaskCard/Background",
+                    "imageIdentity": "c5dc95c4fbd5cc54eaf2e3542df2fd91:3626405249348802404",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                },
+                {
+                    "hierarchyPath": "TaskCard/Icon",
+                    "imageIdentity": "c5dc95c4fbd5cc54eaf2e3542df2fd91:8893737774280990109",
+                    "spriteIdentity": "2deb64c5dd04087499331b4f3a029c93:21300000"
+                },
+                {
+                    "hierarchyPath": "TaskCard/MetaColumn/DifficultyBadge",
+                    "imageIdentity": "c5dc95c4fbd5cc54eaf2e3542df2fd91:1418798300318482962",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                }
+            ],
+            "functionalComponents": [
+                {
+                    "hierarchyPath": "TaskCard",
+                    "typeName": "Norscope.TaskLibrary.TaskCardView",
+                    "componentIdentity": "c5dc95c4fbd5cc54eaf2e3542df2fd91:4112454731950527228",
+                    "fieldSnapshot": "icon=c5dc95c4fbd5cc54eaf2e3542df2fd91:8893737774280990109|titleText=c5dc95c4fbd5cc54eaf2e3542df2fd91:36315139657353339|descriptionText=c5dc95c4fbd5cc54eaf2e3542df2fd91:8647652309759735204|durationText=c5dc95c4fbd5cc54eaf2e3542df2fd91:488129910831414440|difficultyBadgeBackground=c5dc95c4fbd5cc54eaf2e3542df2fd91:1418798300318482962|difficultyBadgeText=c5dc95c4fbd5cc54eaf2e3542df2fd91:8930567087491683579|cardButton=c5dc95c4fbd5cc54eaf2e3542df2fd91:1637228948200526976|border=c5dc95c4fbd5cc54eaf2e3542df2fd91:8019032585479096514|theme=999f3cb932c477644bbf492e013a1903:11400000|fallbackIcon=2deb64c5dd04087499331b4f3a029c93:21300000"
+                }
+            ]
+        },
+        {
+            "assetPath": "Assets/Norscope/UI/Controls/NavigationBackButton.prefab",
+            "hierarchyPaths": [
+                "NavigationBackButton",
+                "NavigationBackButton/Label"
+            ],
+            "buttons": [
+                {
+                    "hierarchyPath": "NavigationBackButton",
+                    "componentIdentity": "77877c9c9feecbc4fabce56dadde7f54:6750186612468777304",
+                    "targetGraphicIdentity": "77877c9c9feecbc4fabce56dadde7f54:7632145117381631972",
+                    "transition": 1,
+                    "interactable": true,
+                    "persistentListeners": []
+                }
+            ],
+            "sprites": [
+                {
+                    "hierarchyPath": "NavigationBackButton",
+                    "imageIdentity": "77877c9c9feecbc4fabce56dadde7f54:7632145117381631972",
+                    "spriteIdentity": "588d939b70ad8a3201620e8cdbad6187:21300000"
+                }
+            ],
+            "functionalComponents": []
+        },
+        {
+            "assetPath": "Assets/Norscope/UI/Controls/NorscopeCloseButton.prefab",
+            "hierarchyPaths": [
+                "NorscopeCloseButton",
+                "NorscopeCloseButton/Icon",
+                "NorscopeCloseButton/Label"
+            ],
+            "buttons": [
+                {
+                    "hierarchyPath": "NorscopeCloseButton",
+                    "componentIdentity": "95a8c8020ed14a6438d9630aeb526011:5310563154625095110",
+                    "targetGraphicIdentity": "95a8c8020ed14a6438d9630aeb526011:4571234273370486193",
+                    "transition": 1,
+                    "interactable": true,
+                    "persistentListeners": []
+                }
+            ],
+            "sprites": [
+                {
+                    "hierarchyPath": "NorscopeCloseButton",
+                    "imageIdentity": "95a8c8020ed14a6438d9630aeb526011:4571234273370486193",
+                    "spriteIdentity": "dfa445fa7b1139164225d027eedd3e2a:21300000"
+                },
+                {
+                    "hierarchyPath": "NorscopeCloseButton/Icon",
+                    "imageIdentity": "95a8c8020ed14a6438d9630aeb526011:8134529260239309245",
+                    "spriteIdentity": "19130d2c0d4e0b199c653c62ad7fbf9e:21300000"
+                }
+            ],
+            "functionalComponents": []
+        }
+    ],
+    "functionalSourceHashes": [
+        {
+            "assetPath": "Assets/Norscope/Runtime/Navigation/HomePanelCard.cs",
+            "sha256": "/20WRj3lXZuDcsP61o4WRxRCVfGfCvtbmaOso3EYRhY="
+        },
+        {
+            "assetPath": "Assets/Norscope/Runtime/Navigation/PanelNavigationBinding.cs",
+            "sha256": "DlkmJmCJL5pUg9k1z6nwad/isGwiv1Wa1pHVnebyO40="
+        },
+        {
+            "assetPath": "Assets/Norscope/Runtime/Navigation/PanelNavigationService.cs",
+            "sha256": "qkYMmO7GohvwH0EhMmDJI/BOa57yFcZSFS3t5rhTpOM="
+        },
+        {
+            "assetPath": "Assets/Norscope/Runtime/Navigation/PanelRegistry.cs",
+            "sha256": "QELY4ABmtdazWFMbOAaJp+pVV5QERWGxiL8LbxJbgdI="
+        },
+        {
+            "assetPath": "Assets/Norscope/Runtime/TaskLibrary/TaskCardView.cs",
+            "sha256": "HTh01hifavB/olLOMBCvnDzQGrkr/4oz2u+m1En2zag="
+        },
+        {
+            "assetPath": "Assets/Norscope/Runtime/TaskLibrary/TaskLibraryPanel.cs",
+            "sha256": "NaEF6xWs7koPnpB5OkLF5CO01to4PaxJfS2FptFM+hM="
+        },
+        {
+            "assetPath": "Assets/Norscope/Runtime/TaskExecution/ActiveTaskPanel.cs",
+            "sha256": "3LkQa1yWGOW5sg70/8d9dp8k7xUXH2wo7hHyVvXdt/M="
+        },
+        {
+            "assetPath": "Assets/Norscope/Runtime/TaskExecution/ActiveTaskSession.cs",
+            "sha256": "psD1zh3llR4GKqmnO4+4SuwR5UR/J0E516P85uU2qNI="
+        },
+        {
+            "assetPath": "Assets/Norscope/Runtime/TaskExecution/ActiveTaskLauncher.cs",
+            "sha256": "7hFezVES9T5BfCwklpKuT4ff2tCjAGd7q+JmD9H0a4s="
+        },
+        {
+            "assetPath": "Assets/Norscope/Runtime/Windows/SpatialWindow.cs",
+            "sha256": "bdJ6eZFd6KzxSTzEt8QxmdAZOj5DVl27YUaOvCoz77w="
+        },
+        {
+            "assetPath": "Assets/Norscope/Runtime/Windows/SpatialWindowManager.cs",
+            "sha256": "N9WOPGBP30aDufEvwSCsGgwzoMljnihd7RHEGcU12Kw="
+        },
+        {
+            "assetPath": "Assets/Norscope/Runtime/UiButtonPressScale.cs",
+            "sha256": "ryno7k210termC/dTsLuCAtkvEGLmKxu/43UHcnTI5w="
+        }
+    ],
+    "navigationEntries": [
+        {
+            "panelType": 1,
+            "windowId": 2,
+            "behaviour": 1,
+            "prefabIdentity": "a45a3a727c7529d4aa100e4c1ca0f076:5719781087203536393"
+        },
+        {
+            "panelType": 2,
+            "windowId": 3,
+            "behaviour": 2,
+            "prefabIdentity": "6569d5d852a66fb4e82ade670ff0c8cd:4907483882219175517"
+        },
+        {
+            "panelType": 3,
+            "windowId": 4,
+            "behaviour": 2,
+            "prefabIdentity": "e85f3c16377614947a7d971d2769b0a4:5447340392591265265"
+        },
+        {
+            "panelType": 4,
+            "windowId": 5,
+            "behaviour": 2,
+            "prefabIdentity": "null"
+        },
+        {
+            "panelType": 5,
+            "windowId": 6,
+            "behaviour": 2,
+            "prefabIdentity": "null"
+        },
+        {
+            "panelType": 6,
+            "windowId": 7,
+            "behaviour": 2,
+            "prefabIdentity": "null"
+        },
+        {
+            "panelType": 7,
+            "windowId": 8,
+            "behaviour": 2,
+            "prefabIdentity": "null"
+        },
+        {
+            "panelType": 8,
+            "windowId": 9,
+            "behaviour": 2,
+            "prefabIdentity": "null"
+        }
+    ],
+    "backupTimestamp": "20260729_165015",
+    "backups": [
+        {
+            "sourcePath": "Assets/Norscope/UI/Panels/HomePanel.prefab",
+            "backupPath": "Assets/Norscope/DesignSystem/Backups/PreD1_20260729_165015/HomePanel.prefab",
+            "backupSha256": "cmoxFZP5kjm5PhGEfycc8Ew/NO0W+jY+xnVEV+cQs5c="
+        },
+        {
+            "sourcePath": "Assets/Norscope/UI/Panels/TaskLibraryPanel.prefab",
+            "backupPath": "Assets/Norscope/DesignSystem/Backups/PreD1_20260729_165015/TaskLibraryPanel.prefab",
+            "backupSha256": "f1OfG1PJ4kG370RzNrMnT8zqI9U8O6QgjDNqWukxbYM="
+        },
+        {
+            "sourcePath": "Assets/Norscope/UI/Panels/ActiveTaskPanel.prefab",
+            "backupPath": "Assets/Norscope/DesignSystem/Backups/PreD1_20260729_165015/ActiveTaskPanel.prefab",
+            "backupSha256": "LInoPb8Zf56lSLGL5vVbgcjupD8bY3KXoPKeGoBCIkY="
+        },
+        {
+            "sourcePath": "Assets/Norscope/UI/Controls/TaskCard.prefab",
+            "backupPath": "Assets/Norscope/DesignSystem/Backups/PreD1_20260729_165015/TaskCard.prefab",
+            "backupSha256": "l0IK5zKOTWqfsfp2fs1glXg6I1ea5gjRgoG6cwoF4Rw="
+        },
+        {
+            "sourcePath": "Assets/Norscope/UI/Controls/NavigationBackButton.prefab",
+            "backupPath": "Assets/Norscope/DesignSystem/Backups/PreD1_20260729_165015/NavigationBackButton.prefab",
+            "backupSha256": "9aAmvAl3M19aNp3Iaqs0+LXfXKeU/I0ctgRSNRKGtt4="
+        },
+        {
+            "sourcePath": "Assets/Norscope/UI/Controls/NorscopeCloseButton.prefab",
+            "backupPath": "Assets/Norscope/DesignSystem/Backups/PreD1_20260729_165015/NorscopeCloseButton.prefab",
+            "backupSha256": "I9cCA7D5Ymy1Cy4NAMR6XHQITl2zK+zI3I6ANZXZ0WA="
+        },
+        {
+            "sourcePath": "Assets/Norscope/Scenes/Bootstrap.unity",
+            "backupPath": "Assets/Norscope/DesignSystem/Backups/PreD1_20260729_165015/Bootstrap.unity",
+            "backupSha256": "pZ17MLmYZu+r2QGKEQFgNuOhDxovICBvnD9KprEkcxQ="
+        }
+    ]
+}

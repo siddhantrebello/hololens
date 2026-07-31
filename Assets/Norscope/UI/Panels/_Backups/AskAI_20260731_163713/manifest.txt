@@ -1,0 +1,4 @@
+Ask AI Phase 1 baseline 20260731_163713
+Bootstrap=Assets/Norscope/Scenes/Bootstrap.unity
+AskAIPanel=MISSING (will be created on Apply)
+PanelRegistry AskAI prefab=null

@@ -1,0 +1,3 @@
+Ask AI Phase 3 Camera baseline 20260731_171643
+WebCam was True; no PhotoCapture yet; speech->Processing direct
+

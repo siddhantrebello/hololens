@@ -1,0 +1,3 @@
+Cancel Active Task Dialog baseline 20260731_154851
+Source=Assets/Norscope/UI/Panels/ActiveTaskPanel.prefab
+Figma=Temp/cancel_active_task_figma/src/app/App.tsx

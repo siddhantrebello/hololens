@@ -106,6 +106,16 @@ namespace Norscope.Editor
             }
         }
 
+        [MenuItem("Norscope/HoloLens/Remove Legacy Hand Test Content Permanently")]
+        public static void RemoveLegacyHandTestContentMenu()
+        {
+            Scene scene = EditorSceneManager.OpenScene(BootstrapScenePath, OpenSceneMode.Single);
+            RemoveRetiredTestContent();
+            EditorSceneManager.MarkSceneDirty(scene);
+            EditorSceneManager.SaveScene(scene);
+            Debug.Log("[Norscope] Legacy hand-test canvas, diagnostics, verification content, cube and sphere removed. Phase 2/3 configurators no longer recreate them.");
+        }
+
         [MenuItem("Norscope/HoloLens/Validate Hand Interaction")]
         public static void ValidateMenu()
         {
@@ -235,8 +245,7 @@ namespace Norscope.Editor
         private static void ReapplySceneWiring()
         {
             Scene scene = EditorSceneManager.OpenScene(BootstrapScenePath, OpenSceneMode.Single);
-            DestroyIfExists("VerificationCube");
-            DestroyIfExists("VerificationLabel");
+            RemoveRetiredTestContent();
 
             XROrigin origin = UnityEngine.Object.FindFirstObjectByType<XROrigin>();
             if (origin == null)
@@ -276,23 +285,11 @@ namespace Norscope.Editor
                 }
             }
 
-            int grabLayer = LayerMask.NameToLayer(Norscope.Phase3HandRayCorrector.GrabLayerName);
-            SetLayer("HandTestCube", grabLayer);
-            SetLayer("HandTestSphere", grabLayer);
-
             // TrackedDeviceGraphicRaycaster filters by interactor raycastLayerMask.
             // Far mask is UI|Grab, so canvases must be on UI (not Default).
             int uiLayer = LayerMask.NameToLayer("UI");
-            SetLayer("HandTestCanvas", uiLayer);
             SetLayer("InteractionTestCanvas", uiLayer);
-            SetLayer("DiagnosticsPanel", uiLayer);
             SetLayer("InteractionTestPanel", uiLayer);
-
-            foreach (HandInteractionDiagnostics d in UnityEngine.Object.FindObjectsByType<HandInteractionDiagnostics>(FindObjectsSortMode.None))
-            {
-                d.showHandDiagnostics = true;
-                EditorUtility.SetDirty(d);
-            }
 
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);
@@ -399,22 +396,21 @@ namespace Norscope.Editor
             Check(!IsIdEnabled(BuildTargetGroup.WSA, HandInteractionProfileFeatureId), "XR_EXT Hand Interaction disabled on WSA");
             Check(!IsIdEnabled(BuildTargetGroup.WSA, AppRemotingFeatureId), "UWP App Remoting disabled");
 
-            GameObject cube = GameObject.Find("HandTestCube");
-            GameObject sphere = GameObject.Find("HandTestSphere");
-            Check(cube != null && cube.GetComponent<XRGrabInteractable>() != null, "cube grab");
-            Check(sphere != null && sphere.GetComponent<XRGrabInteractable>() != null, "sphere grab");
+            Check(GameObject.Find("HandTestCube") == null &&
+                  GameObject.Find("HandTestSphere") == null,
+                "retired hand-test cube and sphere absent");
 
             // Since Phase 4, InteractionTestPanel is runtime-owned by SpatialWindowManager /
             // SpatialWindowSpawner (spawned on demand) and must NOT exist as a static scene object.
             Check(ValidateInteractionTestPanelRuntimeRegistration(), "InteractionTestPanel runtime registration valid");
 
-            Check(GameObject.Find("HandTestCanvas") != null, "HandTestCanvas present");
-            GameObject handCanvas = GameObject.Find("HandTestCanvas");
-            if (handCanvas != null)
-            {
-                int uiLayer = LayerMask.NameToLayer("UI");
-                Check(handCanvas.layer == uiLayer, "HandTestCanvas on UI layer");
-            }
+            Check(GameObject.Find("HandTestCanvas") == null,
+                "retired Norscope Hand Test panel absent");
+            Check(GameObject.Find("DiagnosticsPanel") == null,
+                "retired diagnostics panel absent");
+            Check(GameObject.Find("VerificationLabel") == null &&
+                  GameObject.Find("VerificationCube") == null,
+                "retired Phase 2 verification content absent");
 
             Check(UnityEngine.Object.FindObjectsByType<Norscope.Phase3HandRayCorrector>(FindObjectsSortMode.None).Length >= 1, "Phase3HandRayCorrector present");
             Check(UnityEngine.Object.FindObjectsByType<Norscope.Phase3UiPokeSupport>(FindObjectsSortMode.None).Length >= 1, "Phase3UiPokeSupport present");
@@ -842,15 +838,10 @@ namespace Norscope.Editor
         {
             Scene scene = EditorSceneManager.OpenScene(BootstrapScenePath, OpenSceneMode.Single);
 
-            // Remove Phase 2 verification content and any previous Phase 3 content.
-            DestroyIfExists("VerificationCube");
-            DestroyIfExists("VerificationLabel");
+            // Production Bootstrap no longer contains temporary Phase 2/3 test content.
+            RemoveRetiredTestContent();
             DestroyIfExists("XR Origin Hands (XR Rig)");
             DestroyIfExists("XR Origin");
-            DestroyIfExists("HandTestCube");
-            DestroyIfExists("HandTestSphere");
-            DestroyIfExists("HandTestCanvas");
-            DestroyIfExists("DiagnosticsPanel");
             DestroyIfExists("EventSystem");
             DestroyIfExists("XR Interaction Manager");
 
@@ -876,9 +867,6 @@ namespace Norscope.Editor
 
             EnsureInteractionManager();
             EnsureEventSystem();
-            CreateGrabTargets();
-            CreateHandTestCanvas();
-            CreateDiagnosticsPanel();
 
             EnsureGrabLayer();
             DisableNamedUnder(origin.transform, "Left Controller");
@@ -936,6 +924,16 @@ namespace Norscope.Editor
             {
                 UnityEngine.Object.DestroyImmediate(go);
             }
+        }
+
+        private static void RemoveRetiredTestContent()
+        {
+            DestroyIfExists("VerificationCube");
+            DestroyIfExists("VerificationLabel");
+            DestroyIfExists("HandTestCube");
+            DestroyIfExists("HandTestSphere");
+            DestroyIfExists("HandTestCanvas");
+            DestroyIfExists("DiagnosticsPanel");
         }
 
         private static void EnsureInteractionManager()

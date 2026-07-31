@@ -1,0 +1,2 @@
+Captured=2026-07-30T17:31:29.7596646+02:00
+Source=Assets/Norscope/UI/Panels/HomeLauncher.prefab

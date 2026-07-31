@@ -1,0 +1,1170 @@
+{
+    "capturedUtc": "2026-07-30T11:15:34.5388813Z",
+    "backupPath": "Assets/Norscope/DesignSystem/Backups/PreD3Home_20260730_111534/HomePanel.prefab",
+    "backupHash": "9e88f35abdba0d785869d5935e7b2bf9b0c09e630077eeb1244e4bdd36a881f6",
+    "hierarchy": [
+        "HomePanel",
+        "HomePanel/Background",
+        "HomePanel/Border",
+        "HomePanel/Content",
+        "HomePanel/Content/Card_About",
+        "HomePanel/Content/Card_About/Background",
+        "HomePanel/Content/Card_About/D1_VisualLayer",
+        "HomePanel/Content/Card_About/D1_VisualLayer/EdgeGlow",
+        "HomePanel/Content/Card_About/D1_VisualLayer/SurfaceGlow",
+        "HomePanel/Content/Card_About/Icon",
+        "HomePanel/Content/Card_About/Subtitle",
+        "HomePanel/Content/Card_About/Title",
+        "HomePanel/Content/Card_AskAI",
+        "HomePanel/Content/Card_AskAI/Background",
+        "HomePanel/Content/Card_AskAI/D1_VisualLayer",
+        "HomePanel/Content/Card_AskAI/D1_VisualLayer/EdgeGlow",
+        "HomePanel/Content/Card_AskAI/D1_VisualLayer/SurfaceGlow",
+        "HomePanel/Content/Card_AskAI/Icon",
+        "HomePanel/Content/Card_AskAI/Subtitle",
+        "HomePanel/Content/Card_AskAI/Title",
+        "HomePanel/Content/Card_Reports",
+        "HomePanel/Content/Card_Reports/Background",
+        "HomePanel/Content/Card_Reports/D1_VisualLayer",
+        "HomePanel/Content/Card_Reports/D1_VisualLayer/EdgeGlow",
+        "HomePanel/Content/Card_Reports/D1_VisualLayer/SurfaceGlow",
+        "HomePanel/Content/Card_Reports/Icon",
+        "HomePanel/Content/Card_Reports/Subtitle",
+        "HomePanel/Content/Card_Reports/Title",
+        "HomePanel/Content/Card_Settings",
+        "HomePanel/Content/Card_Settings/Background",
+        "HomePanel/Content/Card_Settings/D1_VisualLayer",
+        "HomePanel/Content/Card_Settings/D1_VisualLayer/EdgeGlow",
+        "HomePanel/Content/Card_Settings/D1_VisualLayer/SurfaceGlow",
+        "HomePanel/Content/Card_Settings/Icon",
+        "HomePanel/Content/Card_Settings/Subtitle",
+        "HomePanel/Content/Card_Settings/Title",
+        "HomePanel/Content/Card_Storage",
+        "HomePanel/Content/Card_Storage/Background",
+        "HomePanel/Content/Card_Storage/D1_VisualLayer",
+        "HomePanel/Content/Card_Storage/D1_VisualLayer/EdgeGlow",
+        "HomePanel/Content/Card_Storage/D1_VisualLayer/SurfaceGlow",
+        "HomePanel/Content/Card_Storage/Icon",
+        "HomePanel/Content/Card_Storage/Subtitle",
+        "HomePanel/Content/Card_Storage/Title",
+        "HomePanel/Content/Card_TaskLibrary",
+        "HomePanel/Content/Card_TaskLibrary/Background",
+        "HomePanel/Content/Card_TaskLibrary/D1_VisualLayer",
+        "HomePanel/Content/Card_TaskLibrary/D1_VisualLayer/EdgeGlow",
+        "HomePanel/Content/Card_TaskLibrary/D1_VisualLayer/SurfaceGlow",
+        "HomePanel/Content/Card_TaskLibrary/Icon",
+        "HomePanel/Content/Card_TaskLibrary/Subtitle",
+        "HomePanel/Content/Card_TaskLibrary/Title",
+        "HomePanel/ResizeHandles",
+        "HomePanel/ResizeHandles/BottomRight",
+        "HomePanel/TitleBar",
+        "HomePanel/TitleBar/CloseButton",
+        "HomePanel/TitleBar/CloseButton/D1_VisualLayer",
+        "HomePanel/TitleBar/CloseButton/D1_VisualLayer/EdgeGlow",
+        "HomePanel/TitleBar/CloseButton/D1_VisualLayer/SurfaceGlow",
+        "HomePanel/TitleBar/CloseButton/Icon",
+        "HomePanel/TitleBar/CloseButton/Label",
+        "HomePanel/TitleBar/GrabRegion",
+        "HomePanel/TitleBar/Title"
+    ],
+    "components": [
+        {
+            "path": "HomePanel",
+            "types": [
+                "Norscope.Navigation.HomePanelController",
+                "Norscope.UI.NorscopePanelRoot",
+                "Norscope.Windows.SpatialWindowBindings",
+                "UnityEngine.RectTransform"
+            ]
+        },
+        {
+            "path": "HomePanel/Background",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/Border",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/Content",
+            "types": [
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_About",
+            "types": [
+                "Norscope.DesignSystem.NorscopeInteractionVisual",
+                "Norscope.Navigation.HomePanelCard",
+                "Norscope.UiButtonPressScale",
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Button",
+                "UnityEngine.UI.Image"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_About/Background",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_About/D1_VisualLayer",
+            "types": [
+                "Norscope.DesignSystem.NorscopeHighlightController",
+                "UnityEngine.RectTransform"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_About/D1_VisualLayer/EdgeGlow",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image",
+                "UnityEngine.UI.Outline"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_About/D1_VisualLayer/SurfaceGlow",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_About/Icon",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_About/Subtitle",
+            "types": [
+                "TMPro.TextMeshProUGUI",
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_About/Title",
+            "types": [
+                "TMPro.TextMeshProUGUI",
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_AskAI",
+            "types": [
+                "Norscope.DesignSystem.NorscopeInteractionVisual",
+                "Norscope.Navigation.HomePanelCard",
+                "Norscope.UiButtonPressScale",
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Button",
+                "UnityEngine.UI.Image"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_AskAI/Background",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_AskAI/D1_VisualLayer",
+            "types": [
+                "Norscope.DesignSystem.NorscopeHighlightController",
+                "UnityEngine.RectTransform"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_AskAI/D1_VisualLayer/EdgeGlow",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image",
+                "UnityEngine.UI.Outline"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_AskAI/D1_VisualLayer/SurfaceGlow",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_AskAI/Icon",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_AskAI/Subtitle",
+            "types": [
+                "TMPro.TextMeshProUGUI",
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_AskAI/Title",
+            "types": [
+                "TMPro.TextMeshProUGUI",
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_Reports",
+            "types": [
+                "Norscope.DesignSystem.NorscopeInteractionVisual",
+                "Norscope.Navigation.HomePanelCard",
+                "Norscope.UiButtonPressScale",
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Button",
+                "UnityEngine.UI.Image"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_Reports/Background",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_Reports/D1_VisualLayer",
+            "types": [
+                "Norscope.DesignSystem.NorscopeHighlightController",
+                "UnityEngine.RectTransform"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_Reports/D1_VisualLayer/EdgeGlow",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image",
+                "UnityEngine.UI.Outline"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_Reports/D1_VisualLayer/SurfaceGlow",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_Reports/Icon",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_Reports/Subtitle",
+            "types": [
+                "TMPro.TextMeshProUGUI",
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_Reports/Title",
+            "types": [
+                "TMPro.TextMeshProUGUI",
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_Settings",
+            "types": [
+                "Norscope.DesignSystem.NorscopeInteractionVisual",
+                "Norscope.Navigation.HomePanelCard",
+                "Norscope.UiButtonPressScale",
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Button",
+                "UnityEngine.UI.Image"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_Settings/Background",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_Settings/D1_VisualLayer",
+            "types": [
+                "Norscope.DesignSystem.NorscopeHighlightController",
+                "UnityEngine.RectTransform"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_Settings/D1_VisualLayer/EdgeGlow",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image",
+                "UnityEngine.UI.Outline"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_Settings/D1_VisualLayer/SurfaceGlow",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_Settings/Icon",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_Settings/Subtitle",
+            "types": [
+                "TMPro.TextMeshProUGUI",
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_Settings/Title",
+            "types": [
+                "TMPro.TextMeshProUGUI",
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_Storage",
+            "types": [
+                "Norscope.DesignSystem.NorscopeInteractionVisual",
+                "Norscope.Navigation.HomePanelCard",
+                "Norscope.UiButtonPressScale",
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Button",
+                "UnityEngine.UI.Image"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_Storage/Background",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_Storage/D1_VisualLayer",
+            "types": [
+                "Norscope.DesignSystem.NorscopeHighlightController",
+                "UnityEngine.RectTransform"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_Storage/D1_VisualLayer/EdgeGlow",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image",
+                "UnityEngine.UI.Outline"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_Storage/D1_VisualLayer/SurfaceGlow",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_Storage/Icon",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_Storage/Subtitle",
+            "types": [
+                "TMPro.TextMeshProUGUI",
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_Storage/Title",
+            "types": [
+                "TMPro.TextMeshProUGUI",
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_TaskLibrary",
+            "types": [
+                "Norscope.DesignSystem.NorscopeInteractionVisual",
+                "Norscope.Navigation.HomePanelCard",
+                "Norscope.UiButtonPressScale",
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Button",
+                "UnityEngine.UI.Image"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_TaskLibrary/Background",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_TaskLibrary/D1_VisualLayer",
+            "types": [
+                "Norscope.DesignSystem.NorscopeHighlightController",
+                "UnityEngine.RectTransform"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_TaskLibrary/D1_VisualLayer/EdgeGlow",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image",
+                "UnityEngine.UI.Outline"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_TaskLibrary/D1_VisualLayer/SurfaceGlow",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_TaskLibrary/Icon",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_TaskLibrary/Subtitle",
+            "types": [
+                "TMPro.TextMeshProUGUI",
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/Content/Card_TaskLibrary/Title",
+            "types": [
+                "TMPro.TextMeshProUGUI",
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/ResizeHandles",
+            "types": [
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/ResizeHandles/BottomRight",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image"
+            ]
+        },
+        {
+            "path": "HomePanel/TitleBar",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/TitleBar/CloseButton",
+            "types": [
+                "Norscope.DesignSystem.NorscopeInteractionVisual",
+                "Norscope.UI.NorscopeButtonControl",
+                "Norscope.UiButtonPressScale",
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Button",
+                "UnityEngine.UI.HorizontalLayoutGroup",
+                "UnityEngine.UI.Image",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/TitleBar/CloseButton/D1_VisualLayer",
+            "types": [
+                "Norscope.DesignSystem.NorscopeHighlightController",
+                "UnityEngine.RectTransform"
+            ]
+        },
+        {
+            "path": "HomePanel/TitleBar/CloseButton/D1_VisualLayer/EdgeGlow",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image",
+                "UnityEngine.UI.Outline"
+            ]
+        },
+        {
+            "path": "HomePanel/TitleBar/CloseButton/D1_VisualLayer/SurfaceGlow",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image"
+            ]
+        },
+        {
+            "path": "HomePanel/TitleBar/CloseButton/Icon",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/TitleBar/CloseButton/Label",
+            "types": [
+                "TMPro.TextMeshProUGUI",
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform"
+            ]
+        },
+        {
+            "path": "HomePanel/TitleBar/GrabRegion",
+            "types": [
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.Image",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        },
+        {
+            "path": "HomePanel/TitleBar/Title",
+            "types": [
+                "TMPro.TextMeshProUGUI",
+                "UnityEngine.CanvasRenderer",
+                "UnityEngine.RectTransform",
+                "UnityEngine.UI.LayoutElement"
+            ]
+        }
+    ],
+    "buttons": [
+        {
+            "path": "HomePanel/Content/Card_About",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:766345067231560536",
+            "targetGraphic": "a45a3a727c7529d4aa100e4c1ca0f076:7364050729275338357",
+            "listeners": []
+        },
+        {
+            "path": "HomePanel/Content/Card_AskAI",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:6197850513053042793",
+            "targetGraphic": "a45a3a727c7529d4aa100e4c1ca0f076:1935982034091292542",
+            "listeners": []
+        },
+        {
+            "path": "HomePanel/Content/Card_Reports",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:4123053017566709309",
+            "targetGraphic": "a45a3a727c7529d4aa100e4c1ca0f076:1460015551430815584",
+            "listeners": []
+        },
+        {
+            "path": "HomePanel/Content/Card_Settings",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:1569943992073753680",
+            "targetGraphic": "a45a3a727c7529d4aa100e4c1ca0f076:143203840972730191",
+            "listeners": []
+        },
+        {
+            "path": "HomePanel/Content/Card_Storage",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:661394754207289541",
+            "targetGraphic": "a45a3a727c7529d4aa100e4c1ca0f076:2208517463073421254",
+            "listeners": []
+        },
+        {
+            "path": "HomePanel/Content/Card_TaskLibrary",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:1722417177022399228",
+            "targetGraphic": "a45a3a727c7529d4aa100e4c1ca0f076:3904663978770679763",
+            "listeners": []
+        },
+        {
+            "path": "HomePanel/TitleBar/CloseButton",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:4418702921377819280",
+            "targetGraphic": "a45a3a727c7529d4aa100e4c1ca0f076:5445066019541809895",
+            "listeners": []
+        }
+    ],
+    "cards": [
+        {
+            "path": "HomePanel/Content/Card_About",
+            "destination": 8,
+            "button": "a45a3a727c7529d4aa100e4c1ca0f076:766345067231560536",
+            "background": "a45a3a727c7529d4aa100e4c1ca0f076:7364050729275338357",
+            "border": "a45a3a727c7529d4aa100e4c1ca0f076:5623562676789345885",
+            "icon": "a45a3a727c7529d4aa100e4c1ca0f076:3172516127796436110",
+            "title": "a45a3a727c7529d4aa100e4c1ca0f076:5557004359713100400",
+            "subtitle": "a45a3a727c7529d4aa100e4c1ca0f076:2281179394332898876",
+            "iconSprite": "db0a2c4a77fb42d4ebd7acfdf52dbd0d:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_AskAI",
+            "destination": 4,
+            "button": "a45a3a727c7529d4aa100e4c1ca0f076:6197850513053042793",
+            "background": "a45a3a727c7529d4aa100e4c1ca0f076:1935982034091292542",
+            "border": "a45a3a727c7529d4aa100e4c1ca0f076:2673809477628068220",
+            "icon": "a45a3a727c7529d4aa100e4c1ca0f076:2668518893174895664",
+            "title": "a45a3a727c7529d4aa100e4c1ca0f076:3697858822633392909",
+            "subtitle": "a45a3a727c7529d4aa100e4c1ca0f076:4937510160356017848",
+            "iconSprite": "39ebf8c118147114f8d08fa6e4c11c81:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_Reports",
+            "destination": 5,
+            "button": "a45a3a727c7529d4aa100e4c1ca0f076:4123053017566709309",
+            "background": "a45a3a727c7529d4aa100e4c1ca0f076:1460015551430815584",
+            "border": "a45a3a727c7529d4aa100e4c1ca0f076:8970362242425758239",
+            "icon": "a45a3a727c7529d4aa100e4c1ca0f076:7066070362262142422",
+            "title": "a45a3a727c7529d4aa100e4c1ca0f076:5198828838009204311",
+            "subtitle": "a45a3a727c7529d4aa100e4c1ca0f076:5554789500934803166",
+            "iconSprite": "582aed6efb66bb54da1d2a3ac092209a:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_Settings",
+            "destination": 6,
+            "button": "a45a3a727c7529d4aa100e4c1ca0f076:1569943992073753680",
+            "background": "a45a3a727c7529d4aa100e4c1ca0f076:143203840972730191",
+            "border": "a45a3a727c7529d4aa100e4c1ca0f076:680706611042011502",
+            "icon": "a45a3a727c7529d4aa100e4c1ca0f076:8006252462630527886",
+            "title": "a45a3a727c7529d4aa100e4c1ca0f076:466558389582592071",
+            "subtitle": "a45a3a727c7529d4aa100e4c1ca0f076:2833617919207038584",
+            "iconSprite": "6b1d875247c08bc4691b1d43497bfe1d:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_Storage",
+            "destination": 7,
+            "button": "a45a3a727c7529d4aa100e4c1ca0f076:661394754207289541",
+            "background": "a45a3a727c7529d4aa100e4c1ca0f076:2208517463073421254",
+            "border": "a45a3a727c7529d4aa100e4c1ca0f076:4435312742135129069",
+            "icon": "a45a3a727c7529d4aa100e4c1ca0f076:2419588411103206925",
+            "title": "a45a3a727c7529d4aa100e4c1ca0f076:988943007720056260",
+            "subtitle": "a45a3a727c7529d4aa100e4c1ca0f076:2795037884752694346",
+            "iconSprite": "0f1f8a0fe217dd24abb881efc097145d:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_TaskLibrary",
+            "destination": 2,
+            "button": "a45a3a727c7529d4aa100e4c1ca0f076:1722417177022399228",
+            "background": "a45a3a727c7529d4aa100e4c1ca0f076:3904663978770679763",
+            "border": "a45a3a727c7529d4aa100e4c1ca0f076:3097539167997609470",
+            "icon": "a45a3a727c7529d4aa100e4c1ca0f076:7979468202774519646",
+            "title": "a45a3a727c7529d4aa100e4c1ca0f076:1246557067733562931",
+            "subtitle": "a45a3a727c7529d4aa100e4c1ca0f076:84592194628173264",
+            "iconSprite": "2deb64c5dd04087499331b4f3a029c93:21300000"
+        }
+    ],
+    "images": [
+        {
+            "path": "HomePanel/Background",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:1979867755732548921",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/Border",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:1771505895824785072",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_About",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:5623562676789345885",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_About/Background",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:7364050729275338357",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_About/D1_VisualLayer/EdgeGlow",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:5862227436076400560",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_About/D1_VisualLayer/SurfaceGlow",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:2687080727622529653",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_About/Icon",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:3172516127796436110",
+            "sprite": "db0a2c4a77fb42d4ebd7acfdf52dbd0d:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_AskAI",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:2673809477628068220",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_AskAI/Background",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:1935982034091292542",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_AskAI/D1_VisualLayer/EdgeGlow",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:9041768688526363853",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_AskAI/D1_VisualLayer/SurfaceGlow",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:678475451030683912",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_AskAI/Icon",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:2668518893174895664",
+            "sprite": "39ebf8c118147114f8d08fa6e4c11c81:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_Reports",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:8970362242425758239",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_Reports/Background",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:1460015551430815584",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_Reports/D1_VisualLayer/EdgeGlow",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:1930565603317143547",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_Reports/D1_VisualLayer/SurfaceGlow",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:7987699450943543870",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_Reports/Icon",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:7066070362262142422",
+            "sprite": "582aed6efb66bb54da1d2a3ac092209a:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_Settings",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:680706611042011502",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_Settings/Background",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:143203840972730191",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_Settings/D1_VisualLayer/EdgeGlow",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:7808604324201975056",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_Settings/D1_VisualLayer/SurfaceGlow",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:1751057095605584085",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_Settings/Icon",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:8006252462630527886",
+            "sprite": "6b1d875247c08bc4691b1d43497bfe1d:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_Storage",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:4435312742135129069",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_Storage/Background",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:2208517463073421254",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_Storage/D1_VisualLayer/EdgeGlow",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:2225181604566840147",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_Storage/D1_VisualLayer/SurfaceGlow",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:7706173006928445078",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_Storage/Icon",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:2419588411103206925",
+            "sprite": "0f1f8a0fe217dd24abb881efc097145d:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_TaskLibrary",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:3097539167997609470",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_TaskLibrary/Background",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:3904663978770679763",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_TaskLibrary/D1_VisualLayer/EdgeGlow",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:739441250909382310",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_TaskLibrary/D1_VisualLayer/SurfaceGlow",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:9102822140732091235",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/Content/Card_TaskLibrary/Icon",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:7979468202774519646",
+            "sprite": "2deb64c5dd04087499331b4f3a029c93:21300000"
+        },
+        {
+            "path": "HomePanel/ResizeHandles/BottomRight",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:6108770927173758514",
+            "sprite": ""
+        },
+        {
+            "path": "HomePanel/TitleBar",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:282300937483880829",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/TitleBar/CloseButton",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:5445066019541809895",
+            "sprite": "dfa445fa7b1139164225d027eedd3e2a:21300000"
+        },
+        {
+            "path": "HomePanel/TitleBar/CloseButton/D1_VisualLayer/EdgeGlow",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:7149857103640079265",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/TitleBar/CloseButton/D1_VisualLayer/SurfaceGlow",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:1669102919361357412",
+            "sprite": "588d939b70ad8a3201620e8cdbad6187:21300000"
+        },
+        {
+            "path": "HomePanel/TitleBar/CloseButton/Icon",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:289123915166746347",
+            "sprite": "19130d2c0d4e0b199c653c62ad7fbf9e:21300000"
+        },
+        {
+            "path": "HomePanel/TitleBar/GrabRegion",
+            "identity": "a45a3a727c7529d4aa100e4c1ca0f076:7752072588447392417",
+            "sprite": ""
+        }
+    ],
+    "panelRoot": {
+        "theme": "999f3cb932c477644bbf492e013a1903:11400000",
+        "worldSpaceConfig": "525e3a59624b94d4cb3129787d760a1e:11400000",
+        "root": "a45a3a727c7529d4aa100e4c1ca0f076:3262587667933162191",
+        "background": "a45a3a727c7529d4aa100e4c1ca0f076:1979867755732548921",
+        "border": "a45a3a727c7529d4aa100e4c1ca0f076:1771505895824785072",
+        "title": "a45a3a727c7529d4aa100e4c1ca0f076:4313614830204677718"
+    },
+    "sources": [
+        {
+            "path": "Assets/Norscope/Runtime/Audio/UIAudioEvent.cs",
+            "hash": "ef3728bdb83a9bb328a4573f471d2cd85105cd73580007a073edaedac47f0117"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/Audio/UIAudioManager.cs",
+            "hash": "005df696a523d730415ccfeedb541d775f7f7227f81f3c864c0e0b27281e0e9a"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/Audio/UIAudioTheme.cs",
+            "hash": "3c0c9e37846c181549717bab7aca31594e1c3c6e765961e6307fd6c403aaf0f6"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/DesignSystem/NorscopeDesignProfile.cs",
+            "hash": "2b9306408cf1f84b38fd13e428f60b89043363009f0ef9b0cb3e85d463d09412"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/DesignSystem/NorscopeDesignProvider.cs",
+            "hash": "dfaa52fccfb2fcf9f72474baaf61883aac5f6a54b8ea42de8878c415eea6b703"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/DesignSystem/NorscopeHighlightController.cs",
+            "hash": "b4176817689eba9feaa84f7c8c51b37f1bbe8e998cc4d4b6f5e9711be92044d9"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/DesignSystem/NorscopeInteractionVisual.cs",
+            "hash": "cd1c0d19c3004953faddfb2d7ac72c211d0553d60e6a9e00fca2d1c361c6f866"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/DesignSystem/NorscopeVisualRole.cs",
+            "hash": "2f99f078ac9fc31cc1b62d2e03715c9ae739c5f871f2640072f8f9db73b731db"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/DesignSystem/NorscopeVisualState.cs",
+            "hash": "97002eaa2b350ed4810f00855355d65fc62287cb81c55ae4a22314e7b5f77dcc"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/HandInteractionDiagnostics.cs",
+            "hash": "a7edfd709bf3e5484ed4e17727fdb096407c8af928f63241996ccf37c5b26045"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/HandTestButtonLogger.cs",
+            "hash": "df40c3bff443fff0a2a691c535016364a9274492e9679a9ec4503c9e643b1e3d"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/Navigation/HomeLauncher.cs",
+            "hash": "f1849ce9c4a6b10f98bab2170624969f343d6517b77171f53d36ee9ef0d2e5ec"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/Navigation/HomeLauncherFollow.cs",
+            "hash": "0b0a78494db711e25534cedcc432d46d44dba3ae8c9c72a11c217af505be62f5"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/Navigation/HomePanelCard.cs",
+            "hash": "ff6d16463de55d9b8372c3fad68e1647144255f19f0afb5b99a3aca371184616"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/Navigation/HomePanelController.cs",
+            "hash": "d0ba1b6d978610466c9c6bbb799d61677e1a523d8daf9f04ddd365d2e2624a58"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/Navigation/PanelBehaviourType.cs",
+            "hash": "43369cf35e9e1a9de08061d35490a3aa3564a30bf2ade286b99447bc72719227"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/Navigation/PanelNavigationBinding.cs",
+            "hash": "0e59262660892f9a5483d935cfa9f069dfe2b06c22bf559ad691d59de6f23b8d"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/Navigation/PanelNavigationService.cs",
+            "hash": "aa460c98eec6a21bf01f41213260c923f04e6b9ef215c652152dede6b853a4e3"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/Navigation/PanelRegistry.cs",
+            "hash": "4042d8e00066b5d6b358531b380689a7ea555794044561b188bf0b6f125b81d2"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/Navigation/PanelRegistryEntry.cs",
+            "hash": "5442c36732614f1cafdfdc8ba1f4b58e7f0dc3526b91ea077c78f389bdbae135"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/Navigation/PanelType.cs",
+            "hash": "5ee5d88ee4ff8a3413b0aabbe4a9cabf6475e6a8718b087ba3189f7670ca8c65"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/Phase3HandRayCorrector.cs",
+            "hash": "89e25dcd5aa7496a13b6f6d46289bf7fcba39cfd07b91d2ad12a29320aedf207"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/Phase3UiPokeSupport.cs",
+            "hash": "dedd947be1cda8c06f688d2428ebeeefd630d8e602297416d3a398c4c096e0fe"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/RuntimeAssembly.cs",
+            "hash": "abbcb243c4849540c1c91b7a40397128be85715677139d054c20626ca6e27f72"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/TaskExecution/ActiveTaskLauncher.cs",
+            "hash": "ee115ecd5112f53e417c2c249692ae4f87dfdad0a300677babe2660fd1f46b8b"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/TaskExecution/ActiveTaskPanel.cs",
+            "hash": "9f317506923768802db6ef8181cbedf0927cfe01a7ee2a2ddb97d18d4dc916f2"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/TaskExecution/ActiveTaskSession.cs",
+            "hash": "0209850538545a55548344803ba6f1cda3725b442ec8b9c0da5e2f5dcb93e26d"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/TaskExecution/TaskCompletionPanel.cs",
+            "hash": "c3564902bebd9b3dc6a0e44000d98601ff393558c5cf5ea51faddc9aee3f0e55"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/TaskLibrary/ITaskRepository.cs",
+            "hash": "b21a51c2534a835d4c8a9787ad856924a67bbadb36080e9980cdc34313d27508"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/TaskLibrary/ScriptableObjectTaskRepository.cs",
+            "hash": "1a35069450ba3af8c3313c9f89637dcc85539a3874cf816c87dd1e6762d47c2d"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/TaskLibrary/TaskCardView.cs",
+            "hash": "1d3874d6189f6af07fa252ce3010af9c3cd01ab92bff8a33daefa6d449f6cda8"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/TaskLibrary/TaskData.cs",
+            "hash": "546ada84493a06124ea57c60b22bf552886b9e1bab1eb312e9cca01ed4fe53aa"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/TaskLibrary/TaskDefinition.cs",
+            "hash": "421e66f27e76159fe89391905f7946103f7931b9837053d390a4a640a87413f6"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/TaskLibrary/TaskDifficulty.cs",
+            "hash": "e59c07e655b7bb69ad74078d491749da24967d5c3604e5d1d3c3d93cb5c90f4d"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/TaskLibrary/TaskLibraryDatabase.cs",
+            "hash": "a423c9f5fd080d83b54eee7909d49687e1c3616923cf91eacd0e72834d12c93e"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/TaskLibrary/TaskLibraryPanel.cs",
+            "hash": "35a105eb15acee4a0f9e90793a42c5e423b4d6da383dac497d2d85a6d14cfa13"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/TaskLibrary/TaskStep.cs",
+            "hash": "eb0c9dd39ba0345075a8142fbc82aa15977f2d1a37b97d7eafff78cd78b22b8e"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/UI/NorscopeBadgeControl.cs",
+            "hash": "9922ac5003dfbb1fb8150247e6a70d3fc5fdcb3ae0aa08a7fe40b2d0be0b8c82"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/UI/NorscopeButtonControl.cs",
+            "hash": "776e04d529ec8baa9844b6044bb087dc8df9a9a75cdffd78d3e775c5399ddb03"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/UI/NorscopePanelRoot.cs",
+            "hash": "1491749b7415cc98e2b507101f905f70b82aa2416110b61affd8f91a419c8524"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/UI/NorscopeTabControl.cs",
+            "hash": "ede948c8bde025adadaf8fcfc42f381a81423176b95f29320d5e29a04630356b"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/UI/NorscopeTheme.cs",
+            "hash": "76aa05dfd14ba1a720114113b89aa166011038cef3765a6a27301b7ba5ee0d4d"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/UI/NorscopeThemedFrame.cs",
+            "hash": "a0bb481490e3e4c76bf403ec0df998ab9f8ba3532e3eb6397fe09a5cc1cb411f"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/UI/NorscopeWorldSpaceUiConfig.cs",
+            "hash": "cd027eb65b73ebd0e0b4558059e4a31e677dce03de5d57f285aadb88507b9c91"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/UiButtonPressScale.cs",
+            "hash": "af29e8ee4db5d2d7ab982fdd4ec2ee080b64bc418b98ac6eff8dd41dc9d3239c"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/Windows/SpatialWindow.cs",
+            "hash": "6dd27a79915de8acf1493cc4b7c43199d0193a3e43565dbb61468ebc2a33efbc"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/Windows/SpatialWindowBindings.cs",
+            "hash": "74cd9d1c042796dbf424f82229c7fa2c21d2bc3a1d0ef67581a7ea5d6a3cd077"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/Windows/SpatialWindowConfig.cs",
+            "hash": "a7039c6ef61704c71006101eb2f7c6f337835520a6935ffcdd89d4dbdfab4706"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/Windows/SpatialWindowHandle.cs",
+            "hash": "74628a893d3c1f8b91285e21d24451abc17149aecf98a0f4bc9e0facd613bf65"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/Windows/SpatialWindowId.cs",
+            "hash": "c5e7938ce4ee4de1903ebba0528185be14fec7926226e9575e05edab8a5cf4cb"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/Windows/SpatialWindowManager.cs",
+            "hash": "37d58e3c604fdf4683b9f12fc120ac1a0c33a0c9639e285ded11c419c535d8ac"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/Windows/SpatialWindowResizeHandle.cs",
+            "hash": "659d84dac3627ca994cc159d252737b2af3f9d6f87e29f71e9b324cb760019d6"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/Windows/SpatialWindowSpawner.cs",
+            "hash": "028fbb934de28638b8d8be37ba71434dad6b7e0c02a24daec831c45aa25c2e25"
+        },
+        {
+            "path": "Assets/Norscope/Runtime/Windows/TemporarySpatialWindowLauncher.cs",
+            "hash": "3bbe617ce9633de7f28d8d3495f6173ccf41dc621eac2b6e83377e9ac81429fe"
+        }
+    ]
+}

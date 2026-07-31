@@ -1,0 +1,3 @@
+Phase=Settings 2B Localization
+CapturedUtc=2026-07-30T17:05:48.3847759Z
+Entries=36

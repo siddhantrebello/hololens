@@ -151,6 +151,33 @@ namespace Norscope.DesignSystem
     }
 
     [Serializable]
+    public sealed class CompositionTokens
+    {
+        [Header("Panel and sections")]
+        public float panelPadding = 16f;
+        public float sectionSpacing = 12f;
+        public float titleToContentSpacing = 16f;
+
+        [Header("Cards")]
+        public float cardPadding = 14f;
+        public float cardSpacing = 12f;
+        public float iconToTextSpacing = 12f;
+        public float taskCardHeight = 64f;
+
+        [Header("Buttons")]
+        public float buttonHeight = 44f;
+        public float primaryButtonWidth = 124f;
+        public float secondaryButtonWidth = 112f;
+        public float navigationButtonWidth = 96f;
+        public float closeButtonSize = 40f;
+
+        [Header("Typography")]
+        public Vector4 titleMargins = new Vector4(0f, 0f, 0f, 2f);
+        public Vector4 bodyMargins = new Vector4(2f, 1f, 2f, 1f);
+        public Vector4 metadataMargins = Vector4.zero;
+    }
+
+    [Serializable]
     public sealed class HighlightStyleTokens
     {
         public Color outlineColor;
@@ -254,6 +281,9 @@ namespace Norscope.DesignSystem
 
         [Header("Motion")]
         public MotionTokens motion = new MotionTokens();
+
+        [Header("Composition")]
+        public CompositionTokens composition = new CompositionTokens();
 
         [Header("Highlight Style")]
         public HighlightStyleTokens highlights = new HighlightStyleTokens();

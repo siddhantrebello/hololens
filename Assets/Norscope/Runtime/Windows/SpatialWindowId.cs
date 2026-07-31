@@ -12,6 +12,7 @@ namespace Norscope.Windows
         Reports = 6,
         Settings = 7,
         Storage = 8,
-        About = 9
+        About = 9,
+        TaskCompletion = 10
     }
 }

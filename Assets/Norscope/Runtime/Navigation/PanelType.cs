@@ -11,6 +11,7 @@ namespace Norscope.Navigation
         Reports = 5,
         Settings = 6,
         Storage = 7,
-        About = 8
+        About = 8,
+        TaskCompletion = 9
     }
 }

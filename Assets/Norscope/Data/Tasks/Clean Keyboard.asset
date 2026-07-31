@@ -18,6 +18,9 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 2deb64c5dd04087499331b4f3a029c93, type: 3}
   estimatedDuration: 15 min
   difficulty: 0
+  category: Cleaning
+  offlineAvailable: 1
+  lastUpdated: ''
   isEnabled: 1
   steps:
   - stepTitle: Power Down
