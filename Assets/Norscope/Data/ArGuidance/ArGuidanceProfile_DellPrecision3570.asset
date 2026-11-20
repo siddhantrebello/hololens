@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a891f9bbfb78a424e90ce081704e461d, type: 3}
+  m_Name: ArGuidanceProfile_DellPrecision3570
+  m_EditorClassIdentifier: 
+  equipmentId: dell_precision_3570
+  displayName: Dell Precision 3570
+  markerPayload: NORSCOPE:DELL3570:DEMO01
+  laptopOutlinePrefab: {fileID: 7814929111345239455, guid: eb7355a0465ae074ab223bab20d00765, type: 3}
+  screwGroupPrefab: {fileID: 8765245844445920829, guid: 220320769129a3b48a5bc37eaad5f1f1, type: 3}
+  liftEdgePrefab: {fileID: 3543914594460491501, guid: 736d8758054ad434a84044afc139a81b, type: 3}
+  connectorWarningPrefab: {fileID: 2185761818463084844, guid: 85ca3b891fef69746a7b268336f0eafa, type: 3}
+  fanHighlightPrefab: {fileID: 8050285008476881627, guid: 36b5b6283ed5b5e4f9db08d35cb907eb, type: 3}
+  airflowPrefab: {fileID: 2137937232351710518, guid: 9e36db56a6d7e884aa6ccac4b90633b7, type: 3}
+  hologramLibrary: {fileID: 11400000, guid: 4217ab61f9aa2b0408b4854d852f038e, type: 2}

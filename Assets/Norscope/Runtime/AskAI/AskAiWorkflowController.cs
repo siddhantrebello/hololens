@@ -7,37 +7,42 @@ using UnityEngine.UI;
 namespace Norscope.AskAI
 {
     /// <summary>
-    /// Owns Ask AI workflow state transitions. Speech and camera stay behind
-    /// dedicated abstractions; Processing still uses MockAskAiService.
+    /// Owns Ask AI workflow state transitions. Speech, camera, and backend analysis
+    /// stay behind dedicated abstractions — no provider SDK types in this controller.
     /// </summary>
     [DisallowMultipleComponent]
     public sealed class AskAiWorkflowController : MonoBehaviour
     {
-        private const float ProcessingSeconds = 1.5f;
+        private const float MinProcessingDisplaySeconds = 0.15f;
         private const float MaxListeningSeconds = 15f;
         private const float MaxCapturingSeconds = 10f;
+        private const float MaxProcessingSeconds = 60f;
         private const float TranscriptHoldSeconds = 0.15f;
 
         [SerializeField] private AskAiView view;
         [SerializeField] private Button primaryButton;
+        [SerializeField] private AskAiBackendConfig backendConfig;
 
-        private IAskAiService _answerService;
         private IAskAiSpeechCapture _speechCapture;
         private IAskAiCameraCapture _cameraCapture;
+        private IAskAiAnalysisService _analysisService;
         private readonly AskAiRequest _currentRequest = new AskAiRequest();
 
         private AskAiWorkflowState _state = AskAiWorkflowState.Ready;
         private Coroutine _workflowRoutine;
         private Coroutine _listeningTimeoutRoutine;
         private Coroutine _capturingTimeoutRoutine;
+        private Coroutine _processingTimeoutRoutine;
         private bool _listenersWired;
         private bool _sessionActive;
         private bool _completionHandled;
         private bool _captureCompletionHandled;
+        private bool _analysisCompletionHandled;
         private int _sessionToken;
         private bool _voiceStartPlayed;
         private bool _voiceStopPlayed;
         private bool _voiceRecognizedPlayed;
+        private float _processingEnteredAt = -1f;
 
         private readonly StringBuilder _finalTranscript = new StringBuilder();
         private string _currentHypothesis = string.Empty;
@@ -49,26 +54,29 @@ namespace Norscope.AskAI
         public void Configure(
             AskAiView askAiView,
             Button primary,
-            IAskAiService answerService = null,
             IAskAiSpeechCapture speechCapture = null,
-            IAskAiCameraCapture cameraCapture = null)
+            IAskAiCameraCapture cameraCapture = null,
+            IAskAiAnalysisService analysisService = null,
+            AskAiBackendConfig config = null)
         {
             view = askAiView;
             primaryButton = primary;
-            _answerService = answerService ?? new MockAskAiService();
+            if (config != null)
+                backendConfig = config;
             ReplaceSpeechCapture(speechCapture);
             ReplaceCameraCapture(cameraCapture);
+            ReplaceAnalysisService(analysisService);
             WireListeners();
         }
 
         private void Awake()
         {
-            if (_answerService == null)
-                _answerService = new MockAskAiService();
             if (_speechCapture == null)
                 ReplaceSpeechCapture(AskAiSpeechCaptureFactory.Create());
             if (_cameraCapture == null)
                 ReplaceCameraCapture(AskAiCameraCaptureFactory.Create());
+            if (_analysisService == null)
+                ReplaceAnalysisService(AskAiAnalysisServiceFactory.Create(backendConfig, this));
             if (view == null)
                 view = GetComponent<AskAiView>();
             if (primaryButton == null && view != null)
@@ -93,6 +101,7 @@ namespace Norscope.AskAI
             UnwireListeners();
             DisposeSpeechCapture();
             DisposeCameraCapture();
+            DisposeAnalysisService();
         }
 
         private void Update()
@@ -108,6 +117,13 @@ namespace Norscope.AskAI
             {
                 while (_cameraCapture.TryDequeue(out AskAiCameraEvent cameraEvent))
                     HandleCameraEvent(cameraEvent);
+            }
+
+            if (_analysisService != null &&
+                (_state == AskAiWorkflowState.Processing || _analysisService.IsBusy))
+            {
+                while (_analysisService.TryDequeue(out AskAiAnalysisEvent analysisEvent))
+                    HandleAnalysisEvent(analysisEvent);
             }
         }
 
@@ -148,6 +164,7 @@ namespace Norscope.AskAI
             _currentRequest.Clear();
             _completionHandled = false;
             _captureCompletionHandled = false;
+            _analysisCompletionHandled = false;
             _voiceStartPlayed = false;
             _voiceStopPlayed = false;
             _voiceRecognizedPlayed = false;
@@ -157,10 +174,12 @@ namespace Norscope.AskAI
                 ReplaceSpeechCapture(AskAiSpeechCaptureFactory.Create());
             if (_cameraCapture == null)
                 ReplaceCameraCapture(AskAiCameraCaptureFactory.Create());
+            if (_analysisService == null)
+                ReplaceAnalysisService(AskAiAnalysisServiceFactory.Create(backendConfig, this));
 
             EnterState(
                 AskAiWorkflowState.Listening,
-                "Listening...",
+                "Listening…",
                 body: string.Empty,
                 buttonLabel: "Ask AI",
                 buttonEnabled: false,
@@ -308,7 +327,7 @@ namespace Norscope.AskAI
         {
             EnterState(
                 AskAiWorkflowState.Listening,
-                "Listening...",
+                "Listening…",
                 body: transcript,
                 buttonLabel: "Ask AI",
                 buttonEnabled: false,
@@ -322,11 +341,11 @@ namespace Norscope.AskAI
 
             EnterState(
                 AskAiWorkflowState.Capturing,
-                "Capturing image...",
-                body: transcript,
+                "Capturing the scene…",
+                body: string.Empty,
                 buttonLabel: "Ask AI",
                 buttonEnabled: false,
-                hintVisible: false,
+                hintVisible: true,
                 microphoneActive: false,
                 processingActive: false);
 
@@ -395,8 +414,7 @@ namespace Norscope.AskAI
                     StopCapturingTimeout();
                     CancelCameraCapture();
                     _currentRequest.ApplyImage(cameraEvent.Image);
-                    _workflowRoutine = StartCoroutine(ContinueToProcessing(
-                        _currentRequest.Transcript));
+                    _workflowRoutine = StartCoroutine(ContinueToProcessing());
                     break;
 
                 case AskAiCameraEventKind.Error:
@@ -410,38 +428,138 @@ namespace Norscope.AskAI
             }
         }
 
-        private IEnumerator ContinueToProcessing(string transcript)
+        private IEnumerator ContinueToProcessing()
         {
+            string transcript = _currentRequest.Transcript;
+            if (string.IsNullOrWhiteSpace(transcript) || !_currentRequest.HasImage)
+            {
+                ShowWorkflowError("The captured image could not be analyzed. Please capture it again.");
+                yield break;
+            }
+
             EnterState(
                 AskAiWorkflowState.Processing,
-                "Analyzing...",
-                body: transcript,
+                "Analyzing…",
+                body: string.Empty,
                 buttonLabel: "Ask AI",
                 buttonEnabled: false,
-                hintVisible: false,
+                hintVisible: true,
                 microphoneActive: false,
                 processingActive: true);
             UIAudioManager.Play(UIAudioEvent.AIThinking);
+            _processingEnteredAt = Time.realtimeSinceStartup;
+            _analysisCompletionHandled = false;
 
-            yield return WaitOrCancelled(ProcessingSeconds);
+            // Optional flicker guard only — completion is driven by HTTP/mock analysis.
+            yield return WaitOrCancelled(MinProcessingDisplaySeconds);
             if (_workflowRoutine == null)
                 yield break;
 
-            string answer = _answerService != null
-                ? _answerService.GetMockAnswer()
-                : MockAskAiService.DefaultAnswer;
+            if (_analysisService == null)
+                ReplaceAnalysisService(AskAiAnalysisServiceFactory.Create(backendConfig, this));
+
+            int analysisToken = ++_sessionToken;
+            if (!_analysisService.TryStartAnalysis(
+                    _currentRequest, analysisToken, out string analysisError))
+            {
+                ShowWorkflowError(string.IsNullOrWhiteSpace(analysisError)
+                    ? "The AI service is temporarily unavailable."
+                    : analysisError);
+                yield break;
+            }
+
+            _processingTimeoutRoutine = StartCoroutine(ProcessingSafetyTimeout(analysisToken));
+            _workflowRoutine = null;
+        }
+
+        private IEnumerator ProcessingSafetyTimeout(int analysisToken)
+        {
+            float remaining = MaxProcessingSeconds;
+            while (remaining > 0f)
+            {
+                if (_analysisCompletionHandled ||
+                    _state != AskAiWorkflowState.Processing ||
+                    analysisToken != _sessionToken)
+                    yield break;
+                remaining -= Time.unscaledDeltaTime;
+                yield return null;
+            }
+
+            if (_analysisCompletionHandled ||
+                _state != AskAiWorkflowState.Processing ||
+                analysisToken != _sessionToken)
+                yield break;
+
+            CancelAnalysisService();
+            ShowWorkflowError("The AI response took too long. Please try again.");
+        }
+
+        private void HandleAnalysisEvent(AskAiAnalysisEvent analysisEvent)
+        {
+            if (_analysisCompletionHandled)
+                return;
+
+            if (_state != AskAiWorkflowState.Processing)
+                return;
+
+            if (analysisEvent.SessionToken != _sessionToken)
+                return;
+
+            _analysisCompletionHandled = true;
+            StopProcessingTimeout();
+            CancelAnalysisService();
+
+            AskAiAnalysisResponse response = analysisEvent.Response;
+            if (analysisEvent.Kind == AskAiAnalysisEventKind.Success &&
+                response != null &&
+                response.Success &&
+                !string.IsNullOrWhiteSpace(response.Answer))
+            {
+                float elapsed = _processingEnteredAt > 0f
+                    ? Time.realtimeSinceStartup - _processingEnteredAt
+                    : MinProcessingDisplaySeconds;
+                float hold = Mathf.Max(0f, MinProcessingDisplaySeconds - elapsed);
+                _workflowRoutine = StartCoroutine(
+                    ShowAnswerAfterHold(FormatAnswerBody(response), hold));
+                return;
+            }
+
+            string message = response != null && !string.IsNullOrWhiteSpace(response.UserMessage)
+                ? response.UserMessage
+                : "The AI service is temporarily unavailable.";
+            ShowWorkflowError(message);
+        }
+
+        private IEnumerator ShowAnswerAfterHold(string answer, float holdSeconds)
+        {
+            // Always yield once so StartCoroutine can assign _workflowRoutine before we continue.
+            // Do not gate on _workflowRoutine == null here: when hold is 0 this method used to
+            // run fully synchronously inside StartCoroutine and abort before EnterState(Answer),
+            // leaving the UI stuck on Analyzing even after a successful backend response.
+            if (holdSeconds > 0f)
+            {
+                float remaining = holdSeconds;
+                while (remaining > 0f)
+                {
+                    remaining -= Time.unscaledDeltaTime;
+                    yield return null;
+                }
+            }
+            else
+            {
+                yield return null;
+            }
 
             EnterState(
                 AskAiWorkflowState.Answer,
-                "Answer",
+                string.Empty,
                 body: answer,
-                buttonLabel: "Ask AI",
+                buttonLabel: "Ask Again",
                 buttonEnabled: true,
                 hintVisible: false,
                 microphoneActive: false,
                 processingActive: false);
             UIAudioManager.Play(UIAudioEvent.AIResponse);
-
             _workflowRoutine = null;
         }
 
@@ -450,11 +568,11 @@ namespace Norscope.AskAI
             _currentRequest.Clear();
             EnterState(
                 AskAiWorkflowState.Error,
-                "Error",
+                "Unable to complete analysis",
                 body: "No speech detected. Please try again.",
-                buttonLabel: "Ask AI",
+                buttonLabel: "Try Again",
                 buttonEnabled: true,
-                hintVisible: false,
+                hintVisible: true,
                 microphoneActive: false,
                 processingActive: false);
             UIAudioManager.Play(UIAudioEvent.Error);
@@ -464,19 +582,22 @@ namespace Norscope.AskAI
         {
             _completionHandled = true;
             _captureCompletionHandled = true;
+            _analysisCompletionHandled = true;
             _sessionActive = false;
             StopListeningTimeout();
             StopCapturingTimeout();
+            StopProcessingTimeout();
             StopSpeechCapture();
             CancelCameraCapture();
+            CancelAnalysisService();
             _currentRequest.Clear();
             EnterState(
                 AskAiWorkflowState.Error,
-                "Error",
+                "Unable to complete analysis",
                 body: message,
-                buttonLabel: "Ask AI",
+                buttonLabel: "Try Again",
                 buttonEnabled: true,
-                hintVisible: false,
+                hintVisible: true,
                 microphoneActive: false,
                 processingActive: false);
             UIAudioManager.Play(UIAudioEvent.Error);
@@ -500,12 +621,14 @@ namespace Norscope.AskAI
             {
                 _completionHandled = true;
                 _captureCompletionHandled = true;
+                _analysisCompletionHandled = true;
             }
 
             _sessionActive = false;
             _sessionToken++;
             StopListeningTimeout();
             StopCapturingTimeout();
+            StopProcessingTimeout();
 
             if (_workflowRoutine != null)
             {
@@ -515,6 +638,7 @@ namespace Norscope.AskAI
 
             StopSpeechCapture();
             CancelCameraCapture();
+            CancelAnalysisService();
             ClearTranscriptState();
             _currentRequest.Clear();
         }
@@ -524,9 +648,10 @@ namespace Norscope.AskAI
             CancelWorkflow(suppressCallbacks: true);
             _completionHandled = false;
             _captureCompletionHandled = false;
+            _analysisCompletionHandled = false;
             EnterState(
                 AskAiWorkflowState.Ready,
-                "Ready",
+                "Ready to listen",
                 body: string.Empty,
                 buttonLabel: "Ask AI",
                 buttonEnabled: true,
@@ -571,6 +696,36 @@ namespace Norscope.AskAI
             _lastAppendedResult = string.Empty;
         }
 
+        /// <summary>
+        /// Compact body for the small Ask AI panel — answer only, plus a one-line
+        /// safety note when present. Observations/actions stay in the structured
+        /// response but are not dumped into the panel (they overflow the card).
+        /// </summary>
+        private static string FormatAnswerBody(AskAiAnalysisResponse response)
+        {
+            if (response == null)
+                return string.Empty;
+
+            string answer = (response.Answer ?? string.Empty).Trim();
+            if (string.IsNullOrEmpty(answer))
+                return string.Empty;
+
+            // Soft cap so a verbose model reply cannot spill the panel.
+            const int maxChars = 280;
+            if (answer.Length > maxChars)
+                answer = answer.Substring(0, maxChars - 1).TrimEnd() + "…";
+
+            if (!string.IsNullOrWhiteSpace(response.SafetyWarning))
+            {
+                string safety = response.SafetyWarning.Trim();
+                if (safety.Length > 100)
+                    safety = safety.Substring(0, 99).TrimEnd() + "…";
+                return (answer + "\n\n⚠ " + safety).Trim();
+            }
+
+            return answer;
+        }
+
         private void StopSpeechCapture()
         {
             if (_speechCapture == null)
@@ -585,6 +740,14 @@ namespace Norscope.AskAI
                 return;
             _cameraCapture.Cancel();
             while (_cameraCapture.TryDequeue(out _)) { }
+        }
+
+        private void CancelAnalysisService()
+        {
+            if (_analysisService == null)
+                return;
+            _analysisService.Cancel();
+            while (_analysisService.TryDequeue(out _)) { }
         }
 
         private void StopListeningTimeout()
@@ -603,6 +766,14 @@ namespace Norscope.AskAI
             _capturingTimeoutRoutine = null;
         }
 
+        private void StopProcessingTimeout()
+        {
+            if (_processingTimeoutRoutine == null)
+                return;
+            StopCoroutine(_processingTimeoutRoutine);
+            _processingTimeoutRoutine = null;
+        }
+
         private void ReplaceSpeechCapture(IAskAiSpeechCapture capture)
         {
             DisposeSpeechCapture();
@@ -613,6 +784,13 @@ namespace Norscope.AskAI
         {
             DisposeCameraCapture();
             _cameraCapture = capture ?? AskAiCameraCaptureFactory.Create();
+        }
+
+        private void ReplaceAnalysisService(IAskAiAnalysisService service)
+        {
+            DisposeAnalysisService();
+            _analysisService = service ??
+                AskAiAnalysisServiceFactory.Create(backendConfig, this);
         }
 
         private void DisposeSpeechCapture()
@@ -629,6 +807,14 @@ namespace Norscope.AskAI
                 return;
             _cameraCapture.Dispose();
             _cameraCapture = null;
+        }
+
+        private void DisposeAnalysisService()
+        {
+            if (_analysisService == null)
+                return;
+            _analysisService.Dispose();
+            _analysisService = null;
         }
 
         private void PlayVoiceStartOnce()
@@ -666,7 +852,6 @@ namespace Norscope.AskAI
             return string.Join(" ", parts);
         }
 
-        /// <summary>Retained for tests / future failure injection.</summary>
         public void ShowError(string message)
         {
             ShowWorkflowError(string.IsNullOrEmpty(message)

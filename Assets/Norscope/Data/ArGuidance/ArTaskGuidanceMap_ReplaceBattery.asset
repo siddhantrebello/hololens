@@ -1,0 +1,168 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c43ece20163886498a6c8f2264e150d, type: 3}
+  m_Name: ArTaskGuidanceMap_ReplaceBattery
+  m_EditorClassIdentifier: 
+  taskId: replace-battery
+  stages:
+  - guidanceKey: power_down_fully
+    displayOrder: 0
+    entries:
+    - hologramId: h02_disconnect_ac
+      visible: 1
+      visualState: 2
+      labelOverride: Disconnect AC Adapter
+      animationHint: 1
+      displayOrder: 0
+  - guidanceKey: remove_back_panel
+    displayOrder: 1
+    entries:
+    - hologramId: h03_back_panel_outline
+      visible: 1
+      visualState: 0
+      labelOverride: 
+      animationHint: 1
+      displayOrder: 0
+    - hologramId: h04_screw_01
+      visible: 1
+      visualState: 0
+      labelOverride: 
+      animationHint: 1
+      displayOrder: 1
+    - hologramId: h04_screw_02
+      visible: 1
+      visualState: 0
+      labelOverride: 
+      animationHint: 1
+      displayOrder: 2
+    - hologramId: h04_screw_03
+      visible: 1
+      visualState: 0
+      labelOverride: 
+      animationHint: 1
+      displayOrder: 3
+    - hologramId: h04_screw_04
+      visible: 1
+      visualState: 0
+      labelOverride: 
+      animationHint: 1
+      displayOrder: 4
+    - hologramId: h04_screw_05
+      visible: 1
+      visualState: 0
+      labelOverride: 
+      animationHint: 1
+      displayOrder: 5
+    - hologramId: h04_screw_06
+      visible: 1
+      visualState: 0
+      labelOverride: 
+      animationHint: 1
+      displayOrder: 6
+    - hologramId: h04_screw_07
+      visible: 1
+      visualState: 0
+      labelOverride: 
+      animationHint: 1
+      displayOrder: 7
+    - hologramId: h04_screw_08
+      visible: 1
+      visualState: 0
+      labelOverride: 
+      animationHint: 1
+      displayOrder: 8
+    - hologramId: h04_screw_09
+      visible: 1
+      visualState: 0
+      labelOverride: 
+      animationHint: 1
+      displayOrder: 9
+  - guidanceKey: disconnect_old_battery
+    displayOrder: 2
+    entries:
+    - hologramId: h17_battery_outline
+      visible: 1
+      visualState: 0
+      labelOverride: 
+      animationHint: 1
+      displayOrder: 0
+    - hologramId: h18_battery_connector
+      visible: 1
+      visualState: 2
+      labelOverride: Disconnect Battery First
+      animationHint: 1
+      displayOrder: 1
+    - hologramId: h19_screw_01
+      visible: 1
+      visualState: 0
+      labelOverride: 
+      animationHint: 1
+      displayOrder: 2
+    - hologramId: h19_screw_02
+      visible: 1
+      visualState: 0
+      labelOverride: 
+      animationHint: 1
+      displayOrder: 3
+    - hologramId: h19_screw_03
+      visible: 1
+      visualState: 0
+      labelOverride: 
+      animationHint: 1
+      displayOrder: 4
+    - hologramId: h19_screw_04
+      visible: 1
+      visualState: 0
+      labelOverride: 
+      animationHint: 1
+      displayOrder: 5
+    - hologramId: h20_swollen_battery_warning
+      visible: 1
+      visualState: 4
+      labelOverride: 'Battery appears swollen.
+
+        Do NOT puncture.'
+      animationHint: 1
+      displayOrder: 6
+  - guidanceKey: install_new_battery
+    displayOrder: 3
+    entries:
+    - hologramId: h21_install_new_battery
+      visible: 1
+      visualState: 0
+      labelOverride: Install New Battery
+      animationHint: 1
+      displayOrder: 0
+  - guidanceKey: test_new_battery
+    displayOrder: 4
+    entries:
+    - hologramId: h07_replace_back_cover
+      visible: 1
+      visualState: 0
+      labelOverride: Replace Back Cover
+      animationHint: 1
+      displayOrder: 0
+    - hologramId: h08_power_on
+      visible: 1
+      visualState: 3
+      labelOverride: Power On
+      animationHint: 1
+      displayOrder: 1
+    - hologramId: h22_battery_verification
+      visible: 1
+      visualState: 3
+      labelOverride: 'Verify battery is detected and charging
+
+        Confirm charging
+        status'
+      animationHint: 1
+      displayOrder: 2

@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Norscope
-  productName: Norscope
+  productName: NORSCOPE
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.12156863, g: 0.12156863, b: 0.1254902, a: 1}
@@ -793,19 +793,19 @@ PlayerSettings:
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   metroPackageName: Norscope_HL2_Clean
-  metroPackageVersion: 
+  metroPackageVersion: 1.0.1.1
   metroCertificatePath: Assets/WSATestCertificate.pfx
   metroCertificatePassword: 
   metroCertificateSubject: Norscope
   metroCertificateIssuer: Norscope
   metroCertificateNotAfter: 801ec8dbeb3cde01
-  metroApplicationDescription: Norscope_HL2_Clean
+  metroApplicationDescription: NORSCOPE
   wsaImages: {}
-  metroTileShortName: 
-  metroTileShowName: 0
-  metroMediumTileShowName: 0
-  metroLargeTileShowName: 0
-  metroWideTileShowName: 0
+  metroTileShortName: NORSCOPE
+  metroTileShowName: 1
+  metroMediumTileShowName: 1
+  metroLargeTileShowName: 1
+  metroWideTileShowName: 1
   metroSupportStreamingInstall: 0
   metroLastRequiredScene: 0
   metroDefaultTileSize: 1
@@ -817,10 +817,10 @@ PlayerSettings:
   platformCapabilities:
     WindowsStoreApps:
       GazeInput: False
-      PrivateNetworkClientServer: False
+      PrivateNetworkClientServer: True
       InternetClientServer: False
       SpatialPerception: True
-      InternetClient: False
+      InternetClient: True
       WebCam: True
       Microphone: True
   metroTargetDeviceFamilies:
@@ -895,6 +895,6 @@ PlayerSettings:
   hmiLoadingImage: {fileID: 0}
   platformRequiresReadableAssets: 0
   virtualTexturingSupportEnabled: 0
-  insecureHttpOption: 0
+  insecureHttpOption: 2
   androidVulkanDenyFilterList: []
   androidVulkanAllowFilterList: []

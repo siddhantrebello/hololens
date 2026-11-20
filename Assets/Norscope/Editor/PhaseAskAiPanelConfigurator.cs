@@ -30,7 +30,7 @@ namespace Norscope.Editor
         private const string ThemePath =
             "Assets/Norscope/UI/DesignSystem/Themes/NorscopeTheme.asset";
         private const string WorldConfigPath =
-            "Assets/Norscope/UI/DesignSystem/NorscopeWorldSpaceUiConfig.asset";
+            "Assets/Norscope/UI/DesignSystem/Themes/NorscopeWorldSpaceUiConfig.asset";
         private const string RoundedPath =
             "Assets/Norscope/UI/DesignSystem/Sprites/UIRounded_8.png";
         private const string OutfitPath =
@@ -39,6 +39,10 @@ namespace Norscope.Editor
             "Assets/Norscope/UI/Fonts/Inter SDF.asset";
         private const string MicPath =
             "Assets/Norscope/UI/Icons/Lucide/Raster/mic.png";
+        private const string CameraIconPath =
+            "Assets/Norscope/UI/Icons/Lucide/Raster/monitor.png";
+        private const string LogoPath =
+            "Assets/WhatsApp Image 2026-07-19 at 13.42.15-transparent.png";
         private const string CloseButtonPath =
             "Assets/Norscope/UI/Controls/NorscopeCloseButton.prefab";
         private const string BackButtonPath =
@@ -48,16 +52,25 @@ namespace Norscope.Editor
         private const string ValidateFlag = "Temp/NorscopeAskAiValidate.flag";
         private const string CaptureFlag = "Temp/NorscopeAskAiCapture.flag";
 
-        private const float Width = 700f;
+        // Figma Make Ask AI: width 480; height 520 fits Ready layout on HL2.
+        private const float Width = 480f;
         private const float Height = 520f;
+        private const float TopBarHeight = 52f;
+        private const float FooterHeight = 36f;
+        private const float GrabWidth = 400f;
+        private const float GrabHeight = 30f;
+        private const float PadX = 24f;
 
-        private static readonly Color Bg = Hex("0D1117");
-        private static readonly Color Elevated = Hex("131A22");
-        private static readonly Color Border = Hex("2D3B49");
+        private static readonly Color Card = Hex("141B22");
+        private static readonly Color Surface = Hex("0F1419");
+        private static readonly Color Border = Hex("1E2D3A");
         private static readonly Color Accent = Hex("1EC8F5");
-        private static readonly Color Primary = Hex("F3F7FB");
-        private static readonly Color Secondary = Hex("91A2B5");
-        private static readonly Color Dim = Hex("4A5D6E");
+        private static readonly Color AccentDim = new Color(30f / 255f, 200f / 255f, 245f / 255f, 0.07f);
+        private static readonly Color AccentBd = new Color(30f / 255f, 200f / 255f, 245f / 255f, 0.22f);
+        private static readonly Color Primary = Hex("EDF1F7");
+        private static readonly Color Secondary = Hex("7A909F");
+        private static readonly Color Dim = Hex("364959");
+        private static readonly Color ButtonText = Hex("060C10");
 
         [InitializeOnLoadMethod]
         private static void PollFlags()
@@ -281,6 +294,8 @@ namespace Norscope.Editor
             TMP_FontAsset inter =
                 AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(InterPath);
             Sprite mic = AssetDatabase.LoadAssetAtPath<Sprite>(MicPath);
+            Sprite cameraIcon = AssetDatabase.LoadAssetAtPath<Sprite>(CameraIconPath);
+            Sprite logo = AssetDatabase.LoadAssetAtPath<Sprite>(LogoPath);
             if (rounded == null || outfit == null || inter == null)
                 throw new InvalidOperationException("Required Ask AI visual assets missing.");
 
@@ -301,7 +316,7 @@ namespace Norscope.Editor
                 RectTransform rootRt = root.GetComponent<RectTransform>();
                 rootRt.sizeDelta = new Vector2(Width, Height);
 
-                Image background = ImageNode(root.transform, "Background", rounded, Bg);
+                Image background = ImageNode(root.transform, "Background", rounded, Card);
                 Stretch(background.rectTransform);
                 background.type = Image.Type.Sliced;
                 background.raycastTarget = false;
@@ -311,21 +326,26 @@ namespace Norscope.Editor
                 border.type = Image.Type.Sliced;
                 border.raycastTarget = false;
 
-                // --- Chrome (not animated) ---
+                // --- Top bar (Figma header + HL2 back) ---
                 RectTransform titleBar = RectNode(root.transform, "TitleBar");
-                SetTopLeft(titleBar, Vector2.zero, new Vector2(Width, 56f));
+                SetTopLeft(titleBar, Vector2.zero, new Vector2(Width, TopBarHeight));
                 Image titleBg = titleBar.gameObject.AddComponent<Image>();
-                titleBg.sprite = rounded;
-                titleBg.type = Image.Type.Sliced;
-                titleBg.color = Elevated;
+                titleBg.color = Color.clear;
                 titleBg.raycastTarget = false;
 
+                // Grab sits on the TOP edge of the panel (above the title bar chrome).
                 RectTransform grab = RectNode(titleBar, "GrabRegion");
-                SetTopLeft(grab, Vector2.zero, new Vector2(Width - 120f, 56f));
+                grab.anchorMin = grab.anchorMax = new Vector2(0.5f, 1f);
+                grab.pivot = new Vector2(0.5f, 0f);
+                grab.anchoredPosition = Vector2.zero;
+                grab.sizeDelta = new Vector2(GrabWidth, GrabHeight);
                 Image grabImage = grab.gameObject.AddComponent<Image>();
-                grabImage.color = Color.clear;
+                grabImage.sprite = rounded;
+                grabImage.type = Image.Type.Sliced;
+                grabImage.color = new Color(15f / 255f, 20f / 255f, 25f / 255f, 0.92f);
                 grabImage.raycastTarget = true;
 
+                // HL2-only: small back (not in Figma).
                 GameObject backPrefab =
                     AssetDatabase.LoadAssetAtPath<GameObject>(BackButtonPath);
                 GameObject back = (GameObject)PrefabUtility.InstantiatePrefab(
@@ -334,112 +354,376 @@ namespace Norscope.Editor
                 RectTransform backRt = back.GetComponent<RectTransform>();
                 backRt.anchorMin = backRt.anchorMax = new Vector2(0f, 1f);
                 backRt.pivot = new Vector2(0f, 1f);
-                backRt.anchoredPosition = new Vector2(12f, -8f);
-                backRt.sizeDelta = new Vector2(40f, 40f);
+                backRt.anchoredPosition = new Vector2(12f, -12f);
+                backRt.sizeDelta = new Vector2(28f, 28f);
                 Button backButton = back.GetComponentInChildren<Button>(true);
+
+                if (logo != null)
+                {
+                    Image logoImage = ImageNode(
+                        titleBar, "Logo", logo, new Color(1f, 1f, 1f, 0.7f),
+                        new Vector2(46f, 18f), new Vector2(72f, 15f));
+                    logoImage.type = Image.Type.Simple;
+                    logoImage.preserveAspect = true;
+                }
+
+                Image sep2 = ImageNode(
+                    titleBar, "SeparatorRight", null, Border,
+                    new Vector2(124f, 20f), new Vector2(1f, 12f));
+                sep2.raycastTarget = false;
+
+                TextNode(
+                    titleBar, "SectionLabel", "ASK AI", inter, 9.5f, Dim,
+                    new Vector2(134f, 18f), new Vector2(72f, 16f),
+                    TextAlignmentOptions.MidlineLeft, FontStyles.Bold);
+
+                // Status pill ONLY when not Ready (hidden by default).
+                Image pillBg = ImageNode(
+                    titleBar, "StatusPill", rounded,
+                    new Color(Dim.r, Dim.g, Dim.b, 0.12f));
+                pillBg.type = Image.Type.Sliced;
+                RectTransform pillRt = pillBg.rectTransform;
+                pillRt.anchorMin = pillRt.anchorMax = new Vector2(1f, 1f);
+                pillRt.pivot = new Vector2(1f, 1f);
+                pillRt.anchoredPosition = new Vector2(-46f, -13f);
+                pillRt.sizeDelta = new Vector2(96f, 22f);
+                TMP_Text pillText = TextNode(
+                    pillBg.transform, "Label", "Ready", inter, 9.5f, Dim,
+                    Vector2.zero, new Vector2(96f, 22f),
+                    TextAlignmentOptions.Center, FontStyles.Normal);
+                Stretch(pillText.rectTransform);
+                pillBg.gameObject.SetActive(false);
 
                 GameObject closePrefab =
                     AssetDatabase.LoadAssetAtPath<GameObject>(CloseButtonPath);
                 GameObject close = (GameObject)PrefabUtility.InstantiatePrefab(
                     closePrefab, titleBar);
                 close.name = "CloseButton";
+                PrefabUtility.UnpackPrefabInstance(
+                    close, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
                 RectTransform closeRt = close.GetComponent<RectTransform>();
                 closeRt.anchorMin = closeRt.anchorMax = new Vector2(1f, 1f);
                 closeRt.pivot = new Vector2(1f, 1f);
-                closeRt.anchoredPosition = new Vector2(-12f, -8f);
-                closeRt.sizeDelta = new Vector2(40f, 40f);
+                closeRt.anchoredPosition = new Vector2(-16f, -13f);
+                // NorscopeButtonControl.OnValidate reapplies serialized size — set that first.
+                NorscopeButtonControl closeControl =
+                    close.GetComponent<NorscopeButtonControl>();
+                if (closeControl != null)
+                {
+                    SerializedObject closeSo = new SerializedObject(closeControl);
+                    closeSo.FindProperty("size").vector2Value = new Vector2(26f, 26f);
+                    closeSo.ApplyModifiedPropertiesWithoutUndo();
+                }
+
+                closeRt.sizeDelta = new Vector2(26f, 26f);
+                LayoutElement closeLe = close.GetComponent<LayoutElement>();
+                if (closeLe != null)
+                {
+                    closeLe.minWidth = 26f;
+                    closeLe.minHeight = 26f;
+                    closeLe.preferredWidth = 26f;
+                    closeLe.preferredHeight = 26f;
+                }
+
+                CenterCloseButtonIcon(close);
 
                 RectTransform resizeHandles = RectNode(root.transform, "ResizeHandles");
                 Stretch(resizeHandles);
                 RectTransform corner = RectNode(resizeHandles, "BottomRight");
                 corner.anchorMin = corner.anchorMax = Vector2.one;
                 corner.pivot = Vector2.one;
-                corner.anchoredPosition = new Vector2(-6f, 6f);
-                corner.sizeDelta = new Vector2(30f, 30f);
+                corner.anchoredPosition = new Vector2(-8f, 8f);
+                corner.sizeDelta = new Vector2(28f, 28f);
                 Image cornerImage = corner.gameObject.AddComponent<Image>();
                 cornerImage.sprite = rounded;
                 cornerImage.type = Image.Type.Sliced;
-                cornerImage.color = new Color(Accent.r, Accent.g, Accent.b, 0.35f);
+                cornerImage.color = new Color(Accent.r, Accent.g, Accent.b, 0.28f);
                 cornerImage.raycastTarget = false;
 
-                // --- Animated content ---
+                // --- Content (Figma: 24px horizontal padding) ---
+                float contentHeight = Height - TopBarHeight - FooterHeight;
+                float contentW = Width - PadX * 2f; // 432
                 RectTransform content = RectNode(root.transform, "Content");
-                SetTopLeft(content, new Vector2(0f, 56f), new Vector2(Width, Height - 56f));
+                SetTopLeft(
+                    content,
+                    new Vector2(0f, TopBarHeight),
+                    new Vector2(Width, contentHeight));
                 CanvasGroup contentGroup = content.gameObject.AddComponent<CanvasGroup>();
 
                 TMP_Text title = TextNode(
-                    content, "Title", "Ask AI", outfit, 36f, Primary,
-                    new Vector2(40f, 24f), new Vector2(520f, 44f),
+                    content, "Title", "Ask AI", outfit, 32f, Primary,
+                    new Vector2(PadX, 14f), new Vector2(contentW, 40f),
                     TextAlignmentOptions.TopLeft, FontStyles.Normal);
-                TMP_Text subtitle = TextNode(
+                title.characterSpacing = -1.5f;
+
+                TextNode(
                     content, "Subtitle",
-                    "Ask a question about what you are currently seeing.",
-                    inter, 15f, Secondary,
-                    new Vector2(40f, 72f), new Vector2(620f, 40f),
+                    "Ask a question about the equipment you're looking at.",
+                    inter, 12.5f, Secondary,
+                    new Vector2(PadX, 56f), new Vector2(contentW, 22f),
                     TextAlignmentOptions.TopLeft, FontStyles.Normal);
 
-                RectTransform micRoot = RectNode(content, "Microphone");
-                SetTopLeft(micRoot, new Vector2(290f, 140f), new Vector2(120f, 120f));
+                Image contentDivider = ImageNode(
+                    content, "ContentDivider", null, Border,
+                    new Vector2(PadX, 90f), new Vector2(contentW, 1f));
+                contentDivider.raycastTarget = false;
+
+                // Ready: HORIZONTAL row — 52×52 mic + text column.
+                RectTransform statusRow = RectNode(content, "StatusRow");
+                SetTopLeft(
+                    statusRow,
+                    new Vector2(PadX, 110f),
+                    new Vector2(contentW, 80f));
+                HorizontalLayoutGroup rowLayout =
+                    statusRow.gameObject.AddComponent<HorizontalLayoutGroup>();
+                rowLayout.childAlignment = TextAnchor.MiddleLeft;
+                rowLayout.childControlWidth = false;
+                rowLayout.childControlHeight = false;
+                rowLayout.childForceExpandWidth = false;
+                rowLayout.childForceExpandHeight = false;
+                rowLayout.spacing = 20f;
+                rowLayout.padding = new RectOffset(0, 0, 0, 0);
+
+                const float iconBox = 52f;
+                RectTransform micRoot = RectNode(statusRow, "Microphone");
+                LayoutElement micLe = micRoot.gameObject.AddComponent<LayoutElement>();
+                micLe.preferredWidth = iconBox;
+                micLe.preferredHeight = iconBox;
+                micLe.minWidth = iconBox;
+                micLe.minHeight = iconBox;
+                FitLayoutChild(micRoot, iconBox, iconBox);
                 Image micRing = micRoot.gameObject.AddComponent<Image>();
                 micRing.sprite = rounded;
                 micRing.type = Image.Type.Sliced;
-                micRing.color = new Color(Accent.r, Accent.g, Accent.b, 0.12f);
+                micRing.color = AccentDim;
+                micRing.pixelsPerUnitMultiplier = 0.5f;
                 micRing.raycastTarget = false;
+                Image micBorder = ImageNode(micRoot, "MicBorder", rounded, AccentBd);
+                Stretch(micBorder.rectTransform, -1f);
+                micBorder.type = Image.Type.Sliced;
+                micBorder.pixelsPerUnitMultiplier = 0.5f;
+                micBorder.raycastTarget = false;
                 Image micIcon = ImageNode(
-                    micRoot, "Icon", mic, new Color(Accent.r, Accent.g, Accent.b, 0.85f),
-                    new Vector2(30f, 30f), new Vector2(60f, 60f));
+                    micRoot, "Icon", mic, Accent, Vector2.zero, new Vector2(24f, 24f));
                 micIcon.type = Image.Type.Simple;
                 micIcon.preserveAspect = true;
+                CenterRect(micIcon.rectTransform, new Vector2(24f, 24f));
 
-                TMP_Text status = TextNode(
-                    content, "StatusText", "Ready", outfit, 20f, Primary,
-                    new Vector2(40f, 280f), new Vector2(620f, 32f),
-                    TextAlignmentOptions.Center, FontStyles.Normal);
-
-                TMP_Text hint = TextNode(
-                    content, "HintText",
-                    "Press Ask AI and speak naturally.",
-                    inter, 14f, Dim,
-                    new Vector2(40f, 318f), new Vector2(620f, 28f),
-                    TextAlignmentOptions.Center, FontStyles.Normal);
-
-                TMP_Text body = TextNode(
-                    content, "BodyText", string.Empty, inter, 16f, Secondary,
-                    new Vector2(60f, 352f), new Vector2(580f, 72f),
-                    TextAlignmentOptions.Center, FontStyles.Normal);
-                body.gameObject.SetActive(false);
+                RectTransform cameraRoot = RectNode(statusRow, "CameraFrame");
+                LayoutElement camLe = cameraRoot.gameObject.AddComponent<LayoutElement>();
+                camLe.preferredWidth = iconBox;
+                camLe.preferredHeight = iconBox;
+                FitLayoutChild(cameraRoot, iconBox, iconBox);
+                Image cameraRing = cameraRoot.gameObject.AddComponent<Image>();
+                cameraRing.sprite = rounded;
+                cameraRing.type = Image.Type.Sliced;
+                cameraRing.color = AccentDim;
+                cameraRing.pixelsPerUnitMultiplier = 0.5f;
+                cameraRing.raycastTarget = false;
+                Image cameraImg = ImageNode(
+                    cameraRoot, "Icon",
+                    cameraIcon != null ? cameraIcon : mic, Accent,
+                    Vector2.zero, new Vector2(24f, 24f));
+                cameraImg.type = Image.Type.Simple;
+                cameraImg.preserveAspect = true;
+                CenterRect(cameraImg.rectTransform, new Vector2(24f, 24f));
+                cameraRoot.gameObject.SetActive(false);
 
                 GameObject processing = new GameObject(
-                    "ProcessingIndicator", typeof(RectTransform), typeof(Image));
-                processing.transform.SetParent(content, false);
+                    "ProcessingIndicator",
+                    typeof(RectTransform),
+                    typeof(Image),
+                    typeof(LayoutElement));
+                processing.transform.SetParent(statusRow, false);
                 processing.layer = 5;
-                RectTransform processingRt = processing.GetComponent<RectTransform>();
-                SetTopLeft(processingRt, new Vector2(335f, 250f), new Vector2(30f, 30f));
+                LayoutElement procLe = processing.GetComponent<LayoutElement>();
+                procLe.preferredWidth = iconBox;
+                procLe.preferredHeight = iconBox;
+                FitLayoutChild(processing.GetComponent<RectTransform>(), iconBox, iconBox);
                 Image processingImage = processing.GetComponent<Image>();
                 processingImage.sprite = rounded;
                 processingImage.type = Image.Type.Sliced;
-                processingImage.color = Accent;
+                processingImage.color = AccentDim;
+                processingImage.pixelsPerUnitMultiplier = 0.5f;
                 processingImage.raycastTarget = false;
                 processing.SetActive(false);
 
+                float textColW = contentW - iconBox - 20f;
+                RectTransform textCol = RectNode(statusRow, "StatusTextColumn");
+                LayoutElement textColLe = textCol.gameObject.AddComponent<LayoutElement>();
+                textColLe.preferredWidth = textColW;
+                textColLe.preferredHeight = 72f;
+                textColLe.flexibleWidth = 1f;
+                FitLayoutChild(textCol, textColW, 72f);
+                VerticalLayoutGroup textLayout =
+                    textCol.gameObject.AddComponent<VerticalLayoutGroup>();
+                textLayout.childAlignment = TextAnchor.MiddleLeft;
+                textLayout.childControlWidth = true;
+                textLayout.childControlHeight = false;
+                textLayout.childForceExpandWidth = true;
+                textLayout.childForceExpandHeight = false;
+                textLayout.spacing = 4f;
+
+                TMP_Text status = LayoutText(
+                    textCol, "StatusText", "Ready to listen", outfit, 16f, Primary,
+                    textColW, 22f,
+                    TextAlignmentOptions.MidlineLeft, FontStyles.Normal);
+
+                TMP_Text hint = LayoutText(
+                    textCol, "HintText",
+                    "Press Ask AI and speak naturally.\nNORSCOPE analyzes your voice and the scene.",
+                    inter, 12.5f, Secondary,
+                    textColW, 40f,
+                    TextAlignmentOptions.TopLeft, FontStyles.Normal);
+
+                // Kept for Configure/API compatibility; always hidden at runtime.
+                TMP_Text secondaryHint = LayoutText(
+                    textCol, "SecondaryHint", string.Empty, inter, 11f, Dim,
+                    textColW, 1f,
+                    TextAlignmentOptions.TopLeft, FontStyles.Normal);
+                secondaryHint.gameObject.SetActive(false);
+
+                // Answer / transcript card (surface fill); hidden until body present.
+                RectTransform card = RectNode(content, "InteractionCard");
+                SetTopLeft(
+                    card,
+                    new Vector2(PadX, 200f),
+                    new Vector2(contentW, 100f));
+                Image cardBg = card.gameObject.AddComponent<Image>();
+                cardBg.sprite = rounded;
+                cardBg.type = Image.Type.Sliced;
+                cardBg.color = Surface;
+                cardBg.raycastTarget = false;
+                Image cardBorder = ImageNode(card, "CardBorder", rounded, Border);
+                Stretch(cardBorder.rectTransform, -1f);
+                cardBorder.type = Image.Type.Sliced;
+                cardBorder.raycastTarget = false;
+                card.gameObject.SetActive(false);
+
+                RectTransform stage = RectNode(card, "StageStack");
+                Stretch(stage, 12f);
+                VerticalLayoutGroup stageLayout =
+                    stage.gameObject.AddComponent<VerticalLayoutGroup>();
+                stageLayout.childAlignment = TextAnchor.UpperLeft;
+                stageLayout.childControlHeight = false;
+                stageLayout.childControlWidth = true;
+                stageLayout.childForceExpandHeight = false;
+                stageLayout.childForceExpandWidth = true;
+                stageLayout.spacing = 8f;
+
+                TMP_Text analysisLabel = LayoutText(
+                    stage, "AnalysisLabel", "NORSCOPE ANALYSIS", inter, 10f,
+                    Hex("34C97A"),
+                    contentW - 24f, 16f,
+                    TextAlignmentOptions.MidlineLeft, FontStyles.Bold);
+                analysisLabel.characterSpacing = 4f;
+                analysisLabel.gameObject.SetActive(false);
+
+                TMP_Text body = LayoutText(
+                    stage, "BodyText", string.Empty, inter, 14f, Primary,
+                    contentW - 24f, 72f,
+                    TextAlignmentOptions.TopLeft, FontStyles.Normal);
+                body.GetComponent<LayoutElement>().flexibleHeight = 1f;
+                body.gameObject.SetActive(false);
+
+                // Primary: full content width (432), height 48, radius ~12.
+                float btnW = contentW;
+                const float btnH = 48f;
                 Button primary = ButtonNode(
                     content, "PrimaryButton", rounded, Accent,
-                    new Vector2(40f, 430f), new Vector2(620f, 56f));
+                    new Vector2(PadX, contentHeight - 20f - btnH),
+                    new Vector2(btnW, btnH));
+                primary.GetComponent<Image>().pixelsPerUnitMultiplier = 0.5f;
+                RectTransform btnRow = RectNode(primary.transform, "LabelRow");
+                Stretch(btnRow);
+                HorizontalLayoutGroup btnLayout =
+                    btnRow.gameObject.AddComponent<HorizontalLayoutGroup>();
+                btnLayout.childAlignment = TextAnchor.MiddleCenter;
+                btnLayout.childControlWidth = false;
+                btnLayout.childControlHeight = false;
+                btnLayout.childForceExpandWidth = false;
+                btnLayout.childForceExpandHeight = false;
+                btnLayout.spacing = 8f;
+                Image primaryMic = ImageNode(
+                    btnRow, "MicIcon", mic, ButtonText, Vector2.zero, new Vector2(14f, 14f));
+                primaryMic.type = Image.Type.Simple;
+                primaryMic.preserveAspect = true;
+                LayoutElement primaryMicLe =
+                    primaryMic.gameObject.AddComponent<LayoutElement>();
+                primaryMicLe.preferredWidth = 14f;
+                primaryMicLe.preferredHeight = 14f;
+                FitLayoutChild(primaryMic.rectTransform, 14f, 14f);
                 TMP_Text primaryLabel = TextNode(
-                    primary.transform, "Label", "Ask AI", outfit, 18f, Color.white,
-                    Vector2.zero, new Vector2(620f, 56f),
-                    TextAlignmentOptions.Center, FontStyles.Normal);
-                Stretch(primaryLabel.rectTransform);
+                    btnRow, "Label", "Ask AI", outfit, 15f, ButtonText,
+                    Vector2.zero, new Vector2(72f, btnH),
+                    TextAlignmentOptions.Center, FontStyles.Bold);
+                LayoutElement labelLe = primaryLabel.gameObject.AddComponent<LayoutElement>();
+                labelLe.preferredWidth = 72f;
+                labelLe.preferredHeight = btnH;
+                FitLayoutChild(primaryLabel.rectTransform, 72f, btnH);
 
-                // Wire components
+                // --- Footer: stage dots (5) + version ---
+                RectTransform footer = RectNode(root.transform, "Footer");
+                footer.anchorMin = new Vector2(0f, 0f);
+                footer.anchorMax = new Vector2(1f, 0f);
+                footer.pivot = new Vector2(0.5f, 0f);
+                footer.anchoredPosition = Vector2.zero;
+                footer.sizeDelta = new Vector2(0f, FooterHeight);
+                Image footerDivider = ImageNode(footer, "FooterDivider", null, Border);
+                RectTransform footerDivRt = footerDivider.rectTransform;
+                footerDivRt.anchorMin = new Vector2(0f, 1f);
+                footerDivRt.anchorMax = new Vector2(1f, 1f);
+                footerDivRt.pivot = new Vector2(0.5f, 1f);
+                footerDivRt.anchoredPosition = Vector2.zero;
+                footerDivRt.sizeDelta = new Vector2(0f, 1f);
+
+                RectTransform dots = RectNode(footer, "StageDots");
+                dots.anchorMin = dots.anchorMax = new Vector2(0f, 0.5f);
+                dots.pivot = new Vector2(0f, 0.5f);
+                dots.anchoredPosition = new Vector2(PadX, 0f);
+                dots.sizeDelta = new Vector2(80f, 12f);
+                HorizontalLayoutGroup dotsLayout =
+                    dots.gameObject.AddComponent<HorizontalLayoutGroup>();
+                dotsLayout.childAlignment = TextAnchor.MiddleLeft;
+                dotsLayout.childControlWidth = false;
+                dotsLayout.childControlHeight = false;
+                dotsLayout.childForceExpandWidth = false;
+                dotsLayout.childForceExpandHeight = false;
+                dotsLayout.spacing = 4f;
+                for (int i = 0; i < 5; i++)
+                {
+                    bool active = i == 0;
+                    Image dot = ImageNode(
+                        dots, "Dot" + i, rounded,
+                        active ? Accent : Border);
+                    dot.type = Image.Type.Sliced;
+                    RectTransform dotRt = dot.rectTransform;
+                    FitLayoutChild(dotRt, active ? 14f : 3f, 3f);
+                    LayoutElement dotLe = dot.gameObject.AddComponent<LayoutElement>();
+                    dotLe.preferredWidth = active ? 14f : 3f;
+                    dotLe.preferredHeight = 3f;
+                }
+
+                TMP_Text footerMeta = TextNode(
+                    footer, "FooterMeta", "v4.2.1 · HoloLens 2", inter, 9.5f, Dim,
+                    Vector2.zero, new Vector2(160f, 18f),
+                    TextAlignmentOptions.MidlineRight, FontStyles.Normal);
+                RectTransform footerMetaRt = footerMeta.rectTransform;
+                footerMetaRt.anchorMin = footerMetaRt.anchorMax = new Vector2(1f, 0.5f);
+                footerMetaRt.pivot = new Vector2(1f, 0.5f);
+                footerMetaRt.anchoredPosition = new Vector2(-PadX, 0f);
+                footerMetaRt.sizeDelta = new Vector2(160f, 18f);
+
+                // Do not bind title/background/border to NorscopePanelRoot — theme.Apply()
+                // would crush the redesign title to headingSize (18) and recolor surfaces.
                 NorscopePanelRoot panelRoot = root.GetComponent<NorscopePanelRoot>();
                 SerializedObject panelSo = new SerializedObject(panelRoot);
                 Set(panelSo, "theme", theme);
                 Set(panelSo, "worldSpaceConfig", world);
                 Set(panelSo, "root", rootRt);
-                Set(panelSo, "background", background);
-                Set(panelSo, "border", border);
-                Set(panelSo, "title", title);
+                Set(panelSo, "background", null);
+                Set(panelSo, "border", null);
+                Set(panelSo, "title", null);
                 panelSo.FindProperty("sizePixels").vector2Value =
                     new Vector2(Width, Height);
                 panelSo.FindProperty("useMetersAsSource").boolValue = false;
@@ -453,7 +737,6 @@ namespace Norscope.Editor
                 Set(bindSo, "closeButtonRoot", close.transform);
                 bindSo.ApplyModifiedPropertiesWithoutUndo();
 
-                // Fallback Home only — runtime parent from Navigate wins when available.
                 PanelNavigationBinding navigation =
                     root.GetComponent<PanelNavigationBinding>();
                 navigation.Configure(
@@ -465,17 +748,41 @@ namespace Norscope.Editor
                 view.Configure(
                     status,
                     hint,
+                    secondaryHint,
                     body,
+                    analysisLabel,
+                    pillText,
+                    pillBg,
                     primary,
                     primaryLabel,
                     micIcon,
                     micRoot,
+                    cameraRoot,
                     contentGroup,
                     processing);
 
                 AskAiWorkflowController controller =
                     root.GetComponent<AskAiWorkflowController>();
-                controller.Configure(view, primary, new MockAskAiService());
+                AskAiBackendConfig backendConfig =
+                    AssetDatabase.LoadAssetAtPath<AskAiBackendConfig>(
+                        "Assets/Norscope/Data/AskAiBackendConfig.asset");
+                controller.Configure(view, primary, config: backendConfig);
+
+                // Re-assert close size + centered icon after any OnValidate from wiring/save prep.
+                if (closeRt != null)
+                {
+                    closeRt.sizeDelta = new Vector2(26f, 26f);
+                    NorscopeButtonControl closeCtrl =
+                        close.GetComponent<NorscopeButtonControl>();
+                    if (closeCtrl != null)
+                    {
+                        SerializedObject closeSo = new SerializedObject(closeCtrl);
+                        closeSo.FindProperty("size").vector2Value = new Vector2(26f, 26f);
+                        closeSo.ApplyModifiedPropertiesWithoutUndo();
+                    }
+
+                    CenterCloseButtonIcon(close);
+                }
 
                 PrefabUtility.SaveAsPrefabAsset(root, PrefabPath);
             }
@@ -556,7 +863,27 @@ namespace Norscope.Editor
                     "AskAiWorkflowController present");
 
                 Check(FindDeep(prefab.transform, "TitleBar") != null, "TitleBar authored");
-                Check(FindDeep(prefab.transform, "GrabRegion") != null, "GrabRegion authored");
+                Transform grabTf = FindDeep(prefab.transform, "GrabRegion");
+                Check(grabTf != null, "GrabRegion authored");
+                if (grabTf is RectTransform grabRt)
+                {
+                    Check(Mathf.Approximately(grabRt.sizeDelta.x, GrabWidth) &&
+                          Mathf.Approximately(grabRt.sizeDelta.y, GrabHeight),
+                        "GrabRegion size is 400x30");
+                    Check(Mathf.Approximately(grabRt.anchorMin.x, 0.5f) &&
+                          Mathf.Approximately(grabRt.anchorMin.y, 1f) &&
+                          Mathf.Approximately(grabRt.pivot.x, 0.5f) &&
+                          Mathf.Approximately(grabRt.pivot.y, 0f),
+                        "GrabRegion centered on top edge (anchor 0.5,1 pivot 0.5,0)");
+                    Image grabImg = grabTf.GetComponent<Image>();
+                    Check(grabImg != null &&
+                          grabImg.raycastTarget &&
+                          grabImg.type == Image.Type.Sliced &&
+                          grabImg.sprite != null &&
+                          grabImg.color.a > 0.5f,
+                        "GrabRegion visible sliced sprite + raycast");
+                }
+
                 Check(FindDeep(prefab.transform, "CloseButton") != null, "CloseButton authored");
                 Check(FindDeep(prefab.transform, "BottomRight") != null, "BottomRight resize authored");
                 Check(FindDeep(prefab.transform, "BackButton") != null, "BackButton authored");
@@ -564,8 +891,72 @@ namespace Norscope.Editor
                 Check(FindDeep(prefab.transform, "StatusText") != null, "StatusText authored");
                 Check(FindDeep(prefab.transform, "HintText") != null, "HintText authored");
                 Check(FindDeep(prefab.transform, "Microphone") != null, "Microphone authored");
+
+                Transform cardTf = FindDeep(prefab.transform, "InteractionCard");
+                Check(cardTf != null, "InteractionCard authored");
+                if (cardTf is RectTransform cardRt)
+                {
+                    Check(Mathf.Approximately(cardRt.sizeDelta.x, Width - PadX * 2f),
+                        "InteractionCard is 432 wide (480-48)");
+                }
+
+                Check(FindDeep(prefab.transform, "StatusPill") != null, "StatusPill authored");
+                Check(FindDeep(prefab.transform, "StageStack") != null, "StageStack authored");
+                Check(FindDeep(prefab.transform, "Footer") != null, "Footer authored");
+                Check(FindDeep(prefab.transform, "StageDots") != null, "StageDots authored");
                 Check(FindDeep(prefab.transform, "ProcessingIndicator") != null,
                     "ProcessingIndicator authored");
+                Check(FindDeep(prefab.transform, "SecondaryHint") != null,
+                    "SecondaryHint authored");
+                Check(FindDeep(prefab.transform, "AnalysisLabel") != null,
+                    "AnalysisLabel authored");
+                Check(FindDeep(prefab.transform, "LabelRow") != null,
+                    "PrimaryButton LabelRow authored");
+
+                Transform primaryTf = FindDeep(prefab.transform, "PrimaryButton");
+                if (primaryTf is RectTransform primaryRt)
+                {
+                    Check(Mathf.Approximately(primaryRt.sizeDelta.x, Width - PadX * 2f) &&
+                          Mathf.Approximately(primaryRt.sizeDelta.y, 48f),
+                        "PrimaryButton is 432x48");
+                }
+
+                Transform micTf = FindDeep(prefab.transform, "Microphone");
+                if (micTf is RectTransform micRt)
+                {
+                    Check(Mathf.Approximately(micRt.sizeDelta.x, 52f) &&
+                          Mathf.Approximately(micRt.sizeDelta.y, 52f),
+                        "Microphone icon box is 52x52");
+                }
+
+                Transform closeTf = FindDeep(prefab.transform, "CloseButton");
+                if (closeTf is RectTransform closeRtCheck)
+                {
+                    Check(Mathf.Approximately(closeRtCheck.sizeDelta.x, 26f) &&
+                          Mathf.Approximately(closeRtCheck.sizeDelta.y, 26f),
+                        "CloseButton is 26x26");
+                }
+
+                NorscopePanelRoot panelRoot = prefab.GetComponent<NorscopePanelRoot>();
+                if (panelRoot != null)
+                {
+                    SerializedObject panelCheck = new SerializedObject(panelRoot);
+                    Check(panelCheck.FindProperty("title").objectReferenceValue == null &&
+                          panelCheck.FindProperty("background").objectReferenceValue == null &&
+                          panelCheck.FindProperty("border").objectReferenceValue == null,
+                        "NorscopePanelRoot title/background/border null (theme won't crush redesign)");
+                    Check(panelCheck.FindProperty("theme").objectReferenceValue != null &&
+                          panelCheck.FindProperty("worldSpaceConfig").objectReferenceValue != null &&
+                          panelCheck.FindProperty("root").objectReferenceValue != null &&
+                          !panelCheck.FindProperty("useMetersAsSource").boolValue,
+                        "NorscopePanelRoot theme/world/root wired, useMetersAsSource false");
+                }
+
+                RectTransform rootRt = prefab.GetComponent<RectTransform>();
+                Check(rootRt != null &&
+                      Mathf.Approximately(rootRt.sizeDelta.x, Width) &&
+                      Mathf.Approximately(rootRt.sizeDelta.y, Height),
+                    "Panel size is 480x520");
 
                 SpatialWindowBindings bindings =
                     prefab.GetComponent<SpatialWindowBindings>();
@@ -589,12 +980,24 @@ namespace Norscope.Editor
                 SerializedObject viewSo = new SerializedObject(view);
                 SerializedObject ctrlSo = new SerializedObject(controller);
                 Check(viewSo.FindProperty("statusText").objectReferenceValue != null &&
+                      viewSo.FindProperty("hintText").objectReferenceValue != null &&
+                      viewSo.FindProperty("secondaryHintText").objectReferenceValue != null &&
+                      viewSo.FindProperty("bodyText").objectReferenceValue != null &&
+                      viewSo.FindProperty("analysisLabel").objectReferenceValue != null &&
+                      viewSo.FindProperty("statusPillText").objectReferenceValue != null &&
+                      viewSo.FindProperty("statusPillBackground").objectReferenceValue != null &&
                       viewSo.FindProperty("primaryButton").objectReferenceValue != null &&
-                      viewSo.FindProperty("microphoneImage").objectReferenceValue != null,
+                      viewSo.FindProperty("primaryButtonLabel").objectReferenceValue != null &&
+                      viewSo.FindProperty("microphoneImage").objectReferenceValue != null &&
+                      viewSo.FindProperty("microphoneRoot").objectReferenceValue != null &&
+                      viewSo.FindProperty("cameraRoot").objectReferenceValue != null &&
+                      viewSo.FindProperty("contentGroup").objectReferenceValue != null &&
+                      viewSo.FindProperty("processingIndicator").objectReferenceValue != null,
                     "AskAiView cached refs assigned");
                 Check(ctrlSo.FindProperty("view").objectReferenceValue != null &&
-                      ctrlSo.FindProperty("primaryButton").objectReferenceValue != null,
-                    "AskAiWorkflowController cached refs assigned");
+                      ctrlSo.FindProperty("primaryButton").objectReferenceValue != null &&
+                      ctrlSo.FindProperty("backendConfig").objectReferenceValue != null,
+                    "AskAiWorkflowController cached refs + backendConfig assigned");
 
                 string controllerSource = File.ReadAllText(
                     "Assets/Norscope/Runtime/AskAI/AskAiWorkflowController.cs");
@@ -604,9 +1007,9 @@ namespace Norscope.Editor
                       !serviceSource.Contains("UIAudioManager") &&
                       !serviceSource.Contains("MonoBehaviour"),
                     "MockAskAiService has no UI/timing/audio");
-                Check(controllerSource.Contains("ListeningSeconds = 2f") &&
-                      controllerSource.Contains("ProcessingSeconds = 1.5f"),
-                    "Controller owns Listening 2.0s and Processing 1.5s");
+                Check(controllerSource.Contains("MaxListeningSeconds = 15f") &&
+                      controllerSource.Contains("MinProcessingDisplaySeconds = 0.15f"),
+                    "Controller owns listening safety and min processing display");
                 Check(controllerSource.Contains("VoiceStartListening") &&
                       controllerSource.Contains("AIThinking") &&
                       controllerSource.Contains("AIResponse"),
@@ -614,10 +1017,10 @@ namespace Norscope.Editor
                 Check(controllerSource.Contains("IAskAiSpeechCapture") ||
                       File.Exists("Assets/Norscope/Runtime/AskAI/IAskAiSpeechCapture.cs"),
                     "Speech capture abstraction present (Phase 2)");
-                Check(!controllerSource.Contains("OpenAI") &&
+                Check(!controllerSource.Contains("using OpenAI") &&
                       !controllerSource.Contains("UnityEngine.Windows.Speech") &&
-                      !controllerSource.Contains("WebRequest"),
-                    "Controller has no LLM/backend and no direct Windows.Speech dependency");
+                      !controllerSource.Contains("UnityWebRequest"),
+                    "Controller has no provider SDK / direct Windows.Speech / UnityWebRequest");
             }
 
             // Bootstrap registry
@@ -670,6 +1073,82 @@ namespace Norscope.Editor
             return ok;
         }
 
+        private static void CenterCloseButtonIcon(GameObject close)
+        {
+            if (close == null)
+                return;
+
+            NorscopeButtonControl control = close.GetComponent<NorscopeButtonControl>();
+            if (control != null)
+            {
+                SerializedObject so = new SerializedObject(control);
+                so.FindProperty("size").vector2Value = new Vector2(26f, 26f);
+                SerializedProperty pad = so.FindProperty("padding");
+                if (pad != null)
+                {
+                    pad.FindPropertyRelative("m_Left").intValue = 0;
+                    pad.FindPropertyRelative("m_Right").intValue = 0;
+                    pad.FindPropertyRelative("m_Top").intValue = 0;
+                    pad.FindPropertyRelative("m_Bottom").intValue = 0;
+                }
+
+                SerializedProperty spacing = so.FindProperty("spacing");
+                if (spacing != null)
+                    spacing.floatValue = 0f;
+                so.ApplyModifiedPropertiesWithoutUndo();
+                // Apply size with zero padding (do not call ApplyAll before zeroing).
+                control.ApplyAll();
+            }
+
+            HorizontalLayoutGroup hl = close.GetComponent<HorizontalLayoutGroup>();
+            if (hl != null)
+            {
+                hl.enabled = true;
+                hl.padding = new RectOffset(0, 0, 0, 0);
+                hl.spacing = 0f;
+                hl.childAlignment = TextAnchor.MiddleCenter;
+                hl.childControlWidth = false;
+                hl.childControlHeight = false;
+                hl.childForceExpandWidth = false;
+                hl.childForceExpandHeight = false;
+            }
+
+            Transform label = close.transform.Find("Label");
+            if (label != null)
+                label.gameObject.SetActive(false);
+
+            Transform icon = close.transform.Find("Icon");
+            if (icon is RectTransform iconRt)
+            {
+                iconRt.anchorMin = iconRt.anchorMax = new Vector2(0.5f, 0.5f);
+                iconRt.pivot = new Vector2(0.5f, 0.5f);
+                iconRt.anchoredPosition = Vector2.zero;
+                iconRt.sizeDelta = new Vector2(12f, 12f);
+                iconRt.localScale = Vector3.one;
+                LayoutElement iconLe = icon.GetComponent<LayoutElement>();
+                if (iconLe == null)
+                    iconLe = icon.gameObject.AddComponent<LayoutElement>();
+                iconLe.minWidth = 12f;
+                iconLe.minHeight = 12f;
+                iconLe.preferredWidth = 12f;
+                iconLe.preferredHeight = 12f;
+                iconLe.flexibleWidth = 0f;
+                iconLe.flexibleHeight = 0f;
+                iconLe.ignoreLayout = false;
+
+                Image iconImage = icon.GetComponent<Image>();
+                if (iconImage != null)
+                {
+                    iconImage.preserveAspect = true;
+                    iconImage.type = Image.Type.Simple;
+                }
+            }
+
+            RectTransform closeRt = close.GetComponent<RectTransform>();
+            if (closeRt != null)
+                closeRt.sizeDelta = new Vector2(26f, 26f);
+        }
+
         private static Image ImageNode(
             Transform parent, string name, Sprite sprite, Color color)
         {
@@ -713,6 +1192,47 @@ namespace Norscope.Editor
             return button;
         }
 
+        private static TMP_Text LayoutText(
+            Transform parent, string name, string value, TMP_FontAsset font,
+            float size, Color color, float preferredWidth, float preferredHeight,
+            TextAlignmentOptions align, FontStyles style)
+        {
+            RectTransform rt = RectNode(parent, name);
+            FitLayoutChild(rt, preferredWidth, preferredHeight);
+            TextMeshProUGUI text = rt.gameObject.AddComponent<TextMeshProUGUI>();
+            text.text = value;
+            text.font = font;
+            text.fontSize = size;
+            text.color = color;
+            text.alignment = align;
+            text.fontStyle = style;
+            text.raycastTarget = false;
+            text.textWrappingMode = TextWrappingModes.Normal;
+            LayoutElement le = rt.gameObject.AddComponent<LayoutElement>();
+            le.preferredWidth = preferredWidth;
+            le.preferredHeight = preferredHeight;
+            le.flexibleWidth = 0f;
+            le.flexibleHeight = 0f;
+            return text;
+        }
+
+        private static void FitLayoutChild(RectTransform rt, float width, float height)
+        {
+            // Centered fixed size — Vertical/HorizontalLayoutGroup drives position.
+            rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
+            rt.pivot = new Vector2(0.5f, 0.5f);
+            rt.anchoredPosition = Vector2.zero;
+            rt.sizeDelta = new Vector2(width, height);
+        }
+
+        private static void CenterRect(RectTransform rt, Vector2 size)
+        {
+            rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
+            rt.pivot = new Vector2(0.5f, 0.5f);
+            rt.anchoredPosition = Vector2.zero;
+            rt.sizeDelta = size;
+        }
+
         private static TMP_Text TextNode(
             Transform parent, string name, string value, TMP_FontAsset font,
             float size, Color color, Vector2 topLeft, Vector2 rectSize,
@@ -745,6 +1265,14 @@ namespace Norscope.Editor
             rt.anchorMin = rt.anchorMax = new Vector2(0f, 1f);
             rt.pivot = new Vector2(0f, 1f);
             rt.anchoredPosition = new Vector2(topLeft.x, -topLeft.y);
+            rt.sizeDelta = size;
+        }
+
+        private static void SetTopCenter(RectTransform rt, float topY, Vector2 size)
+        {
+            rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 1f);
+            rt.pivot = new Vector2(0.5f, 1f);
+            rt.anchoredPosition = new Vector2(0f, -topY);
             rt.sizeDelta = size;
         }
 

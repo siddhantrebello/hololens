@@ -36,6 +36,16 @@ namespace Norscope.UI
             }
         }
 
+        public BadgeKind Kind
+        {
+            get => kind;
+            set
+            {
+                kind = value;
+                Apply();
+            }
+        }
+
         private void OnValidate() => Apply();
         private void Awake() => Apply();
 

@@ -256,9 +256,10 @@ namespace Norscope.Editor
                 "Controller coordinates speech via abstraction only");
             Check(controller.Contains("MaxListeningSeconds = 15f"),
                 "Controller safety timeout is 15 seconds");
-            Check(controller.Contains("GetMockAnswer()") &&
+            Check((controller.Contains("GetMockAnswer()") ||
+                   controller.Contains("IAskAiAnalysisService")) &&
                   mockAnswer.Contains("DefaultAnswer"),
-                "Processing still uses MockAskAiService answer");
+                "Processing uses mock answer service or analysis abstraction");
             Check(!controller.Contains("GetMockTranscript()") ||
                   controller.Contains("IAskAiSpeechCapture"),
                 "Listening no longer depends solely on mock transcript timer");

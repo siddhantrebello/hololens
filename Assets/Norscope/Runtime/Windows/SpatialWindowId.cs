@@ -13,6 +13,7 @@ namespace Norscope.Windows
         Settings = 7,
         Storage = 8,
         About = 9,
-        TaskCompletion = 10
+        TaskCompletion = 10,
+        ArGuidance = 11
     }
 }

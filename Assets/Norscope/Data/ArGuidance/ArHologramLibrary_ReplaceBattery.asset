@@ -1,0 +1,224 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bb1bc7e4ab726942b973613c33bcac8, type: 3}
+  m_Name: ArHologramLibrary_ReplaceBattery
+  m_EditorClassIdentifier: 
+  equipmentId: dell_precision_3570
+  workflowId: replace-battery
+  entries:
+  - hologramId: h02_disconnect_ac
+    displayName: H02 Disconnect AC
+    visualType: 16
+    prefab: {fileID: 2048122110653258320, guid: fb860e47ab365b649bbb1f90262e3717, type: 3}
+    defaultLocalPosition: {x: -0.132, y: -0.039, z: -0.002}
+    defaultLocalEuler: {x: 0, y: 180, z: -90}
+    defaultLocalScale: {x: 1, y: 1, z: 1}
+    isShared: 1
+    notes: Measured QR-local; root matches H04 screw 03 position
+  - hologramId: h03_back_panel_outline
+    displayName: H03 Back Panel Outline
+    visualType: 10
+    prefab: {fileID: 427473985903405569, guid: 2e043d8bb685a1341af757191a6601af, type: 3}
+    defaultLocalPosition: {x: 0, y: 0.12, z: 0}
+    defaultLocalEuler: {x: -90, y: -90, z: -90}
+    defaultLocalScale: {x: 1, y: 1, z: 1}
+    isShared: 1
+    notes: Measured QR-local authored default (saved calibration still wins)
+  - hologramId: h04_screw_01
+    displayName: H04-01
+    visualType: 11
+    prefab: {fileID: 3385905971089933688, guid: 7c8f1a1fc39adb94cacc0ca03f15d380, type: 3}
+    defaultLocalPosition: {x: -0.132, y: 0.288, z: -0.002}
+    defaultLocalEuler: {x: 9, y: -90, z: -90}
+    defaultLocalScale: {x: 1, y: 1, z: 1}
+    isShared: 1
+    notes: Measured QR-local
+  - hologramId: h04_screw_02
+    displayName: H04-02
+    visualType: 11
+    prefab: {fileID: 3385905971089933688, guid: 7c8f1a1fc39adb94cacc0ca03f15d380, type: 3}
+    defaultLocalPosition: {x: -0.132, y: 0.116, z: -0.002}
+    defaultLocalEuler: {x: -9, y: -90, z: -90}
+    defaultLocalScale: {x: 1, y: 1, z: 1}
+    isShared: 1
+    notes: Measured QR-local
+  - hologramId: h04_screw_03
+    displayName: H04-03
+    visualType: 11
+    prefab: {fileID: 3385905971089933688, guid: 7c8f1a1fc39adb94cacc0ca03f15d380, type: 3}
+    defaultLocalPosition: {x: -0.132, y: -0.039, z: -0.002}
+    defaultLocalEuler: {x: -9, y: -90, z: -90}
+    defaultLocalScale: {x: 1, y: 1, z: 1}
+    isShared: 1
+    notes: Measured QR-local
+  - hologramId: h04_screw_04
+    displayName: H04-04
+    visualType: 11
+    prefab: {fileID: 3385905971089933688, guid: 7c8f1a1fc39adb94cacc0ca03f15d380, type: 3}
+    defaultLocalPosition: {x: 0.012, y: 0.294, z: 0.004}
+    defaultLocalEuler: {x: -9, y: -90, z: -90}
+    defaultLocalScale: {x: 1, y: 1, z: 1}
+    isShared: 1
+    notes: Measured QR-local
+  - hologramId: h04_screw_05
+    displayName: H04-05
+    visualType: 11
+    prefab: {fileID: 3385905971089933688, guid: 7c8f1a1fc39adb94cacc0ca03f15d380, type: 3}
+    defaultLocalPosition: {x: -0.002, y: 0.186, z: 0.004}
+    defaultLocalEuler: {x: -9, y: -90, z: -90}
+    defaultLocalScale: {x: 1, y: 1, z: 1}
+    isShared: 1
+    notes: Measured QR-local
+  - hologramId: h04_screw_06
+    displayName: H04-06
+    visualType: 11
+    prefab: {fileID: 3385905971089933688, guid: 7c8f1a1fc39adb94cacc0ca03f15d380, type: 3}
+    defaultLocalPosition: {x: -0.002, y: 0.052, z: 0.004}
+    defaultLocalEuler: {x: -9, y: -90, z: -90}
+    defaultLocalScale: {x: 1, y: 1, z: 1}
+    isShared: 1
+    notes: Measured QR-local
+  - hologramId: h04_screw_07
+    displayName: H04-07
+    visualType: 11
+    prefab: {fileID: 3385905971089933688, guid: 7c8f1a1fc39adb94cacc0ca03f15d380, type: 3}
+    defaultLocalPosition: {x: 0.0069, y: -0.0513, z: -0.0011}
+    defaultLocalEuler: {x: -9, y: -90, z: -90}
+    defaultLocalScale: {x: 1, y: 1, z: 1}
+    isShared: 1
+    notes: Measured QR-local
+  - hologramId: h04_screw_08
+    displayName: H04-08
+    visualType: 11
+    prefab: {fileID: 3385905971089933688, guid: 7c8f1a1fc39adb94cacc0ca03f15d380, type: 3}
+    defaultLocalPosition: {x: 0.092, y: 0.288, z: 0.004}
+    defaultLocalEuler: {x: -9, y: -90, z: -90}
+    defaultLocalScale: {x: 1, y: 1, z: 1}
+    isShared: 1
+    notes: Measured QR-local
+  - hologramId: h04_screw_09
+    displayName: H04-09
+    visualType: 11
+    prefab: {fileID: 3385905971089933688, guid: 7c8f1a1fc39adb94cacc0ca03f15d380, type: 3}
+    defaultLocalPosition: {x: 0.092, y: -0.042, z: 0.004}
+    defaultLocalEuler: {x: -9, y: -90, z: -90}
+    defaultLocalScale: {x: 1, y: 1, z: 1}
+    isShared: 1
+    notes: Measured QR-local
+  - hologramId: h05_lift_here
+    displayName: H05 Lift Here
+    visualType: 14
+    prefab: {fileID: 8622732490654999056, guid: 84d9b480a7d76e249b24d62de519e8ce, type: 3}
+    defaultLocalPosition: {x: -0.138, y: 0.082, z: -0.01}
+    defaultLocalEuler: {x: -58, y: 180, z: -86.2}
+    defaultLocalScale: {x: 1, y: 1, z: 1}
+    isShared: 1
+    notes: Measured QR-local
+  - hologramId: h07_replace_back_cover
+    displayName: H07 Replace Back Cover
+    visualType: 14
+    prefab: {fileID: 365856518566455487, guid: 731cf01cb3fd6ba458c7b938151c5ca7, type: 3}
+    defaultLocalPosition: {x: -0.13, y: 0.11, z: 0}
+    defaultLocalEuler: {x: 0, y: 180, z: -90}
+    defaultLocalScale: {x: 1, y: 1, z: 1}
+    isShared: 1
+    notes: Measured QR-local
+  - hologramId: h08_power_on
+    displayName: H08 Power On
+    visualType: 16
+    prefab: {fileID: 9098628964565493979, guid: 1b2a5576b3e46304b8fd80eb865d9509, type: 3}
+    defaultLocalPosition: {x: 0, y: 0.08, z: 0.14}
+    defaultLocalEuler: {x: 0, y: 0, z: 0}
+    defaultLocalScale: {x: 1, y: 1, z: 1}
+    isShared: 1
+    notes: 
+  - hologramId: h17_battery_outline
+    displayName: H17 Battery Outline
+    visualType: 10
+    prefab: {fileID: 2014747804091338844, guid: 88a486916193e3e45b8fdfd939587bf9, type: 3}
+    defaultLocalPosition: {x: -0.056, y: 0.128, z: 0}
+    defaultLocalEuler: {x: 0, y: -90, z: -90}
+    defaultLocalScale: {x: 1, y: 1, z: 1}
+    isShared: 0
+    notes: Measured QR-local (-56, 128, 0) mm
+  - hologramId: h18_battery_connector
+    displayName: H18 Battery Connector
+    visualType: 12
+    prefab: {fileID: 7729451508033901892, guid: 37c81a1a0b67fc045aeef68440788b02, type: 3}
+    defaultLocalPosition: {x: 0, y: 0.146, z: 0.002}
+    defaultLocalEuler: {x: 0, y: -90, z: -90}
+    defaultLocalScale: {x: 1, y: 1, z: 1}
+    isShared: 0
+    notes: Measured QR-local
+  - hologramId: h19_screw_01
+    displayName: H19-01
+    visualType: 11
+    prefab: {fileID: 5046106764812556080, guid: 1e6e44c5a1196dd4d80ef4481f5253fa, type: 3}
+    defaultLocalPosition: {x: -0.02, y: 0.01, z: 0.005}
+    defaultLocalEuler: {x: 0, y: 0, z: 0}
+    defaultLocalScale: {x: 1, y: 1, z: 1}
+    isShared: 0
+    notes: "Individual battery screw \u2014 editable QR-local default"
+  - hologramId: h19_screw_02
+    displayName: H19-02
+    visualType: 11
+    prefab: {fileID: 5046106764812556080, guid: 1e6e44c5a1196dd4d80ef4481f5253fa, type: 3}
+    defaultLocalPosition: {x: 0.06, y: 0.01, z: 0.005}
+    defaultLocalEuler: {x: 0, y: 0, z: 0}
+    defaultLocalScale: {x: 1, y: 1, z: 1}
+    isShared: 0
+    notes: "Individual battery screw \u2014 editable QR-local default"
+  - hologramId: h19_screw_03
+    displayName: H19-03
+    visualType: 11
+    prefab: {fileID: 5046106764812556080, guid: 1e6e44c5a1196dd4d80ef4481f5253fa, type: 3}
+    defaultLocalPosition: {x: -0.02, y: 0.01, z: 0.055}
+    defaultLocalEuler: {x: 0, y: 0, z: 0}
+    defaultLocalScale: {x: 1, y: 1, z: 1}
+    isShared: 0
+    notes: "Individual battery screw \u2014 editable QR-local default"
+  - hologramId: h19_screw_04
+    displayName: H19-04
+    visualType: 11
+    prefab: {fileID: 5046106764812556080, guid: 1e6e44c5a1196dd4d80ef4481f5253fa, type: 3}
+    defaultLocalPosition: {x: 0.06, y: 0.01, z: 0.055}
+    defaultLocalEuler: {x: 0, y: 0, z: 0}
+    defaultLocalScale: {x: 1, y: 1, z: 1}
+    isShared: 0
+    notes: "Individual battery screw \u2014 editable QR-local default"
+  - hologramId: h20_swollen_battery_warning
+    displayName: H20 Swollen Warning
+    visualType: 13
+    prefab: {fileID: 8940621762846478999, guid: cc91acde5df6e764e933597390b4e7f8, type: 3}
+    defaultLocalPosition: {x: 0.042, y: 0.08, z: 0}
+    defaultLocalEuler: {x: 0, y: -90, z: -90}
+    defaultLocalScale: {x: 1, y: 1, z: 1}
+    isShared: 0
+    notes: Measured QR-local
+  - hologramId: h21_install_new_battery
+    displayName: H21 Install New Battery
+    visualType: 10
+    prefab: {fileID: 4340587958009872159, guid: 37c44317d80840e46a4a016a86ecc7a4, type: 3}
+    defaultLocalPosition: {x: 0.044, y: 0.128, z: 0}
+    defaultLocalEuler: {x: 0, y: -90, z: -90}
+    defaultLocalScale: {x: 1, y: 1, z: 1}
+    isShared: 0
+    notes: Same orientation as H17 (0, -90, -90); position (44, 128, 0) mm
+  - hologramId: h22_battery_verification
+    displayName: H22 Battery Verification
+    visualType: 15
+    prefab: {fileID: 1630000448783804951, guid: 936330dc9089c534a95164ff0a645ffa, type: 3}
+    defaultLocalPosition: {x: 0.044, y: 0.08, z: 0}
+    defaultLocalEuler: {x: 0, y: -90, z: -90}
+    defaultLocalScale: {x: 1, y: 1, z: 1}
+    isShared: 0
+    notes: Measured QR-local

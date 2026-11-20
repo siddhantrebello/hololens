@@ -125,14 +125,24 @@ namespace Norscope.Editor
 
         private static void ConfigurePlayerCapabilities()
         {
+            PlayerSettings.productName = "NORSCOPE";
+            PlayerSettings.companyName = "Norscope";
+            PlayerSettings.WSA.applicationDescription = "NORSCOPE";
+            // Short name shown under the HL2 Start menu tile.
+            PlayerSettings.WSA.tileShortName = "NORSCOPE";
+
             PlayerSettings.WSA.SetCapability(PlayerSettings.WSACapability.SpatialPerception, true);
             // Ask AI Phase 2 requires microphone for DictationRecognizer.
             PlayerSettings.WSA.SetCapability(PlayerSettings.WSACapability.Microphone, true);
             // Ask AI Phase 3 requires webcam for PhotoCapture stills.
             PlayerSettings.WSA.SetCapability(PlayerSettings.WSACapability.WebCam, true);
-            PlayerSettings.WSA.SetCapability(PlayerSettings.WSACapability.InternetClient, false);
+            // Ask AI Phase 4: outbound API + LAN prototype backend.
+            PlayerSettings.WSA.SetCapability(PlayerSettings.WSACapability.InternetClient, true);
+            PlayerSettings.WSA.SetCapability(PlayerSettings.WSACapability.PrivateNetworkClientServer, true);
             PlayerSettings.WSA.SetCapability(PlayerSettings.WSACapability.InternetClientServer, false);
-            PlayerSettings.WSA.SetCapability(PlayerSettings.WSACapability.PrivateNetworkClientServer, false);
+
+            // Local Ask AI backend uses plain HTTP on the LAN (not HTTPS).
+            PlayerSettings.insecureHttpOption = InsecureHttpOption.AlwaysAllowed;
 
             // GazeInput only if required later by validation; start disabled.
             PlayerSettings.WSA.SetCapability(PlayerSettings.WSACapability.GazeInput, false);

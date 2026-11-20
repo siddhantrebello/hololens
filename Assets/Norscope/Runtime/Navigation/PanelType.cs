@@ -12,6 +12,7 @@ namespace Norscope.Navigation
         Settings = 6,
         Storage = 7,
         About = 8,
-        TaskCompletion = 9
+        TaskCompletion = 9,
+        ArGuidance = 10
     }
 }

@@ -6,8 +6,11 @@
         "Unity.XR.CoreUtils",
         "Unity.XR.Hands",
         "Unity.XR.Interaction.Toolkit",
+        "Unity.XR.ARFoundation",
+        "Unity.XR.ARSubsystems",
         "UnityEngine.UI",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "Microsoft.MixedReality.OpenXR"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

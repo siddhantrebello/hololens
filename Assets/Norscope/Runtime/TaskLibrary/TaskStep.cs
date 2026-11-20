@@ -8,6 +8,8 @@ namespace Norscope.TaskLibrary
     [Serializable]
     public sealed class TaskStep
     {
+        [Tooltip("Stable AR guidance key. Used by ArTaskGuidanceMap — not matched on English titles.")]
+        public string guidanceKey = string.Empty;
         public string stepTitle = string.Empty;
         [TextArea(2, 5)] public string instruction = string.Empty;
         public Sprite image;

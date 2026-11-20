@@ -305,13 +305,14 @@ namespace Norscope.Editor
                 "Controller coordinates camera via abstraction only");
             Check(controller.Contains("MaxCapturingSeconds = 10f"),
                 "Controller camera safety timeout is 10 seconds");
-            Check(controller.Contains("Capturing image..."),
+            Check(controller.Contains("Capturing the scene"),
                 "Capturing status text is authored");
             Check(controller.Contains("AskAiWorkflowState.Capturing") &&
                   controller.Contains("AskAiWorkflowState.Listening") &&
                   controller.Contains("AskAiWorkflowState.Processing"),
                 "Busy states include Listening/Capturing/Processing");
-            Check(controller.Contains("GetMockAnswer()") &&
+            Check((controller.Contains("GetMockAnswer()") ||
+                   controller.Contains("IAskAiAnalysisService")) &&
                   mockAnswer.Contains("DefaultAnswer"),
                 "Processing still uses MockAskAiService answer");
             Check(controller.Contains("_currentRequest.Clear()"),

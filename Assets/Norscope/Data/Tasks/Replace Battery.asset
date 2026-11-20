@@ -20,34 +20,40 @@ MonoBehaviour:
   difficulty: 0
   category: Electrical
   offlineAvailable: 1
-  lastUpdated: ''
+  lastUpdated: 
   isEnabled: 1
   steps:
-  - stepTitle: Power Down Fully
+  - guidanceKey: power_down_fully
+    stepTitle: Power Down Fully
     instruction: Shut down the laptop and unplug the charger.
     image: {fileID: 0}
     warning: 
     verification: 
-  - stepTitle: Remove the Back Panel
+  - guidanceKey: remove_back_panel
+    stepTitle: Remove the Back Panel
     instruction: Unscrew and remove the bottom access panel.
     image: {fileID: 0}
     warning: 
     verification: 
-  - stepTitle: Disconnect the Old Battery
+  - guidanceKey: disconnect_old_battery
+    stepTitle: Disconnect the Old Battery
     instruction: Unclip the battery connector and remove the retaining screws.
     image: {fileID: 0}
     warning: If the battery is swollen, handle it carefully and do not puncture it.
     verification: 
-  - stepTitle: Install the New Battery
+  - guidanceKey: install_new_battery
+    stepTitle: Install the New Battery
     instruction: Place the new battery in the same orientation, secure the screws,
       and reconnect the connector.
     image: {fileID: 0}
     warning: 
     verification: 
-  - stepTitle: Test the New Battery
+  - guidanceKey: test_new_battery
+    stepTitle: Test the New Battery
     instruction: Reassemble the panel, power on, and confirm the OS detects the battery
       and it begins charging.
     image: {fileID: 0}
     warning: 
     verification: Battery icon should show a charging state and report an accurate
       charge percentage.
+  localizedContent: []

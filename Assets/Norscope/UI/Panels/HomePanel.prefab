@@ -2764,7 +2764,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Technical documentation, schematics, and equipment asset libraries.
+  m_text: Spatial repair overlays and calibration
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ffab52d9d473f194283593ffc4388ca6, type: 2}
   m_sharedMaterial: {fileID: 3842585501818918892, guid: ffab52d9d473f194283593ffc4388ca6, type: 2}
@@ -6961,8 +6961,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   presentationMode: 1
-  targetPanel: 7
-  logLabel: Opening Storage
+  targetPanel: 10
+  logLabel: Opening Developer
   button: {fileID: 661394754207289541}
   background: {fileID: 2208517463073421254}
   border: {fileID: 4435312742135129069}
@@ -7154,7 +7154,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Coming Soon
+  m_text: Developer
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8de23b0c515ecb84c80f4d8925818ef8, type: 2}
   m_sharedMaterial: {fileID: 8842636298543063701, guid: 8de23b0c515ecb84c80f4d8925818ef8, type: 2}

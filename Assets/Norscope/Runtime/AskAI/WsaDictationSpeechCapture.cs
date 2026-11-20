@@ -160,16 +160,14 @@ namespace Norscope.AskAI
 
         private static AskAiSpeechCompletionCause MapCause(DictationCompletionCause cause)
         {
+            // UWP player DictationCompletionCause does not expose InitialSilenceTimeout /
+            // BabbleTimeout members (Editor stubs may). Map the portable values only.
             switch (cause)
             {
                 case DictationCompletionCause.Complete:
                     return AskAiSpeechCompletionCause.Complete;
                 case DictationCompletionCause.TimeoutExceeded:
                     return AskAiSpeechCompletionCause.TimeoutExceeded;
-                case DictationCompletionCause.InitialSilenceTimeout:
-                    return AskAiSpeechCompletionCause.InitialSilenceTimeout;
-                case DictationCompletionCause.BabbleTimeout:
-                    return AskAiSpeechCompletionCause.BabbleTimeout;
                 case DictationCompletionCause.Canceled:
                     return AskAiSpeechCompletionCause.Cancelled;
                 default:

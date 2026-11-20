@@ -18,6 +18,8 @@ namespace Norscope.Editor
         private const string AskAiSpeechValidateFlag = "Temp/NorscopeAskAiSpeechValidate.flag";
         private const string AskAiCameraApplyFlag = "Temp/NorscopeAskAiCameraApply.flag";
         private const string AskAiCameraValidateFlag = "Temp/NorscopeAskAiCameraValidate.flag";
+        private const string AskAiBackendApplyFlag = "Temp/NorscopeAskAiBackendApply.flag";
+        private const string AskAiBackendValidateFlag = "Temp/NorscopeAskAiBackendValidate.flag";
         private const string PanelPath = "Assets/Norscope/UI/Panels/SettingsPanel.prefab";
 
         [InitializeOnLoadMethod]
@@ -29,6 +31,20 @@ namespace Norscope.Editor
 
         private static void Poll()
         {
+            if (File.Exists(AskAiBackendApplyFlag))
+            {
+                File.Delete(AskAiBackendApplyFlag);
+                EditorApplication.delayCall += InvokeAskAiBackendApply;
+                return;
+            }
+
+            if (File.Exists(AskAiBackendValidateFlag))
+            {
+                File.Delete(AskAiBackendValidateFlag);
+                EditorApplication.delayCall += InvokeAskAiBackendValidate;
+                return;
+            }
+
             if (File.Exists(AskAiCameraApplyFlag))
             {
                 File.Delete(AskAiCameraApplyFlag);
@@ -74,6 +90,20 @@ namespace Norscope.Editor
             if (!File.Exists(Flag)) return;
             File.Delete(Flag);
             EditorApplication.delayCall += Reimport;
+        }
+
+        private static void InvokeAskAiBackendApply()
+        {
+            InvokeTypeMethod(
+                "Norscope.Editor.PhaseAskAiBackendConfigurator, Norscope.Editor",
+                "ApplyFromAutomation");
+        }
+
+        private static void InvokeAskAiBackendValidate()
+        {
+            InvokeTypeMethod(
+                "Norscope.Editor.PhaseAskAiBackendConfigurator, Norscope.Editor",
+                "ValidateFromAutomation");
         }
 
         private static void InvokeAskAiCameraApply()

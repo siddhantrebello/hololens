@@ -63,3 +63,11 @@ BurstDebugInformation_DoNotShip/
 *.csproj.user
 .claude/
 .codex/
+
+# Ask AI backend secrets
+backend/.env
+backend/.venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/.pytest_cache/
+
